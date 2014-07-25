@@ -158,8 +158,8 @@
      // Add a sprite
     player = [CCSprite spriteWithImageNamed:@"faenger-Bobble-100-Prozent.png"];
     player.position  = ccp(self.contentSize.width/2,self.contentSize.height/4);
-    player.opacity = 100;
-    
+    [self setOpacity:100];
+
     //player.scale = 0.8;
 
     
@@ -237,8 +237,8 @@
     // TIMELINE
     
     CCSprite *whiteTimeline = [CCSprite spriteWithImageNamed:@"timeline_white.png"];
-    whiteTimeline.position = ccp(0.5f, 0.1f);
-    whiteTimeline.positionType = CCPositionTypeNormalized;
+    whiteTimeline.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/10);
+   // whiteTimeline.positionType = CCPositionTypeNormalized;
     
     [self addChild:whiteTimeline];
     
@@ -249,8 +249,8 @@
     _progressNode.barChangeRate = ccp(1.0f, 0.0f);
     _progressNode.percentage = 0.0f;
     
-    _progressNode.positionType = CCPositionTypeNormalized;
-    _progressNode.position = ccp(0.5f, 0.1f);
+    //_progressNode.positionType = CCPositionTypeNormalized;
+    _progressNode.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/10);
     [self addChild:_progressNode];
     
     self.userInteractionEnabled = YES;
@@ -301,7 +301,7 @@
     
      for (int i = 1 ; i <= anzahl; i++) {
          
-         artDerBubbles = arc4random()%150;
+         artDerBubbles = arc4random()%120;
          
          NSLog(@"  Arte der Bubble : %d", artDerBubbles);
 
@@ -634,7 +634,7 @@
             
          }
              // BOMB
-          else if ( artDerBubbles > 100 && artDerBubbles <= 120)
+          else if ( artDerBubbles > 100 && artDerBubbles <= 110)
           {
               
               Collsion = NO;
@@ -678,7 +678,7 @@
               
           }
              //SHIELD
-          else if ( artDerBubbles > 120 && artDerBubbles <= 150)
+          else if ( artDerBubbles > 110 && artDerBubbles <= 119)
           {
               
               Collsion = NO;
@@ -846,12 +846,12 @@
     
      CCAction *scaledown = [CCActionScaleBy actionWithDuration:2 scale:0.1];
     
-     CCAction *scaleUp = [CCActionScaleBy actionWithDuration:2 scale:20.0];
+     CCAction *scaleUp = [CCActionScaleBy actionWithDuration:2 scale:10.0];
     
-    CCAction *scaleNormal = [CCActionScaleBy actionWithDuration:2 scale:0.5];
+   // CCAction *scaleNormal = [CCActionScaleBy actionWithDuration:2 scale:0.5];
     
-    [player runAction:[CCActionSequence actionWithArray:@[ callBefore,scaledown, scaleUp, scaleNormal , callAfter]]];
-    
+    [player runAction:[CCActionSequence actionWithArray:@[ callBefore,scaledown, scaleUp,   callAfter]]];
+
     if (shieldActive) {
         
         [shield removeFromParent];
@@ -873,17 +873,20 @@
 
 
 #pragma mark Bubbles_Pointer
- - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubbleCollision:(CCNode *)bubbles_1Node   playerCollision:(CCNode *)player{
+ - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubbleCollision:(CCNode *)bubbles_1Node   playerCollision:(CCNode *)player2{
     
      Collsion = YES;
      
-     
-    [bubbles_1Node removeFromParent];
+     [bubbles_1Node removeFromParent];
         anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
  
       
      scoreBubbles = scoreBubbles+ 1;
      highScore = highScore +1;
+     
+ 
+     
+     
      if (scoreBubbles > 100) {
          
          
@@ -1131,12 +1134,19 @@
        anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
     if (!shieldActive) {
 
+        
+        if (!labelBlink) {
+            
+        
     gameStatus = gamePaused;
     
     
     
     [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:1.0f ]];
+            
+        }
+    
     }
     else if (shieldActive)
     
@@ -1166,7 +1176,7 @@
     shieldActive = YES;
     shield = [CCSprite spriteWithImageNamed:@"shield.png"];
     shield.position = player1.position;
-    [self addChild:shield];
+     [self addChild:shield];
         
         
          shieldBG = [CCSprite spriteWithImageNamed:@"shield.png"];

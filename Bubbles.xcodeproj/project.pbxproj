@@ -38,9 +38,9 @@
 		E445DF5619829276000E3596 /* shield-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E445DF3C19829276000E3596 /* shield-hd.png */; };
 		E445DF5719829276000E3596 /* time-down-Bobble-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E445DF3D19829276000E3596 /* time-down-Bobble-hd.png */; };
 		E445DF5819829276000E3596 /* time-up-Bobble-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E445DF3E19829276000E3596 /* time-up-Bobble-hd.png */; };
-		E445DF5919829276000E3596 /* timeline_white-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E445DF3F19829276000E3596 /* timeline_white-hd.png */; };
 		E445DF5A19829276000E3596 /* timeline-red-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E445DF4019829276000E3596 /* timeline-red-hd.png */; };
 		E445DF5B19829276000E3596 /* xtra-newlife-Bobble-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E445DF4119829276000E3596 /* xtra-newlife-Bobble-hd.png */; };
+		E445DF5D1982952A000E3596 /* timeline_white-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E445DF5C1982952A000E3596 /* timeline_white-hd.png */; };
 		E4D28D1A1982481800009D4A /* bomb-Bobble.png in Resources */ = {isa = PBXBuildFile; fileRef = E4D28D191982481800009D4A /* bomb-Bobble.png */; };
 		E4D28D1D198249F000009D4A /* shield-Bobble.png in Resources */ = {isa = PBXBuildFile; fileRef = E4D28D1B198249F000009D4A /* shield-Bobble.png */; };
 		E4D28D1E198249F000009D4A /* shield.png in Resources */ = {isa = PBXBuildFile; fileRef = E4D28D1C198249F000009D4A /* shield.png */; };
@@ -292,9 +292,9 @@
 		E445DF3C19829276000E3596 /* shield-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shield-hd.png"; sourceTree = "<group>"; };
 		E445DF3D19829276000E3596 /* time-down-Bobble-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "time-down-Bobble-hd.png"; sourceTree = "<group>"; };
 		E445DF3E19829276000E3596 /* time-up-Bobble-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "time-up-Bobble-hd.png"; sourceTree = "<group>"; };
-		E445DF3F19829276000E3596 /* timeline_white-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timeline_white-hd.png"; sourceTree = "<group>"; };
 		E445DF4019829276000E3596 /* timeline-red-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timeline-red-hd.png"; sourceTree = "<group>"; };
 		E445DF4119829276000E3596 /* xtra-newlife-Bobble-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xtra-newlife-Bobble-hd.png"; sourceTree = "<group>"; };
+		E445DF5C1982952A000E3596 /* timeline_white-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timeline_white-hd.png"; sourceTree = "<group>"; };
 		E4D28D191982481800009D4A /* bomb-Bobble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bomb-Bobble.png"; sourceTree = "<group>"; };
 		E4D28D1B198249F000009D4A /* shield-Bobble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shield-Bobble.png"; sourceTree = "<group>"; };
 		E4D28D1C198249F000009D4A /* shield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shield.png; sourceTree = "<group>"; };
@@ -756,7 +756,7 @@
 				E445DF3C19829276000E3596 /* shield-hd.png */,
 				E445DF3D19829276000E3596 /* time-down-Bobble-hd.png */,
 				E445DF3E19829276000E3596 /* time-up-Bobble-hd.png */,
-				E445DF3F19829276000E3596 /* timeline_white-hd.png */,
+				E445DF5C1982952A000E3596 /* timeline_white-hd.png */,
 				E445DF4019829276000E3596 /* timeline-red-hd.png */,
 				E445DF4119829276000E3596 /* xtra-newlife-Bobble-hd.png */,
 			);
@@ -1669,7 +1669,6 @@
 				E4D7BD54197D501000695F15 /* Icon-Small@2x.png in Resources */,
 				E445DF4C19829276000E3596 /* hintergrund-elemente-hd.png in Resources */,
 				E430BBFC197FF70A00D7076C /* 7-Pointer-Bobble.png in Resources */,
-				E445DF5919829276000E3596 /* timeline_white-hd.png in Resources */,
 				E445DF5A19829276000E3596 /* timeline-red-hd.png in Resources */,
 				E4D7BD46197D501000695F15 /* Icon-72@2x.png in Resources */,
 				E430BBFD197FF70A00D7076C /* 10-Pointer-Bobble.png in Resources */,
@@ -1714,6 +1713,7 @@
 				E445DF5819829276000E3596 /* time-up-Bobble-hd.png in Resources */,
 				E445DF4619829276000E3596 /* 10-Pointer-Bobble-hd.png in Resources */,
 				E445DF5B19829276000E3596 /* xtra-newlife-Bobble-hd.png in Resources */,
+				E445DF5D1982952A000E3596 /* timeline_white-hd.png in Resources */,
 				E4D7BD48197D501000695F15 /* Icon-76.png in Resources */,
 				E4EFFB1B19810B0B00127D95 /* play-icon-active.png in Resources */,
 				E445DF5519829276000E3596 /* shield-Bobble-hd.png in Resources */,
