@@ -42,6 +42,7 @@
     int shieldTime;
     BOOL shieldActive;
     BOOL Collsion;
+    BOOL labelBlink;
     
     
     CCSprite *player;
@@ -262,6 +263,8 @@
     highScore = 0;
     percentage = 0;
     shieldActive = NO;
+    
+    labelBlink = NO;
     // done
     
     
@@ -290,8 +293,8 @@
         NSLog(@"anzahl der Bubbles %d", anzahlBubblesAufDemFeld);
     
     
-    if (anzahlBubblesAufDemFeld + anzahl  < 6)
-    {
+    //if (anzahlBubblesAufDemFeld + anzahl  < 6)
+  //  {
         
   
      
@@ -731,7 +734,7 @@
      
         }
       
-    }
+  //  }
  
 }
 
@@ -743,15 +746,24 @@
 
  -(void)callBack
 {
-    if ( !Collsion)
-    {
-        anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
-
-    }
     
     
-    //NSLog(@"anzahl auf dem feld2: %d", anzahlBubblesAufDemFeld);
-
+    
+    
+  
+    
+    
+    
+    
+    
+     if (!Collsion) {
+     
+         anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
+     }
+    
+    
+    NSLog(@" BUbble am BODEN !!!!!!!");
+ 
     
 }
 # pragma mark PlayerMovement
@@ -808,12 +820,17 @@
 
 -(void) labelAfter
 {
+    
+    
+    labelBlink = NO;
     [scoreLabel setString:[NSString stringWithFormat:@"%d/100", scoreBubbles]];
 
     
 }
  -(void)labelRemoving
 {
+    
+    labelBlink = YES;
     
     [scoreLabel setString:[NSString stringWithFormat:@""]];
 
@@ -835,7 +852,16 @@
     
     [player runAction:[CCActionSequence actionWithArray:@[ callBefore,scaledown, scaleUp, scaleNormal , callAfter]]];
     
- 
+    if (shieldActive) {
+        
+        [shield removeFromParent];
+        [shieldBG removeFromParent];
+        [shieldTimeLabel removeFromParent];
+        
+        
+        shieldActive = NO;
+    }
+
   
     scoreBubbles = 0;
 
@@ -878,8 +904,10 @@
      //}
      
      
-     
+     if (!labelBlink) {
+    
      [scoreLabel setString:[NSString stringWithFormat:@"%d/100", scoreBubbles]];
+     }
      [highScoreLabel setString:[NSString stringWithFormat:@"%d", highScore]];
 
      //   NSLog(@"anzahl auf dem feld3: %d", anzahlBubblesAufDemFeld);
@@ -895,7 +923,7 @@
     
     
     [bubbles_2Node removeFromParent];
-        anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
+      anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
     
     
     scoreBubbles = scoreBubbles+ 2;
@@ -919,8 +947,9 @@
     //for (float i; i>= 0.1; i--) {
     //    [ player setScale:i];
    // }
-    
+         if (!labelBlink) {
     [scoreLabel setString:[NSString stringWithFormat:@"%d/100", scoreBubbles]];
+         }
     [highScoreLabel setString:[NSString stringWithFormat:@"%d", highScore]];
 
     //NSLog(@"anzahl auf dem feld3: %d", anzahlBubblesAufDemFeld);
@@ -961,8 +990,9 @@
         [self playerBlink];
     }
     
-    
+         if (!labelBlink) {
     [scoreLabel setString:[NSString stringWithFormat:@"%d/100", scoreBubbles]];
+         }
     [highScoreLabel setString:[NSString stringWithFormat:@"%d", highScore]];
 
     // NSLog(@"anzahl auf dem feld3: %d", anzahlBubblesAufDemFeld);
@@ -980,7 +1010,7 @@
     
     
     [bubbles_5Node removeFromParent];
-        anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
+       anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
     
     
     scoreBubbles = scoreBubbles+ 5;
@@ -1005,8 +1035,9 @@
     if (scoreBubbles == 100) {
         [self playerBlink];
     }
-    
+         if (!labelBlink) {
     [scoreLabel setString:[NSString stringWithFormat:@"%d/100", scoreBubbles]];
+         }
     [highScoreLabel setString:[NSString stringWithFormat:@"%d", highScore]];
 
     // NSLog(@"anzahl auf dem feld3: %d", anzahlBubblesAufDemFeld);
@@ -1047,8 +1078,9 @@
         [self playerBlink];
     }
     
-    
+         if (!labelBlink) {
     [scoreLabel setString:[NSString stringWithFormat:@"%d/100", scoreBubbles]];
+         }
     [highScoreLabel setString:[NSString stringWithFormat:@"%d", highScore]];
 
    // NSLog(@"anzahl auf dem feld3: %d", anzahlBubblesAufDemFeld);
@@ -1079,7 +1111,7 @@
     
     
     [bubbles_Time_Up_Node removeFromParent];
-    anzahlBubblesAufDemFeld--;
+     anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld -1;
     
     percentage = percentage -5;
     [_progressNode setPercentage: percentage];
@@ -1095,7 +1127,8 @@
     
     
     [bubbles_bomb_Node removeFromParent];
-        anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
+    
+       anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
     if (!shieldActive) {
 
     gameStatus = gamePaused;
@@ -1125,7 +1158,7 @@
     
     
     [bubbles_shield_Node removeFromParent];
-        anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
+    anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
     if (!shieldActive) {
         
         shieldTime = 11;
@@ -1155,13 +1188,29 @@
         
         
         [shieldBG setOpacity:1.0];
-        CCAction *fadeIn = [CCActionFadeIn actionWithDuration:0.5];
-        CCAction *fadeOut = [CCActionFadeOut actionWithDuration:0.5];
-        CCAction *bounce = [CCActionEaseBounceOut actionWithDuration:0.5];
+        CCAction *fadeIn = [CCActionFadeIn actionWithDuration:1];
+        CCAction *fadeOut = [CCActionFadeOut actionWithDuration:1];
         
-        CCActionSequence *pulseSequence = [CCActionSequence actionWithArray:@[fadeIn, fadeOut, bounce]];
+        CCActionSequence *pulseSequence = [CCActionSequence actionWithArray:@[fadeIn, fadeOut]];
         CCAction *repeater = [CCActionRepeatForever actionWithAction:pulseSequence];
+       
+        
+        
         [shieldBG runAction:repeater];
+        
+        
+        [shieldTimeLabel setOpacity:1.0];
+        CCAction *fadeIn2 = [CCActionFadeIn actionWithDuration:1];
+        CCAction *fadeOut2 = [CCActionFadeOut actionWithDuration:1];
+         CCActionCallFunc *callTime = [CCActionCallFunc actionWithTarget:self selector:@selector(shieldTimer)];
+
+        
+        
+        CCActionSequence *pulseSequence2 = [CCActionSequence actionWithArray:@[callTime,fadeIn2 ,fadeOut2]];
+        CCAction *repeater2 = [CCActionRepeatForever actionWithAction:pulseSequence2];
+        
+        
+        [shieldTimeLabel runAction:repeater2];
     //[shieldBG runAction:repeat1];
 
     }
@@ -1175,6 +1224,29 @@
      return YES;
     
     
+}
+
+-(void)shieldTimer
+{
+    
+    
+    
+    if (shieldActive) {
+        shieldTime --;
+        [shieldTimeLabel setString:[NSString stringWithFormat:@"%d", shieldTime]];
+        
+        if (shieldTime == 0) {
+            shieldActive = NO;
+            [shield removeFromParent];
+            [shieldBG removeFromParent];
+            [shieldTimeLabel removeFromParent];
+            
+        }
+        
+        
+        
+    }
+
 }
 
 // -----------------------------------------------------------------------
@@ -1231,22 +1303,6 @@
         NSLog(@"percentage %d", percentage);
         
         
-        if (shieldActive) {
-            shieldTime --;
-            [shieldTimeLabel setString:[NSString stringWithFormat:@"%d", shieldTime]];
-
-            if (shieldTime == 0) {
-                shieldActive = NO;
-                [shield removeFromParent];
-                [shieldBG removeFromParent];
-                 [shieldTimeLabel removeFromParent];
-                
-            }
-            
-            
-            
-        }
-        
     }
 }
 
@@ -1263,7 +1319,7 @@
   
   
     [self schedule:@selector(playerBewegung:) interval:0.01];
-    [self schedule:@selector(addBubbles:) interval:0.1];
+    [self schedule:@selector(addBubbles:) interval:1];
     [self schedule:@selector(ticker:) interval:1];
  
         
