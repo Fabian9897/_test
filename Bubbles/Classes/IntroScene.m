@@ -34,6 +34,7 @@
     self = [super init];
     if (!self) return(nil);
     
+    
     // Create a colored background (Dark Grey)
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
     [self addChild:background];
@@ -64,7 +65,7 @@
 {
     // start spinning scene with transition
     [[CCDirector sharedDirector] replaceScene:[HelloWorldScene scene]
-                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
+                               withTransition:[CCTransition transitionCrossFadeWithDuration:1.0f ]];
 }
 
 // -----------------------------------------------------------------------

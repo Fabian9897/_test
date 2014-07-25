@@ -10,16 +10,22 @@
 // Importing cocos2d.h and cocos2d-ui.h, will import anything you need to start using Cocos2D v3
 #import "cocos2d.h"
 #import "cocos2d-ui.h"
+#import <QuartzCore/QuartzCore.h>
+#import <CoreMotion/CoreMotion.h>
 
+
+ 
 // -----------------------------------------------------------------------
 
 /**
  *  The main scene
  */
-@interface HelloWorldScene : CCScene
+@interface HelloWorldScene : CCScene <CCPhysicsCollisionDelegate>
 
 // -----------------------------------------------------------------------
 
+    
+ 
 + (HelloWorldScene *)scene;
 - (id)init;
 
