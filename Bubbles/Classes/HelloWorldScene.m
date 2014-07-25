@@ -1168,10 +1168,8 @@
     
     else if (shieldActive)
     {
-         Collsion = YES;
-        [bubbles_shield_Node removeFromParent];
-        anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
-        shieldTime = 11;
+         [bubbles_shield_Node removeFromParent];
+         shieldTime = 11;
         
     }
      return YES;
