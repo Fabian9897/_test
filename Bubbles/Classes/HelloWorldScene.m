@@ -97,6 +97,9 @@
     int highScore;
     int highScoreEnd;
     
+    int windowHeight;
+    int windowWidth;
+    
 }
 
 // -----------------------------------------------------------------------
@@ -121,10 +124,14 @@
     // Enable touch handling on scene node
     self.userInteractionEnabled = YES;
     
+    
+    windowHeight = self.contentSize.height/2;
+    windowWidth = self.contentSize.width/2;
+    
  
     
     CCSprite* background = [CCSprite spriteWithImageNamed:@"hintergrund-mit.png"];
-    background.position = ccp(self.contentSize.width / 2, self.contentSize.height / 2);
+    background.position = ccp(windowWidth, windowHeight);
 
     [background setScaleX: self.contentSize.width/background.contentSize.width];
     [background setScaleY:self.contentSize.height/background.contentSize.height];
@@ -132,7 +139,7 @@
     [self addChild:background];
 
     CCSprite *linie = [CCSprite spriteWithImageNamed:@"linie-oben.png"];
-    linie.position = ccp(self.contentSize.width / 2, self.contentSize.height - 50 );
+    linie.position = ccp(windowWidth, self.contentSize.height - 50 );
     
     [self addChild:linie];
     
@@ -151,8 +158,8 @@
     //-------------------------------------------------------------------------------------------------------------------------
 
      // Add a sprite
-    player = [CCSprite spriteWithImageNamed:@"faenger-Bobble-100-Prozent.png"];
-    player.position  = ccp(self.contentSize.width/2,self.contentSize.height/4);
+    player = [CCSprite spriteWithImageNamed:@"faenger-Bobble-50-Prozent.png"];
+    player.position  = ccp(windowWidth,self.contentSize.height/4);
     [self setOpacity:100];
 
     //player.scale = 0.8;
@@ -187,15 +194,15 @@
     
     
     pauseSprite = [ CCSprite spriteWithImageNamed:@"pause-icon-inactive.png"];
-    pauseSprite.position  = ccp(60,self.contentSize.height-25);
-   // pauseSprite.positionType = CCPositionTypeNormalized;
+    pauseSprite.position  = ccp(0.19,0.95);
+     pauseSprite.positionType = CCPositionTypeNormalized;
     
     [self addChild:pauseSprite];
     
     
     playSprite = [ CCSprite spriteWithImageNamed:@"play-icon-active.png"];
-    playSprite.position  = ccp(30,self.contentSize.height-25);
-    // pauseSprite.positionType = CCPositionTypeNormalized;
+    playSprite.position  = ccp(0.1,0.95);
+     playSprite.positionType = CCPositionTypeNormalized;
     
     [self addChild:playSprite];
 
@@ -232,7 +239,7 @@
     // TIMELINE
     
     CCSprite *whiteTimeline = [CCSprite spriteWithImageNamed:@"timeline_white.png"];
-    whiteTimeline.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/10);
+    whiteTimeline.position = CGPointMake(windowWidth, self.contentSize.height/10);
     whiteTimeline.scaleY = 2.0f;
     
     [self addChild:whiteTimeline];
@@ -245,7 +252,7 @@
     _progressNode.barChangeRate = ccp(1.0f, 0.0f);
     _progressNode.percentage = 0.0f;
     
-     _progressNode.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/10);
+     _progressNode.position = CGPointMake(windowWidth, self.contentSize.height/10);
     [self addChild:_progressNode];
     
     self.userInteractionEnabled = YES;
@@ -280,9 +287,7 @@
     
     if (gameStatus == gameisOn) {
         
-    
-   
-    anzahl = ( arc4random()%3 + 1);
+           anzahl = ( arc4random()%3 + 1);
     
    //NSLog(@"anzahl : %d", anzahl);
         NSLog(@"anzahl der Bubbles %d", anzahlBubblesAufDemFeld);
@@ -310,10 +315,10 @@
 
        
      
-    int minX = bubbles_1.contentSize.width / 2;
-    int maxX = self.contentSize.width - bubbles_1.contentSize.width / 2;
+    int minX = bubbles_1.contentSize.width ;
+    int maxX = self.contentSize.width - bubbles_1.contentSize.width ;
     int rangeX = maxX - minX;
-    int randomX = (arc4random() % rangeX) + minX;
+    int randomX = (arc4random() % rangeX)  +minX/2 ;
     
          bubbles_1 = [CCSprite spriteWithImageNamed:@"1-Pointer-Bobble.png"];
          bubbles_1.position = CGPointMake(randomX,self.contentSize.height + bubbles_1.contentSize.width/2);
@@ -355,10 +360,10 @@
 
              Collsion = NO;
 
-             int minX = bubbles_2.contentSize.width / 2;
-             int maxX = self.contentSize.width - bubbles_2.contentSize.width / 2;
+             int minX = bubbles_2.contentSize.width  ;
+             int maxX = self.contentSize.width - bubbles_2.contentSize.width  ;
              int rangeX = maxX - minX;
-             int randomX = (arc4random() % rangeX) + minX;
+             int randomX = (arc4random() % rangeX) +minX/2 ;
              
              bubbles_2 = [CCSprite spriteWithImageNamed:@"2-Pointer-Bobble.png"];
              bubbles_2.position = CGPointMake(randomX,self.contentSize.height + bubbles_2.contentSize.width/2);
@@ -405,10 +410,10 @@
 
              
              
-             int minX = bubbles_5.contentSize.width / 2;
-             int maxX = self.contentSize.width - bubbles_5.contentSize.width / 2;
+             int minX = bubbles_5.contentSize.width  ;
+             int maxX = self.contentSize.width - bubbles_5.contentSize.width  ;
              int rangeX = maxX - minX;
-             int randomX = (arc4random() % rangeX) + minX;
+             int randomX = (arc4random() % rangeX) +minX/2  ;
              
              bubbles_5 = [CCSprite spriteWithImageNamed:@"5-Pointer-Bobble.png"];
              bubbles_5.position = CGPointMake(randomX,self.contentSize.height + bubbles_5.contentSize.width/2);
@@ -451,10 +456,10 @@
 
              
              
-             int minX = bubbles_7.contentSize.width / 2;
-             int maxX = self.contentSize.width - bubbles_7.contentSize.width / 2;
+             int minX = bubbles_7.contentSize.width  ;
+             int maxX = self.contentSize.width - bubbles_7.contentSize.width  ;
              int rangeX = maxX - minX;
-             int randomX = (arc4random() % rangeX) + minX;
+             int randomX = (arc4random() % rangeX)  +minX/2 ;
              
              bubbles_7 = [CCSprite spriteWithImageNamed:@"7-Pointer-Bobble.png"];
              bubbles_7.position = CGPointMake(randomX,self.contentSize.height + bubbles_7.contentSize.width/2);
@@ -497,10 +502,10 @@
              anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
 
              
-             int minX = bubbles_10.contentSize.width / 2;
-             int maxX = self.contentSize.width - bubbles_10.contentSize.width / 2;
+             int minX = bubbles_10.contentSize.width  ;
+             int maxX = self.contentSize.width - bubbles_10.contentSize.width   ;
              int rangeX = maxX - minX;
-             int randomX = (arc4random() % rangeX) + minX;
+             int randomX = (arc4random() % rangeX)  +minX/2 ;
              
              bubbles_10 = [CCSprite spriteWithImageNamed:@"10-Pointer-Bobble.png"];
              bubbles_10.position = CGPointMake(randomX,self.contentSize.height + bubbles_10.contentSize.width/2);
@@ -537,19 +542,18 @@
          
          // TIME DOWN
          
-         if (timeInSec > 10) {
-        
-            if ( artDerBubbles > 77 && artDerBubbles <= 90)
+         
+            if ( artDerBubbles > 77 && artDerBubbles <= 90 && highScore >= 70)
          {
              
              Collsion = NO;
              anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
 
              
-             int minX = bubbles_timeDown.contentSize.width / 2;
-             int maxX = self.contentSize.width - bubbles_timeDown.contentSize.width / 2;
+             int minX = bubbles_timeDown.contentSize.width  ;
+             int maxX = self.contentSize.width - bubbles_timeDown.contentSize.width ;
              int rangeX = maxX - minX;
-             int randomX = (arc4random() % rangeX) + minX;
+             int randomX = (arc4random() % rangeX) +minX/2  ;
              
              bubbles_timeDown = [CCSprite spriteWithImageNamed:@"time-down-Bobble.png"];
              bubbles_timeDown.position = CGPointMake(randomX,self.contentSize.height + bubbles_10.contentSize.width/2);
@@ -585,17 +589,17 @@
          }
          //TIME UP
 
-          else if ( artDerBubbles > 90 && artDerBubbles <= 100)
+          else if ( artDerBubbles > 90 && artDerBubbles <= 100&& highScore >= 50)
          {
              
              Collsion = NO;
              anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
 
              
-             int minX = bubbles_timeUp.contentSize.width / 2;
-             int maxX = self.contentSize.width - bubbles_timeUp.contentSize.width / 2;
+             int minX = bubbles_timeUp.contentSize.width ;
+             int maxX = self.contentSize.width - bubbles_timeUp.contentSize.width  ;
              int rangeX = maxX - minX;
-             int randomX = (arc4random() % rangeX) + minX;
+             int randomX = (arc4random() % rangeX)  +minX/2 ;
              
              bubbles_timeUp = [CCSprite spriteWithImageNamed:@"time-up-Bobble.png"];
              bubbles_timeUp.position = CGPointMake(randomX,self.contentSize.height + bubbles_timeUp.contentSize.width/2);
@@ -629,17 +633,17 @@
             
          }
              // BOMB
-          else if ( artDerBubbles > 100 && artDerBubbles <= 110)
+          else if ( artDerBubbles > 100 && artDerBubbles <= 110&& highScore >= 150)
           {
               
               Collsion = NO;
               anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
 
               
-              int minX = bubbles_bomb.contentSize.width / 2;
-              int maxX = self.contentSize.width - bubbles_bomb.contentSize.width / 2;
+              int minX = bubbles_bomb.contentSize.width  ;
+              int maxX = self.contentSize.width - bubbles_bomb.contentSize.width  ;
               int rangeX = maxX - minX;
-              int randomX = (arc4random() % rangeX) + minX;
+              int randomX = (arc4random() % rangeX)  +minX/2 ;
               
               bubbles_bomb = [CCSprite spriteWithImageNamed:@"bomb-Bobble.png"];
               bubbles_bomb.position = CGPointMake(randomX,self.contentSize.height + bubbles_bomb.contentSize.width/2);
@@ -673,16 +677,16 @@
               
           }
              //SHIELD
-          else if ( artDerBubbles > 110 && artDerBubbles <= 119)
+          else if ( artDerBubbles > 110 && artDerBubbles <= 119&& highScore >= 120)
           {
               
               Collsion = NO;
               anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
 
-              int minX = bubbles_shield.contentSize.width / 2;
-              int maxX = self.contentSize.width - bubbles_shield.contentSize.width / 2;
+              int minX = bubbles_shield.contentSize.width  ;
+              int maxX = self.contentSize.width - bubbles_shield.contentSize.width    ;
               int rangeX = maxX - minX;
-              int randomX = (arc4random() % rangeX) + minX;
+              int randomX = (arc4random() % rangeX)  +minX/2;
               
               bubbles_shield = [CCSprite spriteWithImageNamed:@"shield-Bobble.png"];
               bubbles_shield.position = CGPointMake(randomX,self.contentSize.height + bubbles_shield.contentSize.width/2);
@@ -726,12 +730,17 @@
         
         
           }
+    
+    if (anzahlBubblesAufDemFeld <= 2) {
+        [self addBubbles:(CCTime)dt];
+    }
+    
      
         }
       
   //  }
  
-}
+
 
     
 
@@ -774,7 +783,7 @@
 
    // [player stopAllActions];
     CMAccelerometerData *acceleration = motionManager.accelerometerData;
-    playerRichtungX = acceleration.acceleration.x*15;
+    playerRichtungX = acceleration.acceleration.x*10;
   //  NSLog(@"Neigungstest : %.2f", playerRichtungX);
 
     float     targetX   = player.position.x + playerRichtungX;
@@ -833,7 +842,8 @@
 -(void)playerBlink
 {
     
-  
+    [ player setTexture:[CCTexture textureWithFile: @"faenger-Bobble-50-Prozent.png"]];
+
  
     CCActionCallFunc *callBefore = [CCActionCallFunc actionWithTarget:self selector:@selector(labelRemoving)];
     CCActionCallFunc *callAfter = [CCActionCallFunc actionWithTarget:self selector:@selector(labelAfter)];
@@ -885,13 +895,12 @@
         anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
  
       
-     scoreBubbles = scoreBubbles+ 1;
-     highScore = highScore +1;
+   
      
  
      
      
-     if (scoreBubbles > 100) {
+     if (scoreBubbles + 1 > 100) {
          
          
          highScoreEnd  = highScore;
@@ -900,13 +909,26 @@
          gameStatus = gamePaused;
          // back to intro scene with transition
          [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
-                                    withTransition:[CCTransition transitionFadeWithDuration:0.5f  ]];
-         
+                                    withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f  ]];
        
      }
      
-     if (scoreBubbles == 100) {
-         [self playerBlink];
+    else if (scoreBubbles +1 == 100) {
+        scoreBubbles = scoreBubbles+ 1;
+        highScore = highScore +1;
+          [self playerBlink];
+     }
+     
+     else if (scoreBubbles +1 < 100)
+         
+     {
+         
+         scoreBubbles = scoreBubbles+ 1;
+         highScore = highScore +1;
+         
+         [self playerOpacity];
+         
+         
      }
      
      // Hier Neue Blase erschaffen und spiel fortsetzen
@@ -918,9 +940,9 @@
      if (!labelBlink) {
     
      [scoreLabel setString:[NSString stringWithFormat:@"%d/100", scoreBubbles]];
-     }
+   
      [highScoreLabel setString:[NSString stringWithFormat:@"%d", highScore]];
-
+  }
      //   NSLog(@"anzahl auf dem feld3: %d", anzahlBubblesAufDemFeld);
    // bubbles.position =ccp(bubbles.position.x+ bubbles.contentSize.width, bubbles.position.y);
     
@@ -946,10 +968,9 @@
       anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
     
     
-    scoreBubbles = scoreBubbles+ 2;
-    highScore = highScore +2;
+   
  
-    if (scoreBubbles > 100) {
+    if (scoreBubbles+2 > 100) {
         
         highScoreEnd  = highScore;
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
@@ -958,22 +979,33 @@
         gameStatus = gamePaused;
         // back to intro scene with transition
         [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
-                                   withTransition:[CCTransition transitionFadeWithDuration:0.5f  ]];
-    }
+                                   withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f  ]];    }
     
     
     // Hier Neue Blase erschaffen und spiel fortsetzen
-    if (scoreBubbles == 100) {
+   else if (scoreBubbles+2 == 100) {
+       scoreBubbles = scoreBubbles+ 2;
+       highScore = highScore + 2;
+
         [self playerBlink];
     }
+    
+    else if (scoreBubbles +2 < 100)
+    {
+        
+        scoreBubbles = scoreBubbles+ 2;
+        highScore = highScore +2;
+         [self playerOpacity];
+    }
+    
     //for (float i; i>= 0.1; i--) {
     //    [ player setScale:i];
    // }
          if (!labelBlink) {
     [scoreLabel setString:[NSString stringWithFormat:@"%d/100", scoreBubbles]];
-         }
+       
     [highScoreLabel setString:[NSString stringWithFormat:@"%d", highScore]];
-
+  }
     //NSLog(@"anzahl auf dem feld3: %d", anzahlBubblesAufDemFeld);
     // bubbles.position =ccp(bubbles.position.x+ bubbles.contentSize.width, bubbles.position.y);
     
@@ -997,12 +1029,10 @@
     [bubbles_7Node removeFromParent];
         anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
     
-    
-    scoreBubbles = scoreBubbles+ 7;
-    highScore = highScore +7;
+   
 
  
-    if (scoreBubbles > 100) {
+    if (scoreBubbles+7 > 100) {
         highScoreEnd  = highScore;
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
         [[NSUserDefaults standardUserDefaults] synchronize];
@@ -1011,22 +1041,32 @@
         gameStatus = gamePaused;
         // back to intro scene with transition
         [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
-                                   withTransition:[CCTransition transitionFadeWithDuration:0.5f  ]];
+                                   withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f  ]];
     }
     
     
  
     
     // Hier Neue Blase erschaffen und spiel fortsetzen
-    if (scoreBubbles == 100) {
+    else if (scoreBubbles+7 == 100) {
+        scoreBubbles = scoreBubbles+ 7;
+        highScore = highScore +7;
+
         [self playerBlink];
+    }
+   
+    else if (scoreBubbles + 7 < 100)
+    {
+    scoreBubbles = scoreBubbles+ 7;
+    highScore = highScore +7;
+         [self playerOpacity];
     }
     
          if (!labelBlink) {
     [scoreLabel setString:[NSString stringWithFormat:@"%d/100", scoreBubbles]];
-         }
+         
     [highScoreLabel setString:[NSString stringWithFormat:@"%d", highScore]];
-
+         }
     // NSLog(@"anzahl auf dem feld3: %d", anzahlBubblesAufDemFeld);
     // bubbles.position =ccp(bubbles.position.x+ bubbles.contentSize.width, bubbles.position.y);
     
@@ -1056,11 +1096,10 @@
        anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
     
     
-    scoreBubbles = scoreBubbles+ 5;
-    highScore = highScore +5;
+
 
     
-    if (scoreBubbles > 100) {
+    if (scoreBubbles+5 > 100) {
         
         highScoreEnd  = highScore;
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
@@ -1069,7 +1108,7 @@
         gameStatus = gamePaused;
         // back to intro scene with transition
         [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
-                                   withTransition:[CCTransition transitionFadeWithDuration:0.5f  ]];
+                                   withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f  ]];
     }
     
     
@@ -1077,14 +1116,27 @@
     
     // Hier Neue Blase erschaffen und spiel fortsetzen
     
-    if (scoreBubbles == 100) {
+    else if (scoreBubbles+5 == 100) {
         [self playerBlink];
+        scoreBubbles = scoreBubbles+ 5;
+        highScore = highScore +5;
+
+    }
+    
+    else if (scoreBubbles+5 < 100)
+    {
+        
+        scoreBubbles = scoreBubbles+ 5;
+        highScore = highScore +5;
+         [self playerOpacity];
+        
+        
     }
          if (!labelBlink) {
     [scoreLabel setString:[NSString stringWithFormat:@"%d/100", scoreBubbles]];
-         }
+         
     [highScoreLabel setString:[NSString stringWithFormat:@"%d", highScore]];
-
+         }
     // NSLog(@"anzahl auf dem feld3: %d", anzahlBubblesAufDemFeld);
     // bubbles.position =ccp(bubbles.position.x+ bubbles.contentSize.width, bubbles.position.y);
     
@@ -1112,10 +1164,8 @@
         anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
     
     
-    scoreBubbles = scoreBubbles+ 10;
-    highScore = highScore +10;
-
-     if (scoreBubbles > 100) {
+   
+     if (scoreBubbles+10 > 100) {
         
          highScoreEnd  = highScore;
          [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
@@ -1123,22 +1173,34 @@
         
         gameStatus = gamePaused;
         // back to intro scene with transition
-        [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
-                                   withTransition:[CCTransition transitionFadeWithDuration:0.5f  ]];
+         [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
+                                    withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f  ]];
     }
     
     
     
     // Hier Neue Blase erschaffen und spiel fortsetzen
-    if (scoreBubbles == 100) {
+   else if (scoreBubbles+10 == 100) {
         [self playerBlink];
+       scoreBubbles = scoreBubbles+ 10;
+       highScore = highScore +10;
+
+    }
+    else if (scoreBubbles+10 < 100)
+    {
+        
+        scoreBubbles = scoreBubbles+ 10;
+        highScore = highScore +10;
+         [self playerOpacity];
+
+        
     }
     
          if (!labelBlink) {
     [scoreLabel setString:[NSString stringWithFormat:@"%d/100", scoreBubbles]];
-         }
+       
     [highScoreLabel setString:[NSString stringWithFormat:@"%d", highScore]];
-
+  }
    // NSLog(@"anzahl auf dem feld3: %d", anzahlBubblesAufDemFeld);
     // bubbles.position =ccp(bubbles.position.x+ bubbles.contentSize.width, bubbles.position.y);
     
@@ -1164,7 +1226,20 @@
     
     [bubbles_Time_Down_Node removeFromParent];
         anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
-    percentage = percentage +5;
+    if (percentage +5 == 100) {
+        [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
+                                   withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f  ]];
+        highScoreEnd  = highScore;
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+
+        gameStatus = gamePaused;
+    }
+    else if (percentage+ 5 >= 0)
+    {
+        percentage = percentage +5;
+    }
     [_progressNode setPercentage: percentage];
 
         return YES;
@@ -1189,9 +1264,14 @@
     
     [bubbles_Time_Up_Node removeFromParent];
      anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld -1;
-    
+    if (percentage -5 < 0) {
+        percentage = 0;
+    }
+    else if (percentage- 5 >= 0)
+    {
     percentage = percentage -5;
-    [_progressNode setPercentage: percentage];
+    }
+        [_progressNode setPercentage: percentage];
 
     return YES;
     
@@ -1369,7 +1449,49 @@
 // -----------------------------------------------------------------------
 
 
+-(void)playerOpacity
+{
+    
+    if (scoreBubbles <=17) {
+        [ player setTexture:[CCTexture textureWithFile: @"faenger-Bobble-50-Prozent.png"]];
 
+    }
+    else if (scoreBubbles <= 34 && scoreBubbles> 17) {
+        [ player setTexture:[CCTexture textureWithFile: @"faenger-Bobble-60-Prozent.png"]];
+
+    }
+    else if (scoreBubbles <= 51&& scoreBubbles > 34)
+    {
+        
+        [ player setTexture:[CCTexture textureWithFile: @"faenger-Bobble-70-Prozent.png"]];
+
+    }
+    else if (scoreBubbles <= 68&& scoreBubbles > 51)
+    {
+        
+        [ player setTexture:[CCTexture textureWithFile: @"faenger-Bobble-80-Prozent.png"]];
+
+    }
+    else if (scoreBubbles <= 85 &&scoreBubbles > 68)
+        
+    {
+        
+        
+        [ player setTexture:[CCTexture textureWithFile: @"faenger-Bobble-90-Prozent.png"]];
+
+    }
+    else if (scoreBubbles <= 100 && scoreBubbles > 85)
+        
+    {
+        
+        
+        [ player setTexture:[CCTexture textureWithFile: @"faenger-Bobble-100-Prozent.png"]];
+        
+    }
+    
+    
+    
+}
 
 // -----------------------------------------------------------------------
 
@@ -1378,7 +1500,12 @@
 {
     if (gameStatus == gameisOn) {
         
+        [pauseSprite setTexture:[CCTexture textureWithFile:@"pause-icon-inactive.png"]];
         
+        [playSprite setTexture:[CCTexture textureWithFile:@"play-icon-active.png"]];
+        
+
+       
        //  percentage= percentage +10;
         
       //  [self progressBarTimer];
@@ -1432,6 +1559,8 @@
     [super onEnter];
    
   
+    
+    
   
     [self schedule:@selector(playerBewegung:) interval:0.01];
     [self schedule:@selector(addBubbles:) interval:1.5];
@@ -1439,6 +1568,7 @@
  
         
  
+
  
      timeInSec = 0.0f;
      // In pre-v3, touch enable and scheduleUpdate was called here
@@ -1488,25 +1618,31 @@
         
         if(CGRectContainsPoint([pauseSprite boundingBox], touchLoc) ){
             
-            
-            
-            [pauseSprite setTexture:[CCTexture textureWithFile:@"pause-icon-active.png"]];
-            
-            [playSprite setTexture:[CCTexture textureWithFile:@"play-icon-inactive.png"]];
-            [[CCDirector sharedDirector] pause];
-
-            
+    
+                
+                
+                [pauseSprite setTexture:[CCTexture textureWithFile:@"pause-icon-active.png"]];
+                
+                [playSprite setTexture:[CCTexture textureWithFile:@"play-icon-inactive.png"]];
+                [[CCDirector sharedDirector] pause];
+                
+                
+                
         
+            
+           
 
     
 }
-    else if(CGRectContainsPoint([playSprite boundingBox], touchLoc) ){
+     if(CGRectContainsPoint([playSprite boundingBox], touchLoc) ){
+        
+      
+        
+            [pauseSprite setTexture:[CCTexture textureWithFile:@"pause-icon-inactive.png"]];
+            
+            [playSprite setTexture:[CCTexture textureWithFile:@"play-icon-active.png"]];
         [[CCDirector sharedDirector] resume];
 
-        [pauseSprite setTexture:[CCTexture textureWithFile:@"pause-icon-inactive.png"]];
-        
-        [playSprite setTexture:[CCTexture textureWithFile:@"play-icon-active.png"]];
-    
     }
     
     
@@ -1519,15 +1655,17 @@
 
 
 {
+    gameStatus = gameisOn;
     highScoreEnd  = highScore;
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     
-    gameStatus = gamePaused;
+ 
     // back to intro scene with transition
     [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
-                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
+                               withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f  ]];
+    gameStatus = gamePaused;
 }
 
 // -----------------------------------------------------------------------

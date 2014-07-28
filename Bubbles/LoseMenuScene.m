@@ -8,7 +8,6 @@
 
 #import "LoseMenuScene.h"
 #import "HelloWorldScene.h"
-#import "ActivityViewController.h"
 
 @implementation LoseMenuScene
 
@@ -53,49 +52,81 @@
 
     
     
-    CCLabelTTF *labelEnd  = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"Score"] fontName:@"Helvetica" fontSize:18.0f];
+    CCLabelTTF *labelEnd  = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"Score"] fontName:@"Helvetica" fontSize:20.0f];
     labelEnd.color = [CCColor colorWithRed:0.0 green:0.0 blue:0.0];
-    labelEnd.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/1.7 + 30);
+    labelEnd.positionType = CCPositionTypeNormalized;
+    labelEnd.position = ccp(0.5f, 0.68f);
     [self addChild:labelEnd];
     
-    CCLabelTTF *labelEndScore = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", endScore] fontName:@"Helvetica" fontSize:23.0f];
+    CCLabelTTF *labelEndScore = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", endScore] fontName:@"Helvetica" fontSize:27.0f];
     labelEndScore.color = [CCColor colorWithRed:0.0 green:0.0 blue:0.0];
-    labelEndScore.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/1.7);
+    labelEndScore.positionType = CCPositionTypeNormalized;
+    labelEndScore.position = ccp(0.5f, 0.63f);
     [self addChild:labelEndScore];
     
  
   
+    
+    
+    CCLabelTTF *gameOver = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"Game Over"] fontName:@"Helvetica" fontSize:40.0f];
+    gameOver.positionType = CCPositionTypeNormalized;
+    gameOver.position = ccp(0.5f, 0.9f);
+    gameOver.color = [CCColor colorWithRed:0.0 green:0.0 blue:0.0];
+    [self addChild:gameOver];
+    
+    
+    
     //HighScoreLabel
-    labelHigh = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"Highscore"] fontName:@"Helvetica" fontSize:18.0f];
-    labelHigh.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/1.3 + 30);
+    labelHigh = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"Highscore"] fontName:@"Helvetica" fontSize:20.0f];
+    labelHigh.positionType = CCPositionTypeNormalized;
+    labelHigh.position = ccp(0.5f, 0.8f);
     labelHigh.color = [CCColor colorWithRed:0.0 green:0.0 blue:0.0];
     [self addChild:labelHigh];
     
-    labelHighScore = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", highScore] fontName:@"Helvetica" fontSize:23.0f];
-    labelHighScore.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/1.3);
+    labelHighScore = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", highScore] fontName:@"Helvetica" fontSize:27.0f];
+    labelHighScore.positionType = CCPositionTypeNormalized;
+    labelHighScore.position = ccp(0.5f, 0.75f);
     labelHighScore.color = [CCColor colorWithRed:0.0 green:0.0 blue:0.0];
 
     [self addChild:labelHighScore];
     [self highScore];
     
     
+    CCSprite *ball = [CCSprite spriteWithImageNamed:@"faenger-Bobble-100-Prozent-hd.png"];
+    ball.positionType = CCPositionTypeNormalized;
+    ball.position = ccp(0.5f, 0.15f);
+    ball.scale = 1.5;
+    [self addChild:ball];
     
-    
-    CCButton *helloWorldButton = [CCButton buttonWithTitle:@"[ Start ]" fontName:@"Verdana-Bold" fontSize:18.0f];
+    CCButton *helloWorldButton = [CCButton buttonWithTitle:@"Retry" fontName:@"Helvetica" fontSize:35.0f];
     helloWorldButton.positionType = CCPositionTypeNormalized;
-    helloWorldButton.position = ccp(0.5f, 0.35f);
+    helloWorldButton.position = ccp(0.5f, 0.15f);
     [helloWorldButton setTarget:self selector:@selector(onSpinningClicked:)];
+    helloWorldButton.color = [CCColor colorWithRed:0.0 green:0.0 blue:0.0];
+
     [self addChild:helloWorldButton];
     
     
     
     
-    CCButton *shareButtn = [CCButton buttonWithTitle:@"[ Share ]" fontName:@"Verdana-Bold" fontSize:18.0f];
+    CCButton *shareButtn = [CCButton buttonWithTitle:@"Facebook" fontName:@"Helvetica" fontSize:24.0f];
+    
     shareButtn.positionType = CCPositionTypeNormalized;
-    shareButtn.position = ccp(0.5f, 0.2f);
+    shareButtn.position = ccp(0.5f, .45f);
     [shareButtn setTarget:self selector:@selector(share:)];
+    shareButtn.color = [CCColor colorWithRed:0.0 green:0.0 blue:0.0];
+
     [self addChild:shareButtn];
     
+    CCButton *shareButtnTwitter = [CCButton buttonWithTitle:@"Twitter" fontName:@"Helvetica" fontSize:24.0f];
+    
+    shareButtnTwitter.positionType = CCPositionTypeNormalized;
+    shareButtnTwitter.position = ccp(0.5f, 0.35f);
+    [shareButtnTwitter setTarget:self selector:@selector(shareTwitter:)];
+    
+    shareButtnTwitter.color = [CCColor colorWithRed:0.0 green:0.0 blue:0.0];
+
+    [self addChild:shareButtnTwitter];
     
     return self;
     
@@ -143,18 +174,84 @@
 }
 -(void)share:(id)sender
 {
+    SLComposeViewController *fbController=[SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
     
     
-    
-   ActivityViewController *vc = [[ActivityViewController alloc] init];
-    [[CCDirector sharedDirector] presentViewController:vc animated:YES completion:nil  ];
+    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook])
+    {
+        SLComposeViewControllerCompletionHandler __block completionHandler=^(SLComposeViewControllerResult result){
+            
+            [fbController dismissViewControllerAnimated:YES completion:nil];
+            
+            switch(result){
+                case SLComposeViewControllerResultCancelled:
+                default:
+                {
+                    NSLog(@"Cancelled");
+                    
+                }
+                    break;
+                case SLComposeViewControllerResultDone:
+                {
+                    NSLog(@"Posted");
+                }
+                    break;
+            }};
+        
+        [fbController addImage:[UIImage imageNamed:@"shield-hd.png"]];
+        [fbController setInitialText:[ NSString stringWithFormat:@"Hey, I scored %d Points in Bubbles",endScore]];
+       
+        [fbController setCompletionHandler:completionHandler];
+        
+ 
+         [[CCDirector sharedDirector] presentViewController:fbController animated:YES completion:nil  ];
 
-    //AppControler *app = (AppController*) [[UIApplication sharedApplication] delegate];
+     }
+   
     
-   // [[app navController] presentModalViewController:vc animated:YES];
-    // [[CCDirector sharedDirector] replaceScene:[ActivityViewController ]withTransition:[CCTransition transitionCrossFadeWithDuration:1.0f]];
-   // [[[CCDirector sharedDirector] view] addSubview:vc];
-
+   
 }
+-(void)shareTwitter:(id)sender
+{
+    
+    SLComposeViewController *twController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+    
+    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook])
+    {
+        SLComposeViewControllerCompletionHandler __block completionHandler=^(SLComposeViewControllerResult result){
+            
+            [twController dismissViewControllerAnimated:YES completion:nil];
+            
+            switch(result){
+                case SLComposeViewControllerResultCancelled:
+                default:
+                {
+                    NSLog(@"Cancelled");
+                    
+                }
+                    break;
+                case SLComposeViewControllerResultDone:
+                {
+                    NSLog(@"Posted");
+                }
+                    break;
+            }};
+        
+        [twController addImage:[UIImage imageNamed:@"shield-hd.png"]];
+        [twController setInitialText:[ NSString stringWithFormat:@"Hey, I scored %d Points in Bubbles ",endScore]];
+        
+        [twController setCompletionHandler:completionHandler];
+        
+        
+        [[CCDirector sharedDirector] presentViewController:twController animated:YES completion:nil  ];
+        
+
+     }
+    
+}
+
+
+
+
 
 @end

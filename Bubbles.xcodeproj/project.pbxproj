@@ -249,10 +249,14 @@
 		E4EFFB261981436D00127D95 /* time-up-Bobble.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EFFB241981436D00127D95 /* time-up-Bobble.png */; };
 		E4F02338197E949A00DBC941 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F02337197E949A00DBC941 /* CoreMotion.framework */; };
 		E4FDA6A51986322C005035CA /* LoseMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E4FDA6A41986322C005035CA /* LoseMenuScene.m */; };
-		E4FDA6A819864FC1005035CA /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4FDA6A719864FC1005035CA /* ActivityViewController.m */; };
 		E4FDA6AA19865745005035CA /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4FDA6A919865745005035CA /* MobileCoreServices.framework */; };
 		E4FDA6AC198657D2005035CA /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4FDA6AB198657D2005035CA /* Social.framework */; };
 		E4FDA6AE198657DB005035CA /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4FDA6AD198657DB005035CA /* Twitter.framework */; };
+		E4FDA6B41986995C005035CA /* faenger-Bobble-50-Prozent-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E4FDA6AF1986995C005035CA /* faenger-Bobble-50-Prozent-hd.png */; };
+		E4FDA6B51986995C005035CA /* faenger-Bobble-60-Prozent-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E4FDA6B01986995C005035CA /* faenger-Bobble-60-Prozent-hd.png */; };
+		E4FDA6B61986995C005035CA /* faenger-Bobble-70-Prozent-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E4FDA6B11986995C005035CA /* faenger-Bobble-70-Prozent-hd.png */; };
+		E4FDA6B71986995C005035CA /* faenger-Bobble-80-Prozent-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E4FDA6B21986995C005035CA /* faenger-Bobble-80-Prozent-hd.png */; };
+		E4FDA6B81986995C005035CA /* faenger-Bobble-90-Prozent-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E4FDA6B31986995C005035CA /* faenger-Bobble-90-Prozent-hd.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -712,11 +716,14 @@
 		E4F02337197E949A00DBC941 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		E4FDA6A31986322C005035CA /* LoseMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoseMenuScene.h; sourceTree = "<group>"; };
 		E4FDA6A41986322C005035CA /* LoseMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoseMenuScene.m; sourceTree = "<group>"; };
-		E4FDA6A619864FC1005035CA /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
-		E4FDA6A719864FC1005035CA /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
 		E4FDA6A919865745005035CA /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		E4FDA6AB198657D2005035CA /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		E4FDA6AD198657DB005035CA /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		E4FDA6AF1986995C005035CA /* faenger-Bobble-50-Prozent-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "faenger-Bobble-50-Prozent-hd.png"; sourceTree = "<group>"; };
+		E4FDA6B01986995C005035CA /* faenger-Bobble-60-Prozent-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "faenger-Bobble-60-Prozent-hd.png"; sourceTree = "<group>"; };
+		E4FDA6B11986995C005035CA /* faenger-Bobble-70-Prozent-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "faenger-Bobble-70-Prozent-hd.png"; sourceTree = "<group>"; };
+		E4FDA6B21986995C005035CA /* faenger-Bobble-80-Prozent-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "faenger-Bobble-80-Prozent-hd.png"; sourceTree = "<group>"; };
+		E4FDA6B31986995C005035CA /* faenger-Bobble-90-Prozent-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "faenger-Bobble-90-Prozent-hd.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -767,13 +774,18 @@
 				E445DF3919829276000E3596 /* play-icon-active-hd.png */,
 				E445DF3A19829276000E3596 /* play-icon-inactive-hd.png */,
 				E445DF3B19829276000E3596 /* shield-Bobble-hd.png */,
-				E445DF2E19829276000E3596 /* faenger-Bobble-100-Prozent-hd.png */,
 				E445DF3C19829276000E3596 /* shield-hd.png */,
 				E445DF3D19829276000E3596 /* time-down-Bobble-hd.png */,
 				E445DF3E19829276000E3596 /* time-up-Bobble-hd.png */,
 				E445DF5C1982952A000E3596 /* timeline_white-hd.png */,
 				E445DF4019829276000E3596 /* timeline-red-hd.png */,
 				E445DF4119829276000E3596 /* xtra-newlife-Bobble-hd.png */,
+				E4FDA6AF1986995C005035CA /* faenger-Bobble-50-Prozent-hd.png */,
+				E4FDA6B01986995C005035CA /* faenger-Bobble-60-Prozent-hd.png */,
+				E4FDA6B11986995C005035CA /* faenger-Bobble-70-Prozent-hd.png */,
+				E4FDA6B21986995C005035CA /* faenger-Bobble-80-Prozent-hd.png */,
+				E4FDA6B31986995C005035CA /* faenger-Bobble-90-Prozent-hd.png */,
+				E445DF2E19829276000E3596 /* faenger-Bobble-100-Prozent-hd.png */,
 			);
 			name = "Grafiken-HD";
 			sourceTree = "<group>";
@@ -1578,8 +1590,6 @@
 				E4D7BF9B197D501300695F15 /* IntroScene.m */,
 				E4FDA6A31986322C005035CA /* LoseMenuScene.h */,
 				E4FDA6A41986322C005035CA /* LoseMenuScene.m */,
-				E4FDA6A619864FC1005035CA /* ActivityViewController.h */,
-				E4FDA6A719864FC1005035CA /* ActivityViewController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1682,6 +1692,7 @@
 				E4D7BD4C197D501000695F15 /* Icon-120.png in Resources */,
 				E445DF5319829276000E3596 /* play-icon-active-hd.png in Resources */,
 				E445DF4D19829276000E3596 /* hintergrund-mit-hd.png in Resources */,
+				E4FDA6B41986995C005035CA /* faenger-Bobble-50-Prozent-hd.png in Resources */,
 				E430BC01197FF8D700D7076C /* hintergrund-mit.png in Resources */,
 				E445DF4519829276000E3596 /* 7-Pointer-Bobble-hd.png in Resources */,
 				E4EFFB201981189A00127D95 /* linie-oben.png in Resources */,
@@ -1697,9 +1708,11 @@
 				E4D7BD37197D501000695F15 /* Default.png in Resources */,
 				E445DF4719829276000E3596 /* bomb-Bobble-hd.png in Resources */,
 				E445DF4E19829276000E3596 /* hintergrund-ohne-hd.png in Resources */,
+				E4FDA6B51986995C005035CA /* faenger-Bobble-60-Prozent-hd.png in Resources */,
 				E445DF4319829276000E3596 /* 2-Pointer-Bobble-hd.png in Resources */,
 				E445DF5719829276000E3596 /* time-down-Bobble-hd.png in Resources */,
 				E4D28D1E198249F000009D4A /* shield.png in Resources */,
+				E4FDA6B81986995C005035CA /* faenger-Bobble-90-Prozent-hd.png in Resources */,
 				E4D7BD40197D501000695F15 /* Icon.png in Resources */,
 				E430BBFA197FF70A00D7076C /* 2-Pointer-Bobble.png in Resources */,
 				E445DF5619829276000E3596 /* shield-hd.png in Resources */,
@@ -1730,6 +1743,7 @@
 				E4D7BD58197D501000695F15 /* Icon-Spotlight-iOS7@2x.png in Resources */,
 				E445DF4A19829276000E3596 /* freeze-mode-Bobble-hd.png in Resources */,
 				E4EFFB251981436D00127D95 /* time-down-Bobble.png in Resources */,
+				E4FDA6B61986995C005035CA /* faenger-Bobble-70-Prozent-hd.png in Resources */,
 				E445DF5419829276000E3596 /* play-icon-inactive-hd.png in Resources */,
 				E445DF4B19829276000E3596 /* grsser-werden-Bobble-hd.png in Resources */,
 				E445DF5819829276000E3596 /* time-up-Bobble-hd.png in Resources */,
@@ -1745,6 +1759,7 @@
 				E430BC051980014F00D7076C /* timeline-red.png in Resources */,
 				E445DF4219829276000E3596 /* 1-Pointer-Bobble-hd.png in Resources */,
 				E445DF4819829276000E3596 /* faenger-Bobble-100-Prozent-hd.png in Resources */,
+				E4FDA6B71986995C005035CA /* faenger-Bobble-80-Prozent-hd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1856,7 +1871,6 @@
 				E4D7BED3197D501200695F15 /* OALAudioSession.m in Sources */,
 				E4D7BE64197D501200695F15 /* CCWindow.m in Sources */,
 				E4D7BE24197D501100695F15 /* CCSpriteFrame.m in Sources */,
-				E4FDA6A819864FC1005035CA /* ActivityViewController.m in Sources */,
 				E4D7BE50197D501200695F15 /* CCES2Renderer.m in Sources */,
 				E4D7BDA5197D501100695F15 /* CCActionProgressTimer.m in Sources */,
 				E4D7BE88197D501200695F15 /* TGAlib.m in Sources */,
