@@ -24,7 +24,10 @@
 
 // -----------------------------------------------------------------------
 
+
     
+@property (nonatomic,strong) NSString * HS;
+
  
 + (HelloWorldScene *)scene;
 - (id)init;

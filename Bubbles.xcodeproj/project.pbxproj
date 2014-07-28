@@ -248,6 +248,11 @@
 		E4EFFB251981436D00127D95 /* time-down-Bobble.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EFFB231981436D00127D95 /* time-down-Bobble.png */; };
 		E4EFFB261981436D00127D95 /* time-up-Bobble.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EFFB241981436D00127D95 /* time-up-Bobble.png */; };
 		E4F02338197E949A00DBC941 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F02337197E949A00DBC941 /* CoreMotion.framework */; };
+		E4FDA6A51986322C005035CA /* LoseMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E4FDA6A41986322C005035CA /* LoseMenuScene.m */; };
+		E4FDA6A819864FC1005035CA /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4FDA6A719864FC1005035CA /* ActivityViewController.m */; };
+		E4FDA6AA19865745005035CA /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4FDA6A919865745005035CA /* MobileCoreServices.framework */; };
+		E4FDA6AC198657D2005035CA /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4FDA6AB198657D2005035CA /* Social.framework */; };
+		E4FDA6AE198657DB005035CA /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4FDA6AD198657DB005035CA /* Twitter.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -705,6 +710,13 @@
 		E4EFFB231981436D00127D95 /* time-down-Bobble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "time-down-Bobble.png"; sourceTree = "<group>"; };
 		E4EFFB241981436D00127D95 /* time-up-Bobble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "time-up-Bobble.png"; sourceTree = "<group>"; };
 		E4F02337197E949A00DBC941 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		E4FDA6A31986322C005035CA /* LoseMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoseMenuScene.h; sourceTree = "<group>"; };
+		E4FDA6A41986322C005035CA /* LoseMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoseMenuScene.m; sourceTree = "<group>"; };
+		E4FDA6A619864FC1005035CA /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
+		E4FDA6A719864FC1005035CA /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
+		E4FDA6A919865745005035CA /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		E4FDA6AB198657D2005035CA /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		E4FDA6AD198657DB005035CA /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -712,6 +724,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4FDA6AE198657DB005035CA /* Twitter.framework in Frameworks */,
+				E4FDA6AC198657D2005035CA /* Social.framework in Frameworks */,
+				E4FDA6AA19865745005035CA /* MobileCoreServices.framework in Frameworks */,
 				E4D7BD1B197D501000695F15 /* QuartzCore.framework in Frameworks */,
 				E4F02338197E949A00DBC941 /* CoreMotion.framework in Frameworks */,
 				E4D7BD1F197D501000695F15 /* OpenAL.framework in Frameworks */,
@@ -784,6 +799,9 @@
 		E4D7BD19197D501000695F15 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E4FDA6AD198657DB005035CA /* Twitter.framework */,
+				E4FDA6AB198657D2005035CA /* Social.framework */,
+				E4FDA6A919865745005035CA /* MobileCoreServices.framework */,
 				E4F02337197E949A00DBC941 /* CoreMotion.framework */,
 				E4D7BD1A197D501000695F15 /* QuartzCore.framework */,
 				E4D7BD1C197D501000695F15 /* OpenGLES.framework */,
@@ -1558,6 +1576,10 @@
 				E4D7BF98197D501300695F15 /* HelloWorldScene.m */,
 				E4D7BF9A197D501300695F15 /* IntroScene.h */,
 				E4D7BF9B197D501300695F15 /* IntroScene.m */,
+				E4FDA6A31986322C005035CA /* LoseMenuScene.h */,
+				E4FDA6A41986322C005035CA /* LoseMenuScene.m */,
+				E4FDA6A619864FC1005035CA /* ActivityViewController.h */,
+				E4FDA6A719864FC1005035CA /* ActivityViewController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1834,6 +1856,7 @@
 				E4D7BED3197D501200695F15 /* OALAudioSession.m in Sources */,
 				E4D7BE64197D501200695F15 /* CCWindow.m in Sources */,
 				E4D7BE24197D501100695F15 /* CCSpriteFrame.m in Sources */,
+				E4FDA6A819864FC1005035CA /* ActivityViewController.m in Sources */,
 				E4D7BE50197D501200695F15 /* CCES2Renderer.m in Sources */,
 				E4D7BDA5197D501100695F15 /* CCActionProgressTimer.m in Sources */,
 				E4D7BE88197D501200695F15 /* TGAlib.m in Sources */,
@@ -1849,6 +1872,7 @@
 				E4D7BDC6197D501100695F15 /* CCLabelBMFont.m in Sources */,
 				E4D7BEB5197D501200695F15 /* ALCaptureDevice.m in Sources */,
 				E4D7BE39197D501100695F15 /* CCTiledMapLayer.m in Sources */,
+				E4FDA6A51986322C005035CA /* LoseMenuScene.m in Sources */,
 				E4D7BD81197D501000695F15 /* CCEffectTexture.m in Sources */,
 				E4D7BE70197D501200695F15 /* CCColor.m in Sources */,
 				E4D7BD8A197D501000695F15 /* CCShader.m in Sources */,
@@ -2007,12 +2031,14 @@
 					"\"$(SRCROOT)/$(PROJECT_NAME)/Libraries/Chipmunk/objectivec/include\"",
 				);
 				INFOPLIST_FILE = Bubbles/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2031,12 +2057,14 @@
 					"\"$(SRCROOT)/$(PROJECT_NAME)/Libraries/Chipmunk/objectivec/include\"",
 				);
 				INFOPLIST_FILE = Bubbles/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

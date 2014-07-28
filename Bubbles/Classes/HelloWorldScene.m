@@ -9,6 +9,7 @@
 
 #import "HelloWorldScene.h"
 #import "IntroScene.h"
+#import "LoseMenuScene.h"
 
 // -----------------------------------------------------------------------
 #pragma mark - HelloWorldScene
@@ -87,12 +88,14 @@
     CCButton *play;
     int gameStatus;
     int scoreBubbles;
-    int highScore;
-    
+       
     float sec;
     
     int opaqueFactor;
     int artDerBubbles ;
+    
+    int highScore;
+    int highScoreEnd;
     
 }
 
@@ -118,10 +121,7 @@
     // Enable touch handling on scene node
     self.userInteractionEnabled = YES;
     
-    // Create a colored background (Dark Grey)
-  //  CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.8f green:0.8f blue:0.8f alpha:1.0f]];
-  //  [self addChild:background];
-   
+ 
     
     CCSprite* background = [CCSprite spriteWithImageNamed:@"hintergrund-mit.png"];
     background.position = ccp(self.contentSize.width / 2, self.contentSize.height / 2);
@@ -133,15 +133,10 @@
 
     CCSprite *linie = [CCSprite spriteWithImageNamed:@"linie-oben.png"];
     linie.position = ccp(self.contentSize.width / 2, self.contentSize.height - 50 );
-   // linie.positionType = CCPositionTypeNormalized;
     
     [self addChild:linie];
     
-     //background.anchorPoint = CGPointMake(0, 0);
-  // background.scaleX = self.contentSize.width;
-    // background.scaleY = self.contentSize.height;
-    
-    // PHYSIK WORLD
+        // PHYSIK WORLD
     
     physicsWorld = [CCPhysicsNode node];
     physicsWorld.gravity = ccp(0,0);
@@ -238,19 +233,19 @@
     
     CCSprite *whiteTimeline = [CCSprite spriteWithImageNamed:@"timeline_white.png"];
     whiteTimeline.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/10);
-   // whiteTimeline.positionType = CCPositionTypeNormalized;
+    whiteTimeline.scaleY = 2.0f;
     
     [self addChild:whiteTimeline];
     
     CCSprite *sprite = [CCSprite spriteWithImageNamed:@"timeline-red.png"];
     _progressNode = [CCProgressNode progressWithSprite:sprite];
+    _progressNode.scaleY = 2.0f;
     _progressNode.type = CCProgressNodeTypeBar;
     _progressNode.midpoint = ccp(0.0f, 0.0f);
     _progressNode.barChangeRate = ccp(1.0f, 0.0f);
     _progressNode.percentage = 0.0f;
     
-    //_progressNode.positionType = CCPositionTypeNormalized;
-    _progressNode.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/10);
+     _progressNode.position = CGPointMake(self.contentSize.width/2, self.contentSize.height/10);
     [self addChild:_progressNode];
     
     self.userInteractionEnabled = YES;
@@ -332,10 +327,10 @@
         
   
         
-             int minDuration = 3.0;
-             int maxDuration = 6.0;
+             int minDuration = 5.0 + ( 1/sec);
+             int maxDuration = 8.0;
              int rangeDuration = maxDuration - minDuration;
-             int randomDuration = (arc4random() % rangeDuration) + minDuration + ( 1/sec);
+             int randomDuration = (arc4random() % rangeDuration) + minDuration;
          
      
     CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubbles_1.contentSize.width/2)];
@@ -779,7 +774,7 @@
 
    // [player stopAllActions];
     CMAccelerometerData *acceleration = motionManager.accelerometerData;
-    playerRichtungX = acceleration.acceleration.x*20;
+    playerRichtungX = acceleration.acceleration.x*15;
   //  NSLog(@"Neigungstest : %.2f", playerRichtungX);
 
     float     targetX   = player.position.x + playerRichtungX;
@@ -874,7 +869,16 @@
 
 #pragma mark Bubbles_Pointer
  - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubbleCollision:(CCNode *)bubbles_1Node   playerCollision:(CCNode *)player2{
-    
+     
+     if (labelBlink) {
+         [bubbles_1Node removeFromParent];
+         anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
+
+         
+         return YES;
+         
+         
+     }
      Collsion = YES;
      
      [bubbles_1Node removeFromParent];
@@ -890,11 +894,15 @@
      if (scoreBubbles > 100) {
          
          
-         
+         highScoreEnd  = highScore;
+         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
+         [[NSUserDefaults standardUserDefaults] synchronize];
          gameStatus = gamePaused;
          // back to intro scene with transition
-         [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
+         [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
                                     withTransition:[CCTransition transitionFadeWithDuration:0.5f  ]];
+         
+       
      }
      
      if (scoreBubbles == 100) {
@@ -922,6 +930,15 @@
 }
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubble2Collision:(CCNode *)bubbles_2Node   playerCollision:(CCNode *)player{
     
+    if (labelBlink) {
+        
+        [bubbles_2Node removeFromParent];
+        anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
+
+        return YES;
+        
+        
+    }
      Collsion = YES;
     
     
@@ -934,11 +951,13 @@
  
     if (scoreBubbles > 100) {
         
-        
+        highScoreEnd  = highScore;
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         
         gameStatus = gamePaused;
         // back to intro scene with transition
-        [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
+        [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
                                    withTransition:[CCTransition transitionFadeWithDuration:0.5f  ]];
     }
     
@@ -964,6 +983,14 @@
 }
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubble7Collision:(CCNode *)bubbles_7Node   playerCollision:(CCNode *)player{
     
+    if (labelBlink) {
+        
+        [bubbles_7Node removeFromParent];
+        anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
+        return YES;
+        
+        
+    }
     
      Collsion = YES;
     
@@ -976,12 +1003,14 @@
 
  
     if (scoreBubbles > 100) {
-        
+        highScoreEnd  = highScore;
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         
         
         gameStatus = gamePaused;
         // back to intro scene with transition
-        [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
+        [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
                                    withTransition:[CCTransition transitionFadeWithDuration:0.5f  ]];
     }
     
@@ -1009,6 +1038,17 @@
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubble5Collision:(CCNode *)bubbles_5Node   playerCollision:(CCNode *)player{
     
+    if (labelBlink) {
+        
+        
+        [bubbles_5Node removeFromParent];
+        anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
+        
+
+        return YES;
+        
+        
+    }
      Collsion = YES;
     
     
@@ -1022,11 +1062,13 @@
     
     if (scoreBubbles > 100) {
         
-        
+        highScoreEnd  = highScore;
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         
         gameStatus = gamePaused;
         // back to intro scene with transition
-        [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
+        [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
                                    withTransition:[CCTransition transitionFadeWithDuration:0.5f  ]];
     }
     
@@ -1054,6 +1096,15 @@
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubble10Collision:(CCNode *)bubbles_10Node   playerCollision:(CCNode *)player{
     
+    if (labelBlink) {
+        
+        [bubbles_10Node removeFromParent];
+        anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
+
+        return YES;
+        
+        
+    }
     
      Collsion = YES;
     
@@ -1066,11 +1117,13 @@
 
      if (scoreBubbles > 100) {
         
-        
+         highScoreEnd  = highScore;
+         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
+         [[NSUserDefaults standardUserDefaults] synchronize];
         
         gameStatus = gamePaused;
         // back to intro scene with transition
-        [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
+        [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
                                    withTransition:[CCTransition transitionFadeWithDuration:0.5f  ]];
     }
     
@@ -1096,6 +1149,16 @@
 #pragma mark Bubbles_Timer
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubbleTimeDownCollision:(CCNode *)bubbles_Time_Down_Node   playerCollision:(CCNode *)player{
     
+    if (labelBlink) {
+        
+        
+        [bubbles_Time_Down_Node removeFromParent];
+        anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
+
+        return YES;
+        
+        
+    }
     
      Collsion = YES;
     
@@ -1110,6 +1173,17 @@
 }
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubbleTimeUpCollision:(CCNode *)bubbles_Time_Up_Node   playerCollision:(CCNode *)player{
     
+    if (labelBlink) {
+        
+        [bubbles_Time_Up_Node removeFromParent];
+        anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld -1;
+        
+
+        
+        return YES;
+        
+        
+    }
      Collsion = YES;
     
     
@@ -1126,6 +1200,15 @@
 #pragma mark Bubbles_Bomb
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubbleBombCollision:(CCNode *)bubbles_bomb_Node   playerCollision:(CCNode *)player{
     
+    if (labelBlink) {
+        [bubbles_bomb_Node removeFromParent];
+        
+        anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
+        
+        return YES;
+        
+        
+    }
      Collsion = YES;
     
     
@@ -1136,19 +1219,21 @@
 
         
         if (!labelBlink) {
-            
+            highScoreEnd  = highScore;
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
         
     gameStatus = gamePaused;
     
     
     
-    [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
+    [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:1.0f ]];
             
         }
     
     }
-    else if (shieldActive)
+     if (shieldActive)
     
     {
         [shield removeFromParent];
@@ -1164,12 +1249,22 @@
 #pragma mark Bubbles_Shield
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubbleShieldCollision:(CCNode *)bubbles_shield_Node   playerCollision:(CCNode *)player1{
     
+    if (labelBlink) {
+        
+        anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
+
+        [bubbles_shield_Node removeFromParent];
+ 
+        return YES;
+        
+        
+    }
      Collsion = YES;
     
-    
-    [bubbles_shield_Node removeFromParent];
     anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
-    if (!shieldActive) {
+
+    [bubbles_shield_Node removeFromParent];
+     if (!shieldActive) {
         
         shieldTime = 11;
     
@@ -1234,6 +1329,9 @@
      return YES;
     
     
+
+    
+    
 }
 
 -(void)shieldTimer
@@ -1260,6 +1358,8 @@
 }
 
 // -----------------------------------------------------------------------
+
+
 
 - (void)dealloc
 {
@@ -1298,6 +1398,11 @@
         
         if (percentage == 100)
         {
+            
+            highScoreEnd  = highScore;
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
              gameStatus = gamePaused;
             NSLog(@"time is over ");
             
@@ -1329,7 +1434,7 @@
   
   
     [self schedule:@selector(playerBewegung:) interval:0.01];
-    [self schedule:@selector(addBubbles:) interval:1];
+    [self schedule:@selector(addBubbles:) interval:1.5];
     [self schedule:@selector(ticker:) interval:1];
  
         
@@ -1414,11 +1519,14 @@
 
 
 {
+    highScoreEnd  = highScore;
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     
     gameStatus = gamePaused;
     // back to intro scene with transition
-    [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
+    [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
                                withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
 }
 
