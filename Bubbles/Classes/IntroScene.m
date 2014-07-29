@@ -35,22 +35,35 @@
     if (!self) return(nil);
     
     
-    // Create a colored background (Dark Grey)
-    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
+    
+    CCSprite* background = [CCSprite spriteWithImageNamed:@"hintergrund-mit.png"];
+    background.position = ccp(self.contentSize.width/2, self.contentSize.height/2);
+    
+    [background setScaleX: self.contentSize.width/background.contentSize.width];
+    [background setScaleY:self.contentSize.height/background.contentSize.height];
+    
     [self addChild:background];
     
     // Hello world
-    CCLabelTTF *label = [CCLabelTTF labelWithString:@"Hello World" fontName:@"Chalkduster" fontSize:36.0f];
+    CCLabelTTF *label = [CCLabelTTF labelWithString:@"Bubbles" fontName:@"Helvetiva" fontSize:46.0f];
     label.positionType = CCPositionTypeNormalized;
     label.color = [CCColor redColor];
-    label.position = ccp(0.5f, 0.5f); // Middle of screen
+    label.position = ccp(0.5f, 0.8f); // Middle of screen
     [self addChild:label];
     
     // Helloworld scene button
-    CCButton *helloWorldButton = [CCButton buttonWithTitle:@"[ Start ]" fontName:@"Verdana-Bold" fontSize:18.0f];
+    CCSprite *ball = [CCSprite spriteWithImageNamed:@"faenger-Bobble-100-Prozent-hd.png"];
+    ball.positionType = CCPositionTypeNormalized;
+    ball.position = ccp(0.5f, 0.15f);
+    ball.scale = 1.5;
+    [self addChild:ball];
+    
+    CCButton *helloWorldButton = [CCButton buttonWithTitle:@"Start" fontName:@"Helvetica" fontSize:35.0f];
     helloWorldButton.positionType = CCPositionTypeNormalized;
-    helloWorldButton.position = ccp(0.5f, 0.35f);
+    helloWorldButton.position = ccp(0.5f, 0.15f);
     [helloWorldButton setTarget:self selector:@selector(onSpinningClicked:)];
+    helloWorldButton.color = [CCColor colorWithRed:0.0 green:0.0 blue:0.0];
+    
     [self addChild:helloWorldButton];
 
     // done

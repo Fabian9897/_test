@@ -781,17 +781,18 @@
 
    // [player stopAllActions];
     CMAccelerometerData *acceleration = motionManager.accelerometerData;
-      playerRichtungX = acceleration.acceleration.x*7;
+    playerRichtungX = acceleration.acceleration.x*7;
         
-        //double x = acceleration.acceleration.x * 7;
-     //   double y;
+     //  double x = acceleration.acceleration.x * 2;
+      //  double y =  [[CCDirector sharedDirector] totalFrames]  ;
+       // NSLog(@"Total frames 2.%f", y);
         
         
         //for (  int i  = 0; i <= 10; i++) {
             
         //  y = i * 0.1 ;
           //
-           // playerRichtungX = pow(x, y);
+       //    playerRichtungX = pow(x, y);
 
        // }
             
@@ -1667,6 +1668,8 @@
 
 {
     
+    [[CCDirector sharedDirector] resume];
+
     
     
         touchLoc = [touch locationInNode:self ];
@@ -1685,11 +1688,10 @@
                 [pauseSprite setTexture:[CCTexture textureWithFile:@"pause-icon-active.png"]];
                 
                 [playSprite setTexture:[CCTexture textureWithFile:@"play-icon-inactive.png"]];
-                [[CCDirector sharedDirector] pause];
+              [[CCDirector sharedDirector] pause];
                 
                 
-                
-        
+         
             
            
 
@@ -1702,7 +1704,9 @@
             [pauseSprite setTexture:[CCTexture textureWithFile:@"pause-icon-inactive.png"]];
             
             [playSprite setTexture:[CCTexture textureWithFile:@"play-icon-active.png"]];
-        [[CCDirector sharedDirector] resume];
+    [[CCDirector sharedDirector] resume];
+         
+         
 
     }
     
