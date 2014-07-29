@@ -128,7 +128,9 @@
     windowHeight = self.contentSize.height/2;
     windowWidth = self.contentSize.width/2;
     
- 
+  
+    
+    
     
     CCSprite* background = [CCSprite spriteWithImageNamed:@"hintergrund-mit.png"];
     background.position = ccp(windowWidth, windowHeight);
@@ -230,7 +232,7 @@
   
         
     
-    motionManager.accelerometerUpdateInterval = 0.050;
+    motionManager.accelerometerUpdateInterval = 0.05;
  
     
     //-------------------------------------------------------------------------------------------------------------------------
@@ -314,13 +316,17 @@
              anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
 
        
-     
+             bubbles_1 = [CCSprite spriteWithImageNamed:@"1-Pointer-Bobble.png"];
+
     int minX = bubbles_1.contentSize.width ;
-    int maxX = self.contentSize.width - bubbles_1.contentSize.width ;
-    int rangeX = maxX - minX;
-    int randomX = (arc4random() % rangeX)  +minX/2 ;
-    
-         bubbles_1 = [CCSprite spriteWithImageNamed:@"1-Pointer-Bobble.png"];
+    int maxX = self.contentSize.width - bubbles_1.contentSize.width * 2 ;
+   // int rangeX = maxX - minX+1;
+  
+             
+             
+             int randomX = (arc4random() % (maxX-minX+1))  +minX ;
+   // int randomX= arc4random()%(maxX-minX+1) + minX;
+
          bubbles_1.position = CGPointMake(randomX,self.contentSize.height + bubbles_1.contentSize.width/2);
 
     
@@ -359,13 +365,13 @@
          {         anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
 
              Collsion = NO;
+             bubbles_2 = [CCSprite spriteWithImageNamed:@"2-Pointer-Bobble.png"];
 
              int minX = bubbles_2.contentSize.width  ;
              int maxX = self.contentSize.width - bubbles_2.contentSize.width  ;
-             int rangeX = maxX - minX;
-             int randomX = (arc4random() % rangeX) +minX/2 ;
+             int rangeX = maxX - minX+1;
+             int randomX = (arc4random() % (maxX-minX+1))  +minX ;
              
-             bubbles_2 = [CCSprite spriteWithImageNamed:@"2-Pointer-Bobble.png"];
              bubbles_2.position = CGPointMake(randomX,self.contentSize.height + bubbles_2.contentSize.width/2);
              
              
@@ -407,15 +413,15 @@
          {
              Collsion = NO;
              anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
+             bubbles_5 = [CCSprite spriteWithImageNamed:@"5-Pointer-Bobble.png"];
 
              
              
              int minX = bubbles_5.contentSize.width  ;
              int maxX = self.contentSize.width - bubbles_5.contentSize.width  ;
-             int rangeX = maxX - minX;
-             int randomX = (arc4random() % rangeX) +minX/2  ;
+             int rangeX = maxX - minX+1;
+             int randomX = (arc4random() % (maxX-minX+1))  +minX ;
              
-             bubbles_5 = [CCSprite spriteWithImageNamed:@"5-Pointer-Bobble.png"];
              bubbles_5.position = CGPointMake(randomX,self.contentSize.height + bubbles_5.contentSize.width/2);
              
              
@@ -453,15 +459,15 @@
          {
              Collsion = NO;
              anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
+             bubbles_7 = [CCSprite spriteWithImageNamed:@"7-Pointer-Bobble.png"];
 
              
              
              int minX = bubbles_7.contentSize.width  ;
              int maxX = self.contentSize.width - bubbles_7.contentSize.width  ;
-             int rangeX = maxX - minX;
-             int randomX = (arc4random() % rangeX)  +minX/2 ;
+             int rangeX = maxX - minX+1;
+             int randomX = (arc4random() % (maxX-minX+1))  +minX ;
              
-             bubbles_7 = [CCSprite spriteWithImageNamed:@"7-Pointer-Bobble.png"];
              bubbles_7.position = CGPointMake(randomX,self.contentSize.height + bubbles_7.contentSize.width/2);
              
              
@@ -500,14 +506,14 @@
              Collsion = NO;
 
              anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
+             bubbles_10 = [CCSprite spriteWithImageNamed:@"10-Pointer-Bobble.png"];
 
              
              int minX = bubbles_10.contentSize.width  ;
              int maxX = self.contentSize.width - bubbles_10.contentSize.width   ;
-             int rangeX = maxX - minX;
-             int randomX = (arc4random() % rangeX)  +minX/2 ;
+             int rangeX = maxX - minX+1;
+             int randomX = (arc4random() % (maxX-minX+1))  +minX ;
              
-             bubbles_10 = [CCSprite spriteWithImageNamed:@"10-Pointer-Bobble.png"];
              bubbles_10.position = CGPointMake(randomX,self.contentSize.height + bubbles_10.contentSize.width/2);
              
              
@@ -549,13 +555,13 @@
              Collsion = NO;
              anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
 
-             
+             bubbles_timeDown = [CCSprite spriteWithImageNamed:@"time-down-Bobble.png"];
+
              int minX = bubbles_timeDown.contentSize.width  ;
              int maxX = self.contentSize.width - bubbles_timeDown.contentSize.width ;
-             int rangeX = maxX - minX;
-             int randomX = (arc4random() % rangeX) +minX/2  ;
+             int rangeX = maxX - minX+1;
+             int randomX = (arc4random() % (maxX-minX+1))  +minX ;
              
-             bubbles_timeDown = [CCSprite spriteWithImageNamed:@"time-down-Bobble.png"];
              bubbles_timeDown.position = CGPointMake(randomX,self.contentSize.height + bubbles_10.contentSize.width/2);
              
              
@@ -598,8 +604,8 @@
              
              int minX = bubbles_timeUp.contentSize.width ;
              int maxX = self.contentSize.width - bubbles_timeUp.contentSize.width  ;
-             int rangeX = maxX - minX;
-             int randomX = (arc4random() % rangeX)  +minX/2 ;
+             int rangeX = maxX - minX+1;
+             int randomX = (arc4random() % (maxX-minX+1))  +minX ;
              
              bubbles_timeUp = [CCSprite spriteWithImageNamed:@"time-up-Bobble.png"];
              bubbles_timeUp.position = CGPointMake(randomX,self.contentSize.height + bubbles_timeUp.contentSize.width/2);
@@ -639,13 +645,13 @@
               Collsion = NO;
               anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
 
-              
+              bubbles_bomb = [CCSprite spriteWithImageNamed:@"bomb-Bobble.png"];
+
               int minX = bubbles_bomb.contentSize.width  ;
               int maxX = self.contentSize.width - bubbles_bomb.contentSize.width  ;
-              int rangeX = maxX - minX;
-              int randomX = (arc4random() % rangeX)  +minX/2 ;
+              int rangeX = maxX - minX+1;
+              int randomX = (arc4random() % (maxX-minX+1))  +minX ;
               
-              bubbles_bomb = [CCSprite spriteWithImageNamed:@"bomb-Bobble.png"];
               bubbles_bomb.position = CGPointMake(randomX,self.contentSize.height + bubbles_bomb.contentSize.width/2);
               
               
@@ -682,13 +688,13 @@
               
               Collsion = NO;
               anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
+              bubbles_shield = [CCSprite spriteWithImageNamed:@"shield-Bobble.png"];
 
               int minX = bubbles_shield.contentSize.width  ;
               int maxX = self.contentSize.width - bubbles_shield.contentSize.width    ;
-              int rangeX = maxX - minX;
-              int randomX = (arc4random() % rangeX)  +minX/2;
+              int rangeX = maxX - minX+1;
+              int randomX = (arc4random() % (maxX-minX+1))  +minX ;
               
-              bubbles_shield = [CCSprite spriteWithImageNamed:@"shield-Bobble.png"];
               bubbles_shield.position = CGPointMake(randomX,self.contentSize.height + bubbles_shield.contentSize.width/2);
               
               
@@ -776,16 +782,31 @@
 
 
 {
-
+  
+    
     if (gameStatus == gameisOn) {
-     
-        [motionManager startAccelerometerUpdates];
+         [motionManager startAccelerometerUpdates];
 
    // [player stopAllActions];
     CMAccelerometerData *acceleration = motionManager.accelerometerData;
-    playerRichtungX = acceleration.acceleration.x*10;
-  //  NSLog(@"Neigungstest : %.2f", playerRichtungX);
+      playerRichtungX = acceleration.acceleration.x*7;
+        
+        //double x = acceleration.acceleration.x * 7;
+     //   double y;
+        
+        
+        //for (  int i  = 0; i <= 10; i++) {
+            
+        //  y = i * 0.1 ;
+          //
+           // playerRichtungX = pow(x, y);
 
+       // }
+            
+
+        
+        
+ 
     float     targetX   = player.position.x + playerRichtungX;
     float    targetY   = player.position.y;
  
@@ -819,6 +840,7 @@
     
     
     }
+    
     
 }
 
@@ -908,6 +930,9 @@
          [[NSUserDefaults standardUserDefaults] synchronize];
          gameStatus = gamePaused;
          // back to intro scene with transition
+         
+         
+         [self takeScreenShot];
          [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
                                     withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f  ]];
        
@@ -975,7 +1000,8 @@
         highScoreEnd  = highScore;
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        
+        [self takeScreenShot];
+
         gameStatus = gamePaused;
         // back to intro scene with transition
         [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
@@ -1037,7 +1063,8 @@
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        
+        [self takeScreenShot];
+
         gameStatus = gamePaused;
         // back to intro scene with transition
         [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
@@ -1104,7 +1131,8 @@
         highScoreEnd  = highScore;
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        
+        [self takeScreenShot];
+
         gameStatus = gamePaused;
         // back to intro scene with transition
         [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
@@ -1166,7 +1194,8 @@
     
    
      if (scoreBubbles+10 > 100) {
-        
+         [self takeScreenShot];
+
          highScoreEnd  = highScore;
          [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
          [[NSUserDefaults standardUserDefaults] synchronize];
@@ -1227,6 +1256,9 @@
     [bubbles_Time_Down_Node removeFromParent];
         anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
     if (percentage +5 == 100) {
+       
+        [self takeScreenShot];
+
         [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
                                    withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f  ]];
         highScoreEnd  = highScore;
@@ -1302,7 +1334,8 @@
             highScoreEnd  = highScore;
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
             [[NSUserDefaults standardUserDefaults] synchronize];
-        
+            [self takeScreenShot];
+
     gameStatus = gamePaused;
     
     
@@ -1493,7 +1526,43 @@
     
 }
 
-// -----------------------------------------------------------------------
+#pragma mark Screenshot
+    -(UIImage*) takeScreenShot
+    {
+        
+        
+        [CCDirector sharedDirector].nextDeltaTimeZero = YES;
+        CGSize winSize = [CCDirector sharedDirector].viewSize;
+        
+  CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:1.0f]];
+        background.position = ccp(winSize.width/2, winSize.height/2);
+        
+        CCRenderTexture* rtx = [CCRenderTexture renderTextureWithWidth:winSize.width height:winSize.height];
+        
+        [rtx begin];
+        [background visit];
+        [[[CCDirector sharedDirector] runningScene] visit];
+        [rtx end];
+        
+        
+         UIImage *img = [rtx getUIImage];
+        
+       
+        
+      //   UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil);
+        //NSData * data = UIImagePNGRepresentation(img);
+
+        //NSString *imagePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"testImage.png"];
+        //NSLog(@"Path for Image : %@",imagePath);
+        //[data writeToFile:imagePath atomically:YES];
+        
+        
+        [[NSUserDefaults standardUserDefaults] setObject:UIImagePNGRepresentation(img)forKey:@"Screenshot"];
+
+                 [[NSUserDefaults standardUserDefaults] synchronize];
+        return img;
+    }
+
 
 #pragma mark Timer
 -(void)ticker:(CCTime)dt
@@ -1525,7 +1594,7 @@
         
         if (percentage == 100)
         {
-            
+            [self takeScreenShot];
             highScoreEnd  = highScore;
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
             [[NSUserDefaults standardUserDefaults] synchronize];
@@ -1656,6 +1725,9 @@
 
 {
     gameStatus = gameisOn;
+    
+    [self takeScreenShot];
+
     highScoreEnd  = highScore;
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
     [[NSUserDefaults standardUserDefaults] synchronize];

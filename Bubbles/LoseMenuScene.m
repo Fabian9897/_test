@@ -18,6 +18,9 @@
     
     CCLabelTTF * labelHighScore ;
     CCLabelTTF *labelHigh;
+    
+    UIImage *screenshot;
+    NSString *theImagePath;
 }
 
 
@@ -49,8 +52,11 @@
     // ENDSCORE lesen HighScore lesen
     endScore = [[[NSUserDefaults standardUserDefaults] objectForKey:@"HighScore"] intValue ];
     highScore = [[[NSUserDefaults standardUserDefaults] objectForKey: @"AbsolutHighScore" ]intValue];
-
+    NSData* imageData = [[NSUserDefaults standardUserDefaults] objectForKey:@"Screenshot"];
+  screenshot = [UIImage imageWithData:imageData];
     
+    
+     //UIImage *customImage = [UIImage imageWithContentsOfFile:theImagePath];
     
     CCLabelTTF *labelEnd  = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"Score"] fontName:@"Helvetica" fontSize:20.0f];
     labelEnd.color = [CCColor colorWithRed:0.0 green:0.0 blue:0.0];
@@ -128,6 +134,12 @@
 
     [self addChild:shareButtnTwitter];
     
+    
+    
+    
+ 
+    
+    
     return self;
     
     
@@ -166,6 +178,7 @@
     
 }
 
+
 - (void)onSpinningClicked:(id)sender
 {
     // start spinning scene with transition
@@ -174,6 +187,9 @@
 }
 -(void)share:(id)sender
 {
+    
+        
+    
     SLComposeViewController *fbController=[SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
     
     
@@ -198,7 +214,7 @@
                     break;
             }};
         
-        [fbController addImage:[UIImage imageNamed:@"shield-hd.png"]];
+        [fbController addImage:screenshot];
         [fbController setInitialText:[ NSString stringWithFormat:@"Hey, I scored %d Points in Bubbles",endScore]];
        
         [fbController setCompletionHandler:completionHandler];
@@ -213,6 +229,9 @@
 }
 -(void)shareTwitter:(id)sender
 {
+    
+    
+    
     
     SLComposeViewController *twController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
     
@@ -237,7 +256,7 @@
                     break;
             }};
         
-        [twController addImage:[UIImage imageNamed:@"shield-hd.png"]];
+        [twController addImage: screenshot];
         [twController setInitialText:[ NSString stringWithFormat:@"Hey, I scored %d Points in Bubbles ",endScore]];
         
         [twController setCompletionHandler:completionHandler];
