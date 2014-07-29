@@ -284,7 +284,462 @@
 }
 
 #pragma mark MakeBubbles
-
+-(void)addBubblesFast:(CCTime)dt
+{
+    if (gameStatus == gameisOn )  {
+        if (fasterActive) {
+        
+        anzahl = ( arc4random()%3 + 1);
+        
+        
+        //NSLog(@"anzahl : %d", anzahl);
+        NSLog(@"anzahl der Bubbles %d", anzahlBubblesAufDemFeld);
+        
+        
+        //if (anzahlBubblesAufDemFeld + anzahl  < 6)
+        //  {
+        
+        
+        
+        
+        for (int i = 1 ; i <= anzahl; i++) {
+            
+            artDerBubbles = arc4random()%150;
+            
+            NSLog(@"  Arte der Bubble : %d", artDerBubbles);
+            
+            // 1 Bubbles
+            
+            if (artDerBubbles > 0 && artDerBubbles <= 20) {
+                
+                
+                Collsion = NO;
+                anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
+                
+                
+                
+                int minX = bubbles_1.contentSize.width ;
+                int maxX = self.contentSize.width - bubbles_1.contentSize.width ;
+                int rangeX = maxX - minX;
+                int randomX = (arc4random() % rangeX)  +minX/2 ;
+                
+                bubbles_1 = [CCSprite spriteWithImageNamed:@"1-Pointer-Bobble.png"];
+                bubbles_1.position = CGPointMake(randomX,self.contentSize.height + bubbles_1.contentSize.width/2);
+                
+                
+                
+                bubbles_1.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:bubbles_1.contentSize.width/2.0f andCenter:bubbles_1.anchorPointInPoints ];
+                bubbles_1.physicsBody.collisionType =@"bubbleCollision";
+                [physicsWorld addChild:bubbles_1];
+                
+                
+                
+                int minDuration = 3.0 + ( 1/sec);
+                int maxDuration = 6.0;
+                int rangeDuration = maxDuration - minDuration;
+                int randomDuration = (arc4random() % rangeDuration) + minDuration;
+                
+                
+                
+                CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubbles_1.contentSize.width/2)];
+                
+                
+                //  NSLog(@"anzahl auf dem feld1: %d", anzahlBubblesAufDemFeld );
+                
+                CCAction *actionRemove = [CCActionRemove action];
+                CCActionCallFunc *callAfterMoving = [CCActionCallFunc actionWithTarget:self selector:@selector(callBack)];
+                
+                
+                
+                
+                [bubbles_1 runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove,callAfterMoving]]];
+                
+            }
+            
+            // 2Bubbles
+            else if( artDerBubbles > 20 && artDerBubbles <= 40)
+                
+            {         anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
+                
+                Collsion = NO;
+                
+                int minX = bubbles_2.contentSize.width  ;
+                int maxX = self.contentSize.width - bubbles_2.contentSize.width  ;
+                int rangeX = maxX - minX;
+                int randomX = (arc4random() % rangeX) +minX/2 ;
+                
+                bubbles_2 = [CCSprite spriteWithImageNamed:@"2-Pointer-Bobble.png"];
+                bubbles_2.position = CGPointMake(randomX,self.contentSize.height + bubbles_2.contentSize.width/2);
+                
+                
+                
+                bubbles_2.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:bubbles_2.contentSize.width/2.0f andCenter:bubbles_2.anchorPointInPoints ];
+                bubbles_2.physicsBody.collisionType =@"bubble2Collision";
+                [physicsWorld addChild:bubbles_2];
+                
+                
+                
+                
+                
+                int minDuration = 3.0;
+                int maxDuration = 6.0;
+                int rangeDuration = maxDuration - minDuration;
+                int randomDuration = (arc4random() % rangeDuration) + minDuration + ( 1/sec);
+                
+                
+                CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubbles_2.contentSize.width/2)];
+                
+                
+                //NSLog(@"anzahl auf dem feld1: %d", anzahlBubblesAufDemFeld );
+                
+                CCAction *actionRemove = [CCActionRemove action];
+                CCActionCallFunc *callAfterMoving = [CCActionCallFunc actionWithTarget:self selector:@selector(callBack)];
+                
+                
+                
+                
+                [bubbles_2 runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove,callAfterMoving]]];
+                
+                
+                
+                
+            }
+            
+            // 5Bubbles
+            else if ( artDerBubbles > 40 && artDerBubbles <= 60)
+            {
+                Collsion = NO;
+                anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
+                
+                
+                
+                int minX = bubbles_5.contentSize.width  ;
+                int maxX = self.contentSize.width - bubbles_5.contentSize.width  ;
+                int rangeX = maxX - minX;
+                int randomX = (arc4random() % rangeX) +minX/2  ;
+                
+                bubbles_5 = [CCSprite spriteWithImageNamed:@"5-Pointer-Bobble.png"];
+                bubbles_5.position = CGPointMake(randomX,self.contentSize.height + bubbles_5.contentSize.width/2);
+                
+                
+                
+                bubbles_5.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:bubbles_5.contentSize.width/2.0f andCenter:bubbles_5.anchorPointInPoints ];
+                bubbles_5.physicsBody.collisionType =@"bubble5Collision";
+                [physicsWorld addChild:bubbles_5];
+                
+                
+                
+                int minDuration = 3.0;
+                int maxDuration = 6.0;
+                int rangeDuration = maxDuration - minDuration;
+                int randomDuration = (arc4random() % rangeDuration) + minDuration + ( 1/sec);
+                NSLog(@"duration %d", randomDuration);
+                
+                
+                
+                CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubbles_5.contentSize.width/2)];
+                
+                
+                //NSLog(@"anzahl auf dem feld1: %d", anzahlBubblesAufDemFeld );
+                
+                CCAction *actionRemove = [CCActionRemove action];
+                CCActionCallFunc *callAfterMoving = [CCActionCallFunc actionWithTarget:self selector:@selector(callBack)];
+                
+                
+                
+                
+                [bubbles_5 runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove,callAfterMoving]]];
+                
+            }
+            // 7 Bubbles
+            else if ( artDerBubbles > 60 && artDerBubbles <= 70)
+            {
+                Collsion = NO;
+                anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
+                
+                
+                
+                int minX = bubbles_7.contentSize.width  ;
+                int maxX = self.contentSize.width - bubbles_7.contentSize.width  ;
+                int rangeX = maxX - minX;
+                int randomX = (arc4random() % rangeX)  +minX/2 ;
+                
+                bubbles_7 = [CCSprite spriteWithImageNamed:@"7-Pointer-Bobble.png"];
+                bubbles_7.position = CGPointMake(randomX,self.contentSize.height + bubbles_7.contentSize.width/2);
+                
+                
+                
+                bubbles_7.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:bubbles_7.contentSize.width/2.0f andCenter:bubbles_7.anchorPointInPoints ];
+                bubbles_7.physicsBody.collisionType =@"bubble7Collision";
+                [physicsWorld addChild:bubbles_7];
+                
+                
+                
+                
+                int minDuration = 3.0;
+                int maxDuration = 6.0;
+                int rangeDuration = maxDuration - minDuration;
+                int randomDuration = (arc4random() % rangeDuration) + minDuration + ( 1/sec);
+                
+                
+                CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubbles_7.contentSize.width/2)];
+                
+                
+                //NSLog(@"anzahl auf dem feld1: %d", anzahlBubblesAufDemFeld );
+                
+                CCAction *actionRemove = [CCActionRemove action];
+                CCActionCallFunc *callAfterMoving = [CCActionCallFunc actionWithTarget:self selector:@selector(callBack)];
+                
+                
+                
+                
+                [bubbles_7 runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove,callAfterMoving]]];
+                
+            }
+            
+            //10Bubbles
+            else if ( artDerBubbles > 70 && artDerBubbles <= 77)
+            {
+                Collsion = NO;
+                
+                anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
+                
+                
+                int minX = bubbles_10.contentSize.width  ;
+                int maxX = self.contentSize.width - bubbles_10.contentSize.width   ;
+                int rangeX = maxX - minX;
+                int randomX = (arc4random() % rangeX)  +minX/2 ;
+                
+                bubbles_10 = [CCSprite spriteWithImageNamed:@"10-Pointer-Bobble.png"];
+                bubbles_10.position = CGPointMake(randomX,self.contentSize.height + bubbles_10.contentSize.width/2);
+                
+                
+                
+                bubbles_10.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:bubbles_10.contentSize.width/2.0f andCenter:bubbles_10.anchorPointInPoints ];
+                bubbles_10.physicsBody.collisionType =@"bubble10Collision";
+                [physicsWorld addChild:bubbles_10];
+                
+                
+                
+                
+                int minDuration = 3.0;
+                int maxDuration = 6.0;
+                int rangeDuration = maxDuration - minDuration;
+                int randomDuration = (arc4random() % rangeDuration) + minDuration + ( 1/sec);
+                
+                CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubbles_10.contentSize.width/2)];
+                
+                
+                //NSLog(@"anzahl auf dem feld1: %d", anzahlBubblesAufDemFeld );
+                
+                CCAction *actionRemove = [CCActionRemove action];
+                CCActionCallFunc *callAfterMoving = [CCActionCallFunc actionWithTarget:self selector:@selector(callBack)];
+                
+                
+                
+                
+                [bubbles_10 runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove,callAfterMoving]]];
+                
+            }
+            
+            // TIME DOWN
+            
+            
+            if ( artDerBubbles > 77 && artDerBubbles <= 90 && highScore >= 70)
+            {
+                
+                Collsion = NO;
+                anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
+                
+                
+                int minX = bubbles_timeDown.contentSize.width  ;
+                int maxX = self.contentSize.width - bubbles_timeDown.contentSize.width ;
+                int rangeX = maxX - minX;
+                int randomX = (arc4random() % rangeX) +minX/2  ;
+                
+                bubbles_timeDown = [CCSprite spriteWithImageNamed:@"time-down-Bobble.png"];
+                bubbles_timeDown.position = CGPointMake(randomX,self.contentSize.height + bubbles_10.contentSize.width/2);
+                
+                
+                
+                bubbles_timeDown.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:bubbles_timeDown.contentSize.width/2.0f andCenter:bubbles_timeDown.anchorPointInPoints ];
+                bubbles_timeDown.physicsBody.collisionType =@"bubbleTimeDownCollision";
+                [physicsWorld addChild:bubbles_timeDown];
+                
+                
+                
+                
+                
+                int minDuration = 3.0;
+                int maxDuration = 6.0;
+                int rangeDuration = maxDuration - minDuration;
+                int randomDuration = (arc4random() % rangeDuration) + minDuration + ( 1/sec);
+                
+                CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubbles_timeDown.contentSize.width/2)];
+                
+                
+                //NSLog(@"anzahl auf dem feld1: %d", anzahlBubblesAufDemFeld );
+                
+                CCAction *actionRemove = [CCActionRemove action];
+                CCActionCallFunc *callAfterMoving = [CCActionCallFunc actionWithTarget:self selector:@selector(callBack)];
+                
+                
+                
+                
+                [bubbles_timeDown runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove,callAfterMoving]]];
+                
+            }
+            //TIME UP
+            
+            else if ( artDerBubbles > 90 && artDerBubbles <= 100&& highScore >= 50)
+            {
+                
+                Collsion = NO;
+                anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
+                
+                
+                int minX = bubbles_timeUp.contentSize.width ;
+                int maxX = self.contentSize.width - bubbles_timeUp.contentSize.width  ;
+                int rangeX = maxX - minX;
+                int randomX = (arc4random() % rangeX)  +minX/2 ;
+                
+                bubbles_timeUp = [CCSprite spriteWithImageNamed:@"time-up-Bobble.png"];
+                bubbles_timeUp.position = CGPointMake(randomX,self.contentSize.height + bubbles_timeUp.contentSize.width/2);
+                
+                
+                
+                bubbles_timeUp.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:bubbles_timeUp.contentSize.width/2.0f andCenter:bubbles_timeUp.anchorPointInPoints ];
+                bubbles_timeUp.physicsBody.collisionType =@"bubbleTimeUpCollision";
+                [physicsWorld addChild:bubbles_timeUp];
+                
+                
+                
+                
+                int minDuration = 3.0;
+                int maxDuration = 6.0;
+                int rangeDuration = maxDuration - minDuration;
+                int randomDuration = (arc4random() % rangeDuration) + minDuration + ( 1/sec);
+                
+                CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubbles_timeUp.contentSize.width/2)];
+                
+                
+                //NSLog(@"anzahl auf dem feld1: %d", anzahlBubblesAufDemFeld );
+                
+                CCAction *actionRemove = [CCActionRemove action];
+                CCActionCallFunc *callAfterMoving = [CCActionCallFunc actionWithTarget:self selector:@selector(callBack)];
+                
+                
+                
+                
+                [bubbles_timeUp runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove,callAfterMoving]]];
+                
+            }
+            // BOMB
+            else if ( artDerBubbles > 100 && artDerBubbles <= 110&& highScore >= 150)
+            {
+                
+                Collsion = NO;
+                anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
+                
+                
+                int minX = bubbles_bomb.contentSize.width  ;
+                int maxX = self.contentSize.width - bubbles_bomb.contentSize.width  ;
+                int rangeX = maxX - minX;
+                int randomX = (arc4random() % rangeX)  +minX/2 ;
+                
+                bubbles_bomb = [CCSprite spriteWithImageNamed:@"bomb-Bobble.png"];
+                bubbles_bomb.position = CGPointMake(randomX,self.contentSize.height + bubbles_bomb.contentSize.width/2);
+                
+                
+                
+                bubbles_bomb.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:bubbles_bomb.contentSize.width/2.0f andCenter:bubbles_bomb.anchorPointInPoints ];
+                bubbles_bomb.physicsBody.collisionType =@"bubbleBombCollision";
+                [physicsWorld addChild:bubbles_bomb];
+                
+                
+                
+                
+                int minDuration = 3.0;
+                int maxDuration = 6.0;
+                int rangeDuration = maxDuration - minDuration;
+                int randomDuration = (arc4random() % rangeDuration) + minDuration + ( 1/sec);
+                
+                CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubbles_bomb.contentSize.width/2)];
+                
+                
+                //NSLog(@"anzahl auf dem feld1: %d", anzahlBubblesAufDemFeld );
+                
+                CCAction *actionRemove = [CCActionRemove action];
+                CCActionCallFunc *callAfterMoving = [CCActionCallFunc actionWithTarget:self selector:@selector(callBack)];
+                
+                
+                
+                
+                [bubbles_bomb runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove,callAfterMoving]]];
+                
+            }
+            //SHIELD
+            else if ( artDerBubbles > 110 && artDerBubbles <= 119&& highScore >= 120)
+            {
+                
+                Collsion = NO;
+                anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
+                
+                int minX = bubbles_shield.contentSize.width  ;
+                int maxX = self.contentSize.width - bubbles_shield.contentSize.width    ;
+                int rangeX = maxX - minX;
+                int randomX = (arc4random() % rangeX)  +minX/2;
+                
+                bubbles_shield = [CCSprite spriteWithImageNamed:@"shield-Bobble.png"];
+                bubbles_shield.position = CGPointMake(randomX,self.contentSize.height + bubbles_shield.contentSize.width/2);
+                
+                
+                
+                bubbles_shield.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:bubbles_shield.contentSize.width/2.0f andCenter:bubbles_shield.anchorPointInPoints ];
+                bubbles_shield.physicsBody.collisionType =@"bubbleShieldCollision";
+                [physicsWorld addChild:bubbles_shield];
+                
+                
+                
+                
+                int minDuration = 3.0;
+                int maxDuration = 6.0;
+                int rangeDuration = maxDuration - minDuration;
+                int randomDuration = (arc4random() % rangeDuration) + minDuration + ( 1/sec);
+                
+                CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubbles_shield.contentSize.width/2)];
+                
+                
+                //NSLog(@"anzahl auf dem feld1: %d", anzahlBubblesAufDemFeld );
+                
+                CCAction *actionRemove = [CCActionRemove action];
+                CCActionCallFunc *callAfterMoving = [CCActionCallFunc actionWithTarget:self selector:@selector(callBack)];
+                
+                
+                
+                
+                [bubbles_shield runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove,callAfterMoving]]];
+                
+            }
+            fastTIme--;
+            NSLog(@"Fast Time %d !!!!!!!!!!!" ,fastTIme);
+            if (fastTIme == 0) {
+                fasterActive = NO;
+            }
+        }
+        
+        
+        
+    }
+    
+    
+        
+    }
+    
+    
+    
+    
+}
 
 
 - (void)addBubbles:(CCTime)dt
@@ -294,24 +749,12 @@
 {
     
     
-    if (gameStatus == gameisOn) {
+    if (gameStatus == gameisOn ) {
+        if (!fasterActive) {
         
            anzahl = ( arc4random()%3 + 1);
         
-        if (fasterActive) {
-            fastTIme --;
-            NSLog(@"%d", fastTIme);
-            
-            
-            if (fastTIme == 0) {
-                fasterActive = NO;
-                fasterDuration = 1.5;
-                [self onEnter];
-                
-            }
-            
-
-        }
+     
            //NSLog(@"anzahl : %d", anzahl);
         NSLog(@"anzahl der Bubbles %d", anzahlBubblesAufDemFeld);
     
@@ -849,8 +1292,9 @@
 
 
     
-
     
+}
+
 
 
 
@@ -1574,9 +2018,9 @@
     
         fasterDuration = 0.5;
         fasterActive = YES;
-            fastTIme = 3;
+            fastTIme = 5;
         
-        [self onEnter];
+            [self schedule:@selector(addBubblesFast:) interval:0.5 repeat:10 delay:0.05f];
          
         
         
@@ -1627,12 +2071,11 @@
         else if (!fasterActive)
         {
         Collsion = YES;
-          fasterDuration = 2.5;
-        
+         
         fasterActive = YES;
-        [self onEnter];
-        
-   fastTIme = 3;
+         
+      [self schedule:@selector(addBubblesFast:) interval:2.5 repeat:4 delay:0.05f];
+            fastTIme = 10;
         
         
         [bubbles_slower_Node removeFromParent];
@@ -1823,7 +2266,7 @@
     
     
   
-        [self schedule:@selector(addBubbles:) interval:fasterDuration];
+        [self schedule:@selector(addBubbles:) interval:1.5];
 
    
     [self schedule:@selector(ticker:) interval:1];
