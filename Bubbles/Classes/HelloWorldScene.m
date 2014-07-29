@@ -369,8 +369,7 @@
 
              int minX = bubbles_2.contentSize.width  ;
              int maxX = self.contentSize.width - bubbles_2.contentSize.width  ;
-             int rangeX = maxX - minX+1;
-             int randomX = (arc4random() % (maxX-minX+1))  +minX ;
+              int randomX = (arc4random() % (maxX-minX+1))  +minX ;
              
              bubbles_2.position = CGPointMake(randomX,self.contentSize.height + bubbles_2.contentSize.width/2);
              
@@ -419,8 +418,7 @@
              
              int minX = bubbles_5.contentSize.width  ;
              int maxX = self.contentSize.width - bubbles_5.contentSize.width  ;
-             int rangeX = maxX - minX+1;
-             int randomX = (arc4random() % (maxX-minX+1))  +minX ;
+              int randomX = (arc4random() % (maxX-minX+1))  +minX ;
              
              bubbles_5.position = CGPointMake(randomX,self.contentSize.height + bubbles_5.contentSize.width/2);
              
@@ -465,8 +463,7 @@
              
              int minX = bubbles_7.contentSize.width  ;
              int maxX = self.contentSize.width - bubbles_7.contentSize.width  ;
-             int rangeX = maxX - minX+1;
-             int randomX = (arc4random() % (maxX-minX+1))  +minX ;
+              int randomX = (arc4random() % (maxX-minX+1))  +minX ;
              
              bubbles_7.position = CGPointMake(randomX,self.contentSize.height + bubbles_7.contentSize.width/2);
              
@@ -511,8 +508,7 @@
              
              int minX = bubbles_10.contentSize.width  ;
              int maxX = self.contentSize.width - bubbles_10.contentSize.width   ;
-             int rangeX = maxX - minX+1;
-             int randomX = (arc4random() % (maxX-minX+1))  +minX ;
+              int randomX = (arc4random() % (maxX-minX+1))  +minX ;
              
              bubbles_10.position = CGPointMake(randomX,self.contentSize.height + bubbles_10.contentSize.width/2);
              
@@ -559,8 +555,7 @@
 
              int minX = bubbles_timeDown.contentSize.width  ;
              int maxX = self.contentSize.width - bubbles_timeDown.contentSize.width ;
-             int rangeX = maxX - minX+1;
-             int randomX = (arc4random() % (maxX-minX+1))  +minX ;
+              int randomX = (arc4random() % (maxX-minX+1))  +minX ;
              
              bubbles_timeDown.position = CGPointMake(randomX,self.contentSize.height + bubbles_10.contentSize.width/2);
              
@@ -604,8 +599,7 @@
              
              int minX = bubbles_timeUp.contentSize.width ;
              int maxX = self.contentSize.width - bubbles_timeUp.contentSize.width  ;
-             int rangeX = maxX - minX+1;
-             int randomX = (arc4random() % (maxX-minX+1))  +minX ;
+              int randomX = (arc4random() % (maxX-minX+1))  +minX ;
              
              bubbles_timeUp = [CCSprite spriteWithImageNamed:@"time-up-Bobble.png"];
              bubbles_timeUp.position = CGPointMake(randomX,self.contentSize.height + bubbles_timeUp.contentSize.width/2);
@@ -649,8 +643,7 @@
 
               int minX = bubbles_bomb.contentSize.width  ;
               int maxX = self.contentSize.width - bubbles_bomb.contentSize.width  ;
-              int rangeX = maxX - minX+1;
-              int randomX = (arc4random() % (maxX-minX+1))  +minX ;
+               int randomX = (arc4random() % (maxX-minX+1))  +minX ;
               
               bubbles_bomb.position = CGPointMake(randomX,self.contentSize.height + bubbles_bomb.contentSize.width/2);
               
@@ -692,8 +685,7 @@
 
               int minX = bubbles_shield.contentSize.width  ;
               int maxX = self.contentSize.width - bubbles_shield.contentSize.width    ;
-              int rangeX = maxX - minX+1;
-              int randomX = (arc4random() % (maxX-minX+1))  +minX ;
+               int randomX = (arc4random() % (maxX-minX+1))  +minX ;
               
               bubbles_shield.position = CGPointMake(randomX,self.contentSize.height + bubbles_shield.contentSize.width/2);
               
