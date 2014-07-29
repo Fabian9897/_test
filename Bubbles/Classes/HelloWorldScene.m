@@ -37,6 +37,8 @@
     CCSprite *bubbles_timeUp;
     CCSprite *bubbles_bomb;
     CCSprite *bubbles_shield;
+    CCSprite *bubbles_faster;
+    CCSprite *bubbles_slower;
     CCSprite *shield ;
     CCSprite *shieldBG;
     CCLabelTTF *shieldTimeLabel;
@@ -44,7 +46,9 @@
     BOOL shieldActive;
     BOOL Collsion;
     BOOL labelBlink;
-    
+    BOOL fasterActive;
+    double fasterDuration;
+    int fastTIme;
     
     CCSprite *player;
     
@@ -100,6 +104,8 @@
     int windowHeight;
     int windowWidth;
     
+    double basisForFunc;
+    
 }
 
 // -----------------------------------------------------------------------
@@ -124,9 +130,12 @@
     // Enable touch handling on scene node
     self.userInteractionEnabled = YES;
     
-    
+    fasterActive = NO;
+    fasterDuration = 1.5;
     windowHeight = self.contentSize.height/2;
     windowWidth = self.contentSize.width/2;
+    
+    basisForFunc = 2;
     
  
     
@@ -268,7 +277,7 @@
     
     labelBlink = NO;
     // done
-    
+    fastTIme = 0;
     
      gameStatus = gameisOn;
 	return self;
@@ -288,8 +297,22 @@
     if (gameStatus == gameisOn) {
         
            anzahl = ( arc4random()%3 + 1);
-    
-   //NSLog(@"anzahl : %d", anzahl);
+        
+        if (fasterActive) {
+            fastTIme --;
+            NSLog(@"%d", fastTIme);
+            
+            
+            if (fastTIme == 0) {
+                fasterActive = NO;
+                fasterDuration = 1.5;
+                [self onEnter];
+                
+            }
+            
+
+        }
+           //NSLog(@"anzahl : %d", anzahl);
         NSLog(@"anzahl der Bubbles %d", anzahlBubblesAufDemFeld);
     
     
@@ -301,7 +324,7 @@
     
      for (int i = 1 ; i <= anzahl; i++) {
          
-         artDerBubbles = arc4random()%120;
+         artDerBubbles = arc4random()%150;
          
          NSLog(@"  Arte der Bubble : %d", artDerBubbles);
 
@@ -331,13 +354,13 @@
         
         
   
-        
-             int minDuration = 5.0 + ( 1/sec);
-             int maxDuration = 8.0;
+             int minDuration = 3.0 + ( 1/sec);
+             int maxDuration = 6.0;
              int rangeDuration = maxDuration - minDuration;
              int randomDuration = (arc4random() % rangeDuration) + minDuration;
          
-     
+             
+             
     CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubbles_1.contentSize.width/2)];
          
          
@@ -524,7 +547,6 @@
              int rangeDuration = maxDuration - minDuration;
              int randomDuration = (arc4random() % rangeDuration) + minDuration + ( 1/sec);
              
-             
              CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubbles_10.contentSize.width/2)];
              
              
@@ -572,7 +594,7 @@
              int maxDuration = 6.0;
              int rangeDuration = maxDuration - minDuration;
              int randomDuration = (arc4random() % rangeDuration) + minDuration + ( 1/sec);
-      
+             
              CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubbles_timeDown.contentSize.width/2)];
              
              
@@ -720,9 +742,93 @@
               
           }
              
-
- 
-             
+         //Faster
+          else if ( artDerBubbles > 119 && artDerBubbles <= 130&& !fasterActive )
+          {
+              
+              Collsion = NO;
+              anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
+              
+              int minX = bubbles_faster.contentSize.width  ;
+              int maxX = self.contentSize.width - bubbles_faster.contentSize.width    ;
+              int rangeX = maxX - minX;
+              int randomX = (arc4random() % rangeX)  +minX/2;
+              
+              bubbles_faster = [CCSprite spriteWithImageNamed:@"faster-Bobble.png"];
+              bubbles_faster.position = CGPointMake(randomX,self.contentSize.height + bubbles_faster.contentSize.width/2);
+              
+              
+              
+              bubbles_faster.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:bubbles_faster.contentSize.width/2.0f andCenter:bubbles_faster.anchorPointInPoints ];
+              bubbles_faster.physicsBody.collisionType =@"bubbleFasterCollision";
+              [physicsWorld addChild:bubbles_faster];
+              
+              
+              
+              
+              int minDuration = 3.0;
+              int maxDuration = 6.0;
+              int rangeDuration = maxDuration - minDuration;
+              int randomDuration = (arc4random() % rangeDuration) + minDuration + ( 1/sec);
+              
+              CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubbles_faster.contentSize.width/2)];
+              
+              
+              //NSLog(@"anzahl auf dem feld1: %d", anzahlBubblesAufDemFeld );
+              
+              CCAction *actionRemove = [CCActionRemove action];
+              CCActionCallFunc *callAfterMoving = [CCActionCallFunc actionWithTarget:self selector:@selector(callBack)];
+              
+              
+              
+              
+              [bubbles_faster runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove,callAfterMoving]]];
+              
+          }
+         
+         //Slower
+          else if ( artDerBubbles > 130 && artDerBubbles <= 150 && !fasterActive)
+          {
+              
+              Collsion = NO;
+              anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
+              
+              int minX = bubbles_slower.contentSize.width  ;
+              int maxX = self.contentSize.width - bubbles_slower.contentSize.width    ;
+              int rangeX = maxX - minX;
+              int randomX = (arc4random() % rangeX)  +minX/2;
+              
+              bubbles_slower = [CCSprite spriteWithImageNamed:@"freeze-mode-Bobble.png"];
+              bubbles_slower.position = CGPointMake(randomX,self.contentSize.height + bubbles_slower.contentSize.width/2);
+              
+              
+              
+              bubbles_slower.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:bubbles_slower.contentSize.width/2.0f andCenter:bubbles_slower.anchorPointInPoints ];
+              bubbles_slower.physicsBody.collisionType =@"bubbleSlowerCollision";
+              [physicsWorld addChild:bubbles_slower];
+              
+              
+              
+              
+              int minDuration = 3.0;
+              int maxDuration = 6.0;
+              int rangeDuration = maxDuration - minDuration;
+              int randomDuration = (arc4random() % rangeDuration) + minDuration + ( 1/sec);
+              
+              CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubbles_slower.contentSize.width/2)];
+              
+              
+              //NSLog(@"anzahl auf dem feld1: %d", anzahlBubblesAufDemFeld );
+              
+              CCAction *actionRemove = [CCActionRemove action];
+              CCActionCallFunc *callAfterMoving = [CCActionCallFunc actionWithTarget:self selector:@selector(callBack)];
+              
+              
+              
+              
+              [bubbles_slower runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove,callAfterMoving]]];
+              
+          }
          }
    //  anzahlBubblesAufDemFeld --;
         
@@ -778,22 +884,36 @@
 {
 
     if (gameStatus == gameisOn) {
+        
+          basisForFunc = basisForFunc + 0.1;
+        
      
         [motionManager startAccelerometerUpdates];
 
    // [player stopAllActions];
     CMAccelerometerData *acceleration = motionManager.accelerometerData;
-    playerRichtungX = acceleration.acceleration.x*10;
-  //  NSLog(@"Neigungstest : %.2f", playerRichtungX);
+        
+     //  int  resultInt = (int)pow((double)someInt, (double));
 
-    float     targetX   = player.position.x + playerRichtungX;
-    float    targetY   = player.position.y;
+        
+      //  playerRichtungX =  pow(basisForFunc, acceleration.acceleration.x);
+      
+       // NSLog(@"%.2f", playerRichtungX);
+        
+        playerRichtungX = acceleration.acceleration.x;
+ 
+        float     targetX   = player.position.x + playerRichtungX;
+        float    targetY   = player.position.y;
  
     
     if (player.position.x + playerRichtungX < player.contentSize.width/2 ) {
         player.position = CGPointMake(player.contentSize.width/2, player.position.y);
         [scoreLabel setPosition:player.position];
-        [shield setPosition:player.position];
+        
+        if (shieldActive) {
+            [shield setPosition:player.position];
+
+        }
 
     }
     
@@ -801,7 +921,10 @@
     {
         player.position = CGPointMake(self.contentSize.width- player.contentSize.width/2, player.position.y);
         [scoreLabel setPosition:player.position];
-        [shield setPosition:player.position];
+        if (shieldActive) {
+            [shield setPosition:player.position];
+            
+        }
 
 
         
@@ -811,7 +934,10 @@
         
         player.position = CGPointMake(targetX, targetY);
         [scoreLabel setPosition:player.position];
-        [shield setPosition:player.position];
+        if (shieldActive) {
+            [shield setPosition:player.position];
+            
+        }
 
 
         
@@ -1414,6 +1540,119 @@
     
 }
 
+
+#pragma mark Bubbles_Faster
+ - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubbleFasterCollision:(CCNode *)bubbles_faster_Node   playerCollision:(CCNode *)player{
+    
+    if (labelBlink) {
+        [bubbles_faster_Node removeFromParent];
+        
+        anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
+        
+        return YES;
+        
+        
+    }
+  
+    
+    else if (!labelBlink)
+    {
+        
+        
+        
+        if (fasterActive) {
+            [bubbles_faster_Node removeFromParent];
+            
+            anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
+            
+            return YES;
+        }
+        
+        else if (!fasterActive)
+        {
+    Collsion = YES;
+    
+        fasterDuration = 0.5;
+        fasterActive = YES;
+            fastTIme = 3;
+        
+        [self onEnter];
+         
+        
+        
+    [bubbles_faster_Node removeFromParent];
+    
+    anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
+    
+    
+    
+    
+    
+    
+    
+    
+      //  return YES;
+        }
+    }
+    return YES;
+    
+  
+}
+
+#pragma mark Bubbles_SLOWER
+ - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubbleSlowerCollision:(CCNode *)bubbles_slower_Node   playerCollision:(CCNode *)player{
+    
+    if (labelBlink) {
+        [bubbles_slower_Node removeFromParent];
+        
+        anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
+        
+        return YES;
+        
+        
+    }
+    
+    
+    else if (!labelBlink)
+    {
+        
+        if (fasterActive) {
+            [bubbles_slower_Node removeFromParent];
+            
+            anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
+            
+            return YES;
+        }
+        
+        else if (!fasterActive)
+        {
+        Collsion = YES;
+          fasterDuration = 2.5;
+        
+        fasterActive = YES;
+        [self onEnter];
+        
+   fastTIme = 3;
+        
+        
+        [bubbles_slower_Node removeFromParent];
+        
+        anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
+        
+        
+        
+        
+        
+        
+        
+        }
+       // return YES;
+    }
+    return YES;
+    
+    
+}
+
 -(void)shieldTimer
 {
     
@@ -1434,7 +1673,21 @@
         
         
     }
-
+    if (fasterActive)
+    {
+        shieldTime --;
+        NSLog(@"SHield Time : %d !!!", shieldTime);
+        if (shieldTime == 0) {
+            fasterActive = NO;
+            
+            
+        }
+        
+        
+        
+        
+    }
+    
 }
 
 // -----------------------------------------------------------------------
@@ -1551,7 +1804,7 @@
 
 
 
-#pragma mark - Enter & Exit
+#pragma mark - Enter & Exit / Schedule Timer for some classes
 
 - (void)onEnter
 {
@@ -1563,7 +1816,16 @@
     
   
     [self schedule:@selector(playerBewegung:) interval:0.01];
-    [self schedule:@selector(addBubbles:) interval:1.5];
+   
+    
+    
+    
+    
+    
+  
+        [self schedule:@selector(addBubbles:) interval:fasterDuration];
+
+   
     [self schedule:@selector(ticker:) interval:1];
  
         
