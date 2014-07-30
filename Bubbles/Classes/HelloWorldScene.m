@@ -25,6 +25,7 @@
 @implementation HelloWorldScene
 {
     
+    
     // SPRITES
     CCSprite *bubbles_1;
     CCSprite *bubbles_2;
@@ -40,6 +41,15 @@
     CCSprite *shield ;
     CCSprite *shieldBG;
     CCLabelTTF *shieldTimeLabel;
+    
+    CCSprite *bubble_faster;
+    int fasterTime;
+    BOOL fasterActive;
+    BOOL slowerActive;
+    
+    CCSprite *bubbles_slower;
+    int slowerTime;
+    
     int shieldTime;
     BOOL shieldActive;
     BOOL Collsion;
@@ -99,7 +109,8 @@
     
     int windowHeight;
     int windowWidth;
-    
+    CCNode *groupBubbles;
+
 }
 
 // -----------------------------------------------------------------------
@@ -119,7 +130,6 @@
     self = [super init];
     if (!self) return(nil);
     
-    
     gameStatus = gamePaused;
     // Enable touch handling on scene node
     self.userInteractionEnabled = YES;
@@ -129,8 +139,8 @@
     windowWidth = self.contentSize.width/2;
     
   
-    
-    
+    fasterActive = NO;
+    slowerActive = NO;
     
     CCSprite* background = [CCSprite spriteWithImageNamed:@"hintergrund-mit.png"];
     background.position = ccp(windowWidth, windowHeight);
@@ -171,6 +181,8 @@
     player.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:player.contentSize.width/2.0f andCenter:player.anchorPointInPoints ];
     player.physicsBody.collisionType =@"playerCollision";
     player.physicsBody.collisionGroup= @"playerGroup";
+    player.physicsBody.affectedByGravity = NO;
+    player.physicsBody.sensor = YES;
     [physicsWorld addChild:player];
     
     
@@ -271,8 +283,7 @@
     labelBlink = NO;
     // done
     
-    
-     gameStatus = gameisOn;
+           gameStatus = gameisOn;
 	return self;
 }
 
@@ -285,7 +296,7 @@
 
 
 {
-    
+ 
     
     if (gameStatus == gameisOn) {
         
@@ -303,13 +314,13 @@
     
      for (int i = 1 ; i <= anzahl; i++) {
          
-         artDerBubbles = arc4random()%120;
+         artDerBubbles = arc4random()%150;
          
          NSLog(@"  Arte der Bubble : %d", artDerBubbles);
 
          // 1 Bubbles
 
-         if (artDerBubbles > 0 && artDerBubbles <= 20) {
+         if (artDerBubbles > 0 && artDerBubbles <= 20&&!slowerActive) {
              
          
              Collsion = NO;
@@ -333,6 +344,9 @@
     
         bubbles_1.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:bubbles_1.contentSize.width/2.0f andCenter:bubbles_1.anchorPointInPoints ];
         bubbles_1.physicsBody.collisionType =@"bubbleCollision";
+             bubbles_1.physicsBody.allowsRotation = NO;
+             //bubbles_1.physicsBody.sensor = YES;
+             
         [physicsWorld addChild:bubbles_1];
         
         
@@ -356,11 +370,13 @@
       
         
     [bubbles_1 runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove,callAfterMoving]]];
+             
+             [groupBubbles addChild:bubbles_1];
  
          }
          
          // 2Bubbles
-         else if( artDerBubbles > 20 && artDerBubbles <= 40)
+         else if( artDerBubbles > 20 && artDerBubbles <= 40&&!slowerActive)
              
          {         anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
 
@@ -377,8 +393,11 @@
              
              bubbles_2.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:bubbles_2.contentSize.width/2.0f andCenter:bubbles_2.anchorPointInPoints ];
              bubbles_2.physicsBody.collisionType =@"bubble2Collision";
+             bubbles_2.physicsBody.allowsRotation = NO;
+
              [physicsWorld addChild:bubbles_2];
-             
+            // bubbles_2.physicsBody.sensor = YES;
+
              
              
        
@@ -402,13 +421,14 @@
              
              [bubbles_2 runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove,callAfterMoving]]];
  
-          
+             [groupBubbles addChild:bubbles_2];
+
              
              
          }
          
          // 5Bubbles
-         else if ( artDerBubbles > 40 && artDerBubbles <= 60)
+         else if ( artDerBubbles > 40 && artDerBubbles <= 60&&!slowerActive)
          {
              Collsion = NO;
              anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
@@ -426,8 +446,11 @@
              
              bubbles_5.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:bubbles_5.contentSize.width/2.0f andCenter:bubbles_5.anchorPointInPoints ];
              bubbles_5.physicsBody.collisionType =@"bubble5Collision";
+             bubbles_5.physicsBody.allowsRotation = NO;
+
              [physicsWorld addChild:bubbles_5];
-             
+            // bubbles_5.physicsBody.sensor = YES;
+
          
              
              int minDuration = 3.0;
@@ -450,10 +473,11 @@
              
              
              [bubbles_5 runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove,callAfterMoving]]];
-            
+             [groupBubbles addChild:bubbles_5];
+
          }
           // 7 Bubbles
-         else if ( artDerBubbles > 60 && artDerBubbles <= 70)
+         else if ( artDerBubbles > 60 && artDerBubbles <= 70&&!slowerActive)
          {
              Collsion = NO;
              anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
@@ -471,8 +495,11 @@
              
              bubbles_7.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:bubbles_7.contentSize.width/2.0f andCenter:bubbles_7.anchorPointInPoints ];
              bubbles_7.physicsBody.collisionType =@"bubble7Collision";
+             bubbles_7.physicsBody.allowsRotation = NO;
+
              [physicsWorld addChild:bubbles_7];
-             
+            // bubbles_7.physicsBody.sensor = YES;
+
              
           
              
@@ -494,11 +521,12 @@
              
              
              [bubbles_7 runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove,callAfterMoving]]];
-          
+             [groupBubbles addChild:bubbles_7];
+
          }
 
         //10Bubbles
-         else if ( artDerBubbles > 70 && artDerBubbles <= 77)
+         else if ( artDerBubbles > 70 && artDerBubbles <= 77&&!slowerActive)
          {
              Collsion = NO;
 
@@ -516,8 +544,11 @@
              
              bubbles_10.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:bubbles_10.contentSize.width/2.0f andCenter:bubbles_10.anchorPointInPoints ];
              bubbles_10.physicsBody.collisionType =@"bubble10Collision";
+             bubbles_10.physicsBody.allowsRotation = NO;
+
              [physicsWorld addChild:bubbles_10];
-             
+           //  bubbles_10.physicsBody.sensor = YES;
+
              
           
         
@@ -539,13 +570,14 @@
              
              
              [bubbles_10 runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove,callAfterMoving]]];
-           
+             [groupBubbles addChild:bubbles_10];
+
          }
          
          // TIME DOWN
          
          
-            if ( artDerBubbles > 77 && artDerBubbles <= 90 && highScore >= 70)
+            if ( artDerBubbles > 77 && artDerBubbles <= 90 && highScore >= 70&&!slowerActive)
          {
              
              Collsion = NO;
@@ -563,8 +595,11 @@
              
              bubbles_timeDown.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:bubbles_timeDown.contentSize.width/2.0f andCenter:bubbles_timeDown.anchorPointInPoints ];
              bubbles_timeDown.physicsBody.collisionType =@"bubbleTimeDownCollision";
+             bubbles_timeDown.physicsBody.allowsRotation = NO;
+
              [physicsWorld addChild:bubbles_timeDown];
-             
+            // bubbles_timeDown.physicsBody.sensor = YES;
+
              
              
              
@@ -586,11 +621,12 @@
              
              
              [bubbles_timeDown runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove,callAfterMoving]]];
-             
+             [groupBubbles addChild:bubbles_timeDown];
+
          }
          //TIME UP
 
-          else if ( artDerBubbles > 90 && artDerBubbles <= 100&& highScore >= 50)
+          else if ( artDerBubbles > 90 && artDerBubbles <= 100&& highScore >= 50&&!slowerActive)
          {
              
              Collsion = NO;
@@ -608,9 +644,12 @@
              
              bubbles_timeUp.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:bubbles_timeUp.contentSize.width/2.0f andCenter:bubbles_timeUp.anchorPointInPoints ];
              bubbles_timeUp.physicsBody.collisionType =@"bubbleTimeUpCollision";
+             bubbles_timeUp.physicsBody.allowsRotation = NO;
+
              [physicsWorld addChild:bubbles_timeUp];
              
-             
+           //  bubbles_timeUp.physicsBody.sensor = YES;
+
              
              
              int minDuration = 3.0;
@@ -630,10 +669,11 @@
              
              
              [bubbles_timeUp runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove,callAfterMoving]]];
-            
+             [groupBubbles addChild:bubbles_timeUp];
+
          }
              // BOMB
-          else if ( artDerBubbles > 100 && artDerBubbles <= 110&& highScore >= 150)
+          else if ( artDerBubbles > 100 && artDerBubbles <= 110&& highScore > 150&&!slowerActive)
           {
               
               Collsion = NO;
@@ -651,9 +691,12 @@
               
               bubbles_bomb.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:bubbles_bomb.contentSize.width/2.0f andCenter:bubbles_bomb.anchorPointInPoints ];
               bubbles_bomb.physicsBody.collisionType =@"bubbleBombCollision";
+              bubbles_bomb.physicsBody.allowsRotation = NO;
+
               [physicsWorld addChild:bubbles_bomb];
               
-              
+             // bubbles_bomb.physicsBody.sensor = YES;
+
               
               
               int minDuration = 3.0;
@@ -673,10 +716,11 @@
               
               
               [bubbles_bomb runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove,callAfterMoving]]];
-              
+              [groupBubbles addChild:bubbles_bomb];
+
           }
              //SHIELD
-          else if ( artDerBubbles > 110 && artDerBubbles <= 119&& highScore >= 120)
+          else if ( artDerBubbles > 110 && artDerBubbles <= 119&& highScore >= 120&&!slowerActive)
           {
               
               Collsion = NO;
@@ -693,9 +737,12 @@
               
               bubbles_shield.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:bubbles_shield.contentSize.width/2.0f andCenter:bubbles_shield.anchorPointInPoints ];
               bubbles_shield.physicsBody.collisionType =@"bubbleShieldCollision";
+              bubbles_shield.physicsBody.allowsRotation = NO;
+
               [physicsWorld addChild:bubbles_shield];
               
-              
+             // bubbles_shield.physicsBody.sensor = YES;
+
               
               
               int minDuration = 3.0;
@@ -715,12 +762,104 @@
               
               
               [bubbles_shield runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove,callAfterMoving]]];
-              
+              [groupBubbles addChild:bubbles_shield];
+
           }
-             
+             //FASTER
+          else if ( artDerBubbles > 119 && artDerBubbles <= 123&& !fasterActive && !fasterActive)
+          {
+              
+              Collsion = NO;
+              anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
+              bubble_faster = [CCSprite spriteWithImageNamed:@"faster-Bobble.png"];
+              
+              int minX = bubble_faster.contentSize.width  ;
+              int maxX = self.contentSize.width - bubble_faster.contentSize.width    ;
+              int randomX = (arc4random() % (maxX-minX+1))  +minX ;
+              
+              bubble_faster.position = CGPointMake(randomX,self.contentSize.height + bubble_faster.contentSize.width/2);
+              
+              
+              
+              bubble_faster.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:bubble_faster.contentSize.width/2.0f andCenter:bubble_faster.anchorPointInPoints ];
+              bubble_faster.physicsBody.collisionType =@"bubbleFasterCollision";
+              bubble_faster.physicsBody.allowsRotation = NO;
+
+              [physicsWorld addChild:bubble_faster];
+              
+              // bubbles_shield.physicsBody.sensor = YES;
+              
+              
+              
+              int minDuration = 3.0;
+              int maxDuration = 6.0;
+              int rangeDuration = maxDuration - minDuration;
+              int randomDuration = (arc4random() % rangeDuration) + minDuration + ( 1/sec);
+              
+              CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubble_faster.contentSize.width/2)];
+              
+              
+              //NSLog(@"anzahl auf dem feld1: %d", anzahlBubblesAufDemFeld );
+              
+              CCAction *actionRemove = [CCActionRemove action];
+              CCActionCallFunc *callAfterMoving = [CCActionCallFunc actionWithTarget:self selector:@selector(callBack)];
+              
+              
+              
+              
+              [bubble_faster runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove,callAfterMoving]]];
+              [groupBubbles addChild:bubble_faster];
+
+          }
+         //Slower
+          else if ( artDerBubbles > 123 && artDerBubbles <= 127&& !slowerActive && !fasterActive)
+          {
+              
+              Collsion = NO;
+              anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
+              bubbles_slower = [CCSprite spriteWithImageNamed:@"freeze-mode-Bobble.png"];
+              
+              int minX = bubbles_slower.contentSize.width  ;
+              int maxX = self.contentSize.width - bubbles_slower.contentSize.width    ;
+              int randomX = (arc4random() % (maxX-minX+1))  +minX ;
+              
+              bubbles_slower.position = CGPointMake(randomX,self.contentSize.height + bubbles_slower.contentSize.width/2);
+              
+              
+              
+              bubbles_slower.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:bubbles_slower.contentSize.width/2.0f andCenter:bubbles_slower.anchorPointInPoints ];
+              bubbles_slower.physicsBody.collisionType =@"bubbleSlowerCollision";
+              bubbles_slower.physicsBody.allowsRotation = NO;
+
+              [physicsWorld addChild:bubbles_slower];
+              
+              // bubbles_shield.physicsBody.sensor = YES;
+              
+              
+              
+              int minDuration = 3.0;
+              int maxDuration = 6.0;
+              int rangeDuration = maxDuration - minDuration;
+              int randomDuration = (arc4random() % rangeDuration) + minDuration + ( 1/sec);
+              
+              CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubbles_slower.contentSize.width/2)];
+              
+              
+              //NSLog(@"anzahl auf dem feld1: %d", anzahlBubblesAufDemFeld );
+              
+              CCAction *actionRemove = [CCActionRemove action];
+              CCActionCallFunc *callAfterMoving = [CCActionCallFunc actionWithTarget:self selector:@selector(callBack)];
+              
+              
+              
+              
+              [bubbles_slower runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove,callAfterMoving]]];
+              [groupBubbles addChild:bubbles_slower];
+
+          }
 
  
-             
+         
          }
    //  anzahlBubblesAufDemFeld --;
         
@@ -1304,7 +1443,7 @@
 }
 #pragma mark Bubbles_Bomb
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubbleBombCollision:(CCNode *)bubbles_bomb_Node   playerCollision:(CCNode *)player{
-    
+   
     if (labelBlink) {
         [bubbles_bomb_Node removeFromParent];
         
@@ -1348,6 +1487,8 @@
         
         shieldActive = NO;
     }
+    
+    
     return YES;
     
     
@@ -1461,6 +1602,241 @@
         
     }
 
+}
+#pragma mark Bubbles_Faster
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubbleFasterCollision:(CCNode *)bubbles_faster_Node   playerCollision:(CCNode *)player{
+     if (labelBlink || fasterActive) {
+        [bubbles_faster_Node removeFromParent];
+        
+        anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
+        
+        return YES;
+        
+        
+    }
+    
+    if (!fasterActive && !slowerActive) {
+  
+    Collsion = YES;
+    
+    
+    [bubbles_faster_Node removeFromParent];
+    
+    anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
+    
+    
+    
+   /*
+    CCActionCallFunc *callTime = [CCActionCallFunc actionWithTarget:self selector:@selector(fasterTimer)];
+    CCActionSequence *pulseSequence2 = [CCActionSequence actionWithArray:@[callTime ]];
+    CCAction *repeater2 = [CCActionRepeatForever actionWithAction:pulseSequence2];
+    
+    
+    [sprite runAction:repeater2];
+    */
+    [self schedule:@selector(fasterTimer) interval:1 repeat:6 delay:0.01];
+
+    
+    fasterTime = 6;
+    fasterActive = YES;
+        return YES;
+    }
+    if (slowerActive) {
+        
+        [bubbles_faster_Node removeFromParent];
+
+        physicsWorld.gravity = ccp(0, 0);
+        slowerActive = NO;
+        return YES;
+
+    }
+    return YES;
+    
+    
+}
+#pragma mark Bubbles_Slower
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubbleSlowerCollision:(CCNode *)bubbles_slower_Node   playerCollision:(CCNode *)player{
+    if (labelBlink || slowerActive) {
+        [bubbles_slower_Node removeFromParent];
+        
+        anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
+        
+        return YES;
+        
+        
+    }
+    
+    if (!slowerActive && !fasterActive) {
+        
+        Collsion = YES;
+        
+        
+        [bubbles_slower_Node removeFromParent];
+        
+        anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
+        
+        
+        
+        /*
+         CCActionCallFunc *callTime = [CCActionCallFunc actionWithTarget:self selector:@selector(fasterTimer)];
+         CCActionSequence *pulseSequence2 = [CCActionSequence actionWithArray:@[callTime ]];
+         CCAction *repeater2 = [CCActionRepeatForever actionWithAction:pulseSequence2];
+         
+         
+         [sprite runAction:repeater2];
+         */
+        [self schedule:@selector(slowerTimer) interval:1 repeat:6 delay:0.01];
+        
+        
+        slowerActive = 6;
+        slowerActive = YES;
+        return YES;
+    }
+    
+    if (fasterActive) {
+        
+        [bubbles_slower_Node removeFromParent];
+
+        physicsWorld.gravity = ccp(0,  0);
+        fasterActive = NO;
+        return YES;
+        
+    }
+    
+    return YES;
+    
+    
+}
+-(void)slowerTimer
+{
+   if (slowerActive) {
+       
+      
+       /*for(CCSprite *myNode in bubble1)
+       {
+           //myNode.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:myNode.contentSize.width/2.0f andCenter:myNode.anchorPointInPoints ];
+           myNode.paused = YES;
+           
+       }*/
+
+       
+ 
+       
+       
+         NSArray *childrenArray = [self children];
+       NSUInteger count = childrenArray.count;
+        for(NSUInteger i = 0; i < count; i++)
+        {
+           //myNode.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:myNode.contentSize.width/2.0f andCenter:myNode.anchorPointInPoints ];
+           // myNode.paused = YES;
+            
+        
+            
+            bubbles_1.paused = YES;
+            bubbles_2.paused = YES;
+            bubbles_5.paused = YES;
+            bubbles_7.paused = YES;
+            bubbles_10.paused = YES;
+            bubble_faster.paused = YES;
+            bubbles_timeUp.paused = YES;
+            bubbles_timeDown.paused = YES;
+            bubbles_bomb.paused = YES;
+            bubbles_shield.paused = YES;
+            
+            bubbles_slower.paused = YES;
+            
+        }
+       
+       physicsWorld.gravity = ccp(0, -20);
+
+    
+     //  groupBubbles.paused = YES;
+       
+
+        
+ 
+        slowerTime--;
+        
+        
+
+        if (slowerTime== 0) {
+            
+            physicsWorld.gravity = ccp(0, 0);
+            
+            slowerActive = NO;
+    
+          /*     for(CCSprite *myNode in childrenArray)
+            {
+                
+                myNode.paused = NO;
+                
+            }
+            */
+     
+            
+            for(NSUInteger i = 0; i < count; i++)
+            {
+                //myNode.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:myNode.contentSize.width/2.0f andCenter:myNode.anchorPointInPoints ];
+                // myNode.paused = YES;
+                
+                
+                
+                bubbles_1.paused = NO;
+                bubbles_2.paused = NO;
+                bubbles_5.paused = NO;
+                bubbles_7.paused = NO;
+                bubbles_10.paused = NO;
+                bubble_faster.paused = NO;
+                bubbles_timeUp.paused = NO;
+                bubbles_timeDown.paused = NO;
+                bubbles_bomb.paused = NO;
+                bubbles_shield.paused = NO;
+                
+                bubbles_slower.paused = NO;
+            }
+           
+        }
+   }
+    }
+
+
+-(void)fasterTimer
+{
+    if (fasterActive) {
+  
+    fasterTime--;
+    physicsWorld.gravity = ccp(0, -300);
+
+    
+    if (fasterTime== 0) {
+        
+        physicsWorld.gravity = ccp(0, 0);
+
+        fasterActive = NO;
+        
+    }
+        
+    }
+    /*NSLog(@"faster !!!");
+    
+    if (fasterActive) {
+  
+    fasterTime --;
+    physicsWorld.gravity = ccp(0, -500);
+
+    if (fasterTime == 0) {
+        physicsWorld.gravity = ccp(0, 0);
+        fasterActive = NO;
+        
+        
+    }
+    
+    
+        
+    }
+    
+    */
+    
 }
 
 // -----------------------------------------------------------------------
@@ -1625,7 +2001,7 @@
     
   
     [self schedule:@selector(playerBewegung:) interval:0.01];
-    [self schedule:@selector(addBubbles:) interval:1.5];
+    [self schedule:@selector(addBubbles:) interval:1];
     [self schedule:@selector(ticker:) interval:1];
  
         
