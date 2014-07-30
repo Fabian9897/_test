@@ -41,6 +41,7 @@
 		E445DF5A19829276000E3596 /* timeline-red-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E445DF4019829276000E3596 /* timeline-red-hd.png */; };
 		E445DF5B19829276000E3596 /* xtra-newlife-Bobble-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E445DF4119829276000E3596 /* xtra-newlife-Bobble-hd.png */; };
 		E445DF5D1982952A000E3596 /* timeline_white-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E445DF5C1982952A000E3596 /* timeline_white-hd.png */; };
+		E474B873198936CB00B49AB4 /* xtra-newlife-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E474B872198936CB00B49AB4 /* xtra-newlife-hd.png */; };
 		E4D28D1A1982481800009D4A /* bomb-Bobble.png in Resources */ = {isa = PBXBuildFile; fileRef = E4D28D191982481800009D4A /* bomb-Bobble.png */; };
 		E4D28D1D198249F000009D4A /* shield-Bobble.png in Resources */ = {isa = PBXBuildFile; fileRef = E4D28D1B198249F000009D4A /* shield-Bobble.png */; };
 		E4D28D1E198249F000009D4A /* shield.png in Resources */ = {isa = PBXBuildFile; fileRef = E4D28D1C198249F000009D4A /* shield.png */; };
@@ -304,6 +305,7 @@
 		E445DF4019829276000E3596 /* timeline-red-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timeline-red-hd.png"; sourceTree = "<group>"; };
 		E445DF4119829276000E3596 /* xtra-newlife-Bobble-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xtra-newlife-Bobble-hd.png"; sourceTree = "<group>"; };
 		E445DF5C1982952A000E3596 /* timeline_white-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timeline_white-hd.png"; sourceTree = "<group>"; };
+		E474B872198936CB00B49AB4 /* xtra-newlife-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xtra-newlife-hd.png"; sourceTree = "<group>"; };
 		E4D28D191982481800009D4A /* bomb-Bobble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bomb-Bobble.png"; sourceTree = "<group>"; };
 		E4D28D1B198249F000009D4A /* shield-Bobble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shield-Bobble.png"; sourceTree = "<group>"; };
 		E4D28D1C198249F000009D4A /* shield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shield.png; sourceTree = "<group>"; };
@@ -786,6 +788,7 @@
 				E4FDA6B21986995C005035CA /* faenger-Bobble-80-Prozent-hd.png */,
 				E4FDA6B31986995C005035CA /* faenger-Bobble-90-Prozent-hd.png */,
 				E445DF2E19829276000E3596 /* faenger-Bobble-100-Prozent-hd.png */,
+				E474B872198936CB00B49AB4 /* xtra-newlife-hd.png */,
 			);
 			name = "Grafiken-HD";
 			sourceTree = "<group>";
@@ -1736,6 +1739,7 @@
 				E4D7BD56197D501000695F15 /* Icon-Spotlight-iOS7.png in Resources */,
 				E445DF4419829276000E3596 /* 5-Pointer-Bobble-hd.png in Resources */,
 				E4EFFB2219811CDE00127D95 /* faenger-Bobble-100-Prozent.png in Resources */,
+				E474B873198936CB00B49AB4 /* xtra-newlife-hd.png in Resources */,
 				E4EFFB1C19810B0B00127D95 /* play-icon-inactive.png in Resources */,
 				E4D7BD4A197D501000695F15 /* Icon-76@2x.png in Resources */,
 				E430BBF9197FF70A00D7076C /* 1-Pointer-Bobble.png in Resources */,

@@ -42,6 +42,11 @@
     CCSprite *shieldBG;
     CCLabelTTF *shieldTimeLabel;
     
+    
+    CCSprite *bubble_live;
+    CCSprite *xtraLive;
+    BOOL liveActive;
+    
     CCSprite *bubble_faster;
     int fasterTime;
     BOOL fasterActive;
@@ -138,7 +143,7 @@
     windowHeight = self.contentSize.height/2;
     windowWidth = self.contentSize.width/2;
     
-  
+    liveActive = NO;
     fasterActive = NO;
     slowerActive = NO;
     
@@ -231,7 +236,8 @@
     [self addChild:scoreLabel];
     
     highScoreLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%i", highScore] fontName:@"Helvetica-Neue-UltraLight" fontSize:28.0f];
-    [highScoreLabel setPosition: CGPointMake(self.contentSize.width - 50, self.contentSize.height - 25)    ];
+    highScoreLabel.positionType = CCPositionTypeNormalized;
+    highScoreLabel.position = ccp(0.9,0.95);
     highScoreLabel.color = [CCColor blackColor];
     
     [self addChild:highScoreLabel];
@@ -766,7 +772,7 @@
 
           }
              //FASTER
-          else if ( artDerBubbles > 119 && artDerBubbles <= 123&& !fasterActive && !fasterActive)
+          else if ( artDerBubbles > 119 && artDerBubbles <= 123&& !fasterActive && !fasterActive && highScore >100)
           {
               
               Collsion = NO;
@@ -812,7 +818,7 @@
 
           }
          //Slower
-          else if ( artDerBubbles > 123 && artDerBubbles <= 127&& !slowerActive && !fasterActive)
+          else if ( artDerBubbles > 123 && artDerBubbles <= 130&& !slowerActive && !fasterActive&& highScore > 90)
           {
               
               Collsion = NO;
@@ -859,7 +865,56 @@
           }
 
  
+         //Leben
+          else if ( artDerBubbles > 130 && artDerBubbles <= 132 && ! liveActive && highScore > 80)
+          {
+              
+              Collsion = NO;
+              anzahlBubblesAufDemFeld = anzahlBubblesAufDemFeld + 1;
+              bubble_live = [CCSprite spriteWithImageNamed:@"xtra-newlife-Bobble.png"];
+              
+              int minX = bubble_live.contentSize.width  ;
+              int maxX = self.contentSize.width - bubble_live.contentSize.width    ;
+              int randomX = (arc4random() % (maxX-minX+1))  +minX ;
+              
+              bubble_live.position = CGPointMake(randomX,self.contentSize.height + bubble_live.contentSize.width/2);
+              
+              
+              
+              bubble_live.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:bubble_live.contentSize.width/2.0f andCenter:bubble_live.anchorPointInPoints ];
+              bubble_live.physicsBody.collisionType =@"bubbleLifeCollision";
+              
+              bubble_live.physicsBody.allowsRotation = NO;
+              
+              [physicsWorld addChild:bubble_live];
+              
+              // bubbles_shield.physicsBody.sensor = YES;
+              
+              
+              
+              int minDuration = 3.0;
+              int maxDuration = 6.0;
+              int rangeDuration = maxDuration - minDuration;
+              int randomDuration = (arc4random() % rangeDuration) + minDuration + ( 1/sec);
+              
+              CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubble_live.contentSize.width/2)];
+              
+              
+              //NSLog(@"anzahl auf dem feld1: %d", anzahlBubblesAufDemFeld );
+              
+              CCAction *actionRemove = [CCActionRemove action];
+              CCActionCallFunc *callAfterMoving = [CCActionCallFunc actionWithTarget:self selector:@selector(callBack)];
+              
+              
+              
+              
+              [bubble_live runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove,callAfterMoving]]];
+              [groupBubbles addChild:bubble_live];
+              
+          }
          
+         
+
          }
    //  anzahlBubblesAufDemFeld --;
         
@@ -920,9 +975,9 @@
 
    // [player stopAllActions];
     CMAccelerometerData *acceleration = motionManager.accelerometerData;
-    playerRichtungX = acceleration.acceleration.x*7;
+   // playerRichtungX = acceleration.acceleration.x*7;
         
-     //  double x = acceleration.acceleration.x * 2;
+      double x = acceleration.acceleration.x;
       //  double y =  [[CCDirector sharedDirector] totalFrames]  ;
        // NSLog(@"Total frames 2.%f", y);
         
@@ -934,9 +989,14 @@
        //    playerRichtungX = pow(x, y);
 
        // }
+        int velocity;
+        for (double i = 0; i<= 10; i++) {
             
-
-        
+            velocity = pow(i, x);
+            
+            
+        }
+        playerRichtungX +=velocity;
         
  
     float     targetX   = player.position.x + playerRichtungX;
@@ -1054,7 +1114,7 @@
  
      
      
-     if (scoreBubbles + 1 > 100) {
+     if (scoreBubbles + 1 > 100 && !liveActive) {
          
          
          highScoreEnd  = highScore;
@@ -1069,7 +1129,12 @@
                                     withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f  ]];
        
      }
-     
+     if (scoreBubbles +1 > 100 && liveActive) {
+         liveActive = NO;
+         [xtraLive removeFromParent];
+         
+         
+     }
     else if (scoreBubbles +1 == 100) {
         scoreBubbles = scoreBubbles+ 1;
         highScore = highScore +1;
@@ -1127,7 +1192,7 @@
     
    
  
-    if (scoreBubbles+2 > 100) {
+    if (scoreBubbles+2 > 100 && !liveActive) {
         
         highScoreEnd  = highScore;
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
@@ -1139,7 +1204,10 @@
         [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
                                    withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f  ]];    }
     
-    
+    if (scoreBubbles+2 > 100 && liveActive) {
+        liveActive = NO;
+        [xtraLive removeFromParent];
+    }
     // Hier Neue Blase erschaffen und spiel fortsetzen
    else if (scoreBubbles+2 == 100) {
        scoreBubbles = scoreBubbles+ 2;
@@ -1190,7 +1258,7 @@
    
 
  
-    if (scoreBubbles+7 > 100) {
+    if (scoreBubbles+7 > 100&& ! liveActive) {
         highScoreEnd  = highScore;
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
         [[NSUserDefaults standardUserDefaults] synchronize];
@@ -1204,7 +1272,10 @@
     }
     
     
- 
+    if (scoreBubbles+7>100 &&  liveActive) {
+        liveActive =NO;
+        [xtraLive removeFromParent];
+    }
     
     // Hier Neue Blase erschaffen und spiel fortsetzen
     else if (scoreBubbles+7 == 100) {
@@ -1258,7 +1329,7 @@
 
 
     
-    if (scoreBubbles+5 > 100) {
+    if (scoreBubbles+5 > 100 && ! liveActive) {
         
         highScoreEnd  = highScore;
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
@@ -1271,7 +1342,10 @@
                                    withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f  ]];
     }
     
-    
+    if (scoreBubbles+5 > 100 && liveActive) {
+        liveActive = NO;
+        [xtraLive removeFromParent];
+    }
  
     
     // Hier Neue Blase erschaffen und spiel fortsetzen
@@ -1325,7 +1399,7 @@
     
     
    
-     if (scoreBubbles+10 > 100) {
+     if (scoreBubbles+10 > 100 && !liveActive) {
          [self takeScreenShot];
 
          highScoreEnd  = highScore;
@@ -1338,7 +1412,11 @@
                                     withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f  ]];
     }
     
-    
+    if (scoreBubbles+10 > 100 && liveActive) {
+        liveActive = NO;
+        [xtraLive removeFromParent];
+        
+    }
     
     // Hier Neue Blase erschaffen und spiel fortsetzen
    else if (scoreBubbles+10 == 100) {
@@ -1387,7 +1465,7 @@
     
     [bubbles_Time_Down_Node removeFromParent];
         anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
-    if (percentage +5 == 100) {
+    if (percentage +5 == 100 && !liveActive) {
        
         [self takeScreenShot];
 
@@ -1400,6 +1478,12 @@
 
         gameStatus = gamePaused;
     }
+     if (percentage +5 == 100 && liveActive) {
+     
+         liveActive = NO;
+         [xtraLive removeFromParent];
+     
+     }
     else if (percentage+ 5 >= 0)
     {
         percentage = percentage +5;
@@ -1459,7 +1543,7 @@
     [bubbles_bomb_Node removeFromParent];
     
        anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
-    if (!shieldActive) {
+    if (!shieldActive && !liveActive) {
 
         
         if (!labelBlink) {
@@ -1486,6 +1570,12 @@
         [shieldTimeLabel removeFromParent];
         
         shieldActive = NO;
+    }
+    if (liveActive) {
+        
+        liveActive = NO;
+        [xtraLive removeFromParent];
+        
     }
     
     
@@ -1707,55 +1797,72 @@
     
     
 }
+#pragma mark Bubbles_xtraLife
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubbleLifeCollision:(CCNode *)bubbles_life_Node   playerCollision:(CCNode *)player{
+    if (labelBlink || liveActive) {
+        [bubbles_life_Node removeFromParent];
+        
+        anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
+        
+        return YES;
+        
+        
+    }
+    
+    if (!liveActive) {
+        
+ 
+        liveActive = YES;
+        
+        xtraLive =  [CCSprite spriteWithImageNamed:@"xtra-newlife.png" ];
+        xtraLive.positionType = CCPositionTypeNormalized;
+        xtraLive.position  = ccp(0.5, 0.95);
+        xtraLive.scale = 2;
+        [self addChild:xtraLive];
+        
+        
+        
+        
+        
+        
+        
+        return YES;
+    }
+    
+    
+    
+    return YES;
+    
+    
+}
+
 -(void)slowerTimer
 {
    if (slowerActive) {
        
       
-       /*for(CCSprite *myNode in bubble1)
-       {
-           //myNode.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:myNode.contentSize.width/2.0f andCenter:myNode.anchorPointInPoints ];
-           myNode.paused = YES;
-           
-       }*/
-
-       
  
+      /* CCNode *myNode;
        
        
          NSArray *childrenArray = [self children];
-       NSUInteger count = childrenArray.count;
-        for(NSUInteger i = 0; i < count; i++)
+ 
+       for( myNode in childrenArray)
         {
-           //myNode.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:myNode.contentSize.width/2.0f andCenter:myNode.anchorPointInPoints ];
-           // myNode.paused = YES;
             
         
-            
-            bubbles_1.paused = YES;
-            bubbles_2.paused = YES;
-            bubbles_5.paused = YES;
-            bubbles_7.paused = YES;
-            bubbles_10.paused = YES;
-            bubble_faster.paused = YES;
-            bubbles_timeUp.paused = YES;
-            bubbles_timeDown.paused = YES;
-            bubbles_bomb.paused = YES;
-            bubbles_shield.paused = YES;
-            
-            bubbles_slower.paused = YES;
+            myNode.paused= YES;
             
         }
        
-       physicsWorld.gravity = ccp(0, -20);
 
     
      //  groupBubbles.paused = YES;
        
 
-        
- 
-        slowerTime--;
+        */
+       physicsWorld.gravity = ccp(0, 10);
+         slowerTime--;
         
         
 
@@ -1765,35 +1872,15 @@
             
             slowerActive = NO;
     
-          /*     for(CCSprite *myNode in childrenArray)
+            /*  for( myNode in childrenArray)
             {
                 
                 myNode.paused = NO;
                 
             }
-            */
-     
-            
-            for(NSUInteger i = 0; i < count; i++)
-            {
-                //myNode.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:myNode.contentSize.width/2.0f andCenter:myNode.anchorPointInPoints ];
-                // myNode.paused = YES;
-                
-                
-                
-                bubbles_1.paused = NO;
-                bubbles_2.paused = NO;
-                bubbles_5.paused = NO;
-                bubbles_7.paused = NO;
-                bubbles_10.paused = NO;
-                bubble_faster.paused = NO;
-                bubbles_timeUp.paused = NO;
-                bubbles_timeDown.paused = NO;
-                bubbles_bomb.paused = NO;
-                bubbles_shield.paused = NO;
-                
-                bubbles_slower.paused = NO;
-            }
+           
+     */
+   
            
         }
    }
@@ -1961,7 +2048,7 @@
         
         
         
-        if (percentage == 100)
+        if (percentage == 100 && ! liveActive)
         {
             [self takeScreenShot];
             highScoreEnd  = highScore;
@@ -1975,6 +2062,12 @@
             
             [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
                                        withTransition:[CCTransition transitionCrossFadeWithDuration:1.0f ]];
+            
+        }
+        else if (percentage == 100 && liveActive)
+        {
+            liveActive = NO;
+            [xtraLive removeFromParent];
             
         }
         
