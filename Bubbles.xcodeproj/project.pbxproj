@@ -23,7 +23,6 @@
 		E445DF4719829276000E3596 /* bomb-Bobble-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E445DF2D19829276000E3596 /* bomb-Bobble-hd.png */; };
 		E445DF4819829276000E3596 /* faenger-Bobble-100-Prozent-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E445DF2E19829276000E3596 /* faenger-Bobble-100-Prozent-hd.png */; };
 		E445DF4919829276000E3596 /* faster-Bobble-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E445DF2F19829276000E3596 /* faster-Bobble-hd.png */; };
-		E445DF4A19829276000E3596 /* freeze-mode-Bobble-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E445DF3019829276000E3596 /* freeze-mode-Bobble-hd.png */; };
 		E445DF4B19829276000E3596 /* grsser-werden-Bobble-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E445DF3119829276000E3596 /* grsser-werden-Bobble-hd.png */; };
 		E445DF4C19829276000E3596 /* hintergrund-elemente-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E445DF3219829276000E3596 /* hintergrund-elemente-hd.png */; };
 		E445DF4D19829276000E3596 /* hintergrund-mit-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E445DF3319829276000E3596 /* hintergrund-mit-hd.png */; };
@@ -240,6 +239,7 @@
 		E4D7BF96197D501300695F15 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4D7BF95197D501300695F15 /* AppDelegate.m */; };
 		E4D7BF99197D501300695F15 /* HelloWorldScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E4D7BF98197D501300695F15 /* HelloWorldScene.m */; };
 		E4D7BF9C197D501300695F15 /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E4D7BF9B197D501300695F15 /* IntroScene.m */; };
+		E4E9146C198A2D2D00E9FC4A /* freeze-mode-Bobble-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E4E9146B198A2D2D00E9FC4A /* freeze-mode-Bobble-hd.png */; };
 		E4EFFB17198101C100127D95 /* pause-icon-active.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EFFB15198101C100127D95 /* pause-icon-active.png */; };
 		E4EFFB18198101C100127D95 /* pause-icon-inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EFFB16198101C100127D95 /* pause-icon-inactive.png */; };
 		E4EFFB1B19810B0B00127D95 /* play-icon-active.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EFFB1919810B0B00127D95 /* play-icon-active.png */; };
@@ -287,7 +287,6 @@
 		E445DF2D19829276000E3596 /* bomb-Bobble-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bomb-Bobble-hd.png"; sourceTree = "<group>"; };
 		E445DF2E19829276000E3596 /* faenger-Bobble-100-Prozent-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "faenger-Bobble-100-Prozent-hd.png"; sourceTree = "<group>"; };
 		E445DF2F19829276000E3596 /* faster-Bobble-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "faster-Bobble-hd.png"; sourceTree = "<group>"; };
-		E445DF3019829276000E3596 /* freeze-mode-Bobble-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "freeze-mode-Bobble-hd.png"; sourceTree = "<group>"; };
 		E445DF3119829276000E3596 /* grsser-werden-Bobble-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grsser-werden-Bobble-hd.png"; sourceTree = "<group>"; };
 		E445DF3219829276000E3596 /* hintergrund-elemente-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hintergrund-elemente-hd.png"; sourceTree = "<group>"; };
 		E445DF3319829276000E3596 /* hintergrund-mit-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hintergrund-mit-hd.png"; sourceTree = "<group>"; };
@@ -707,6 +706,7 @@
 		E4D7BF98197D501300695F15 /* HelloWorldScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HelloWorldScene.m; path = Classes/HelloWorldScene.m; sourceTree = "<group>"; };
 		E4D7BF9A197D501300695F15 /* IntroScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IntroScene.h; path = Classes/IntroScene.h; sourceTree = "<group>"; };
 		E4D7BF9B197D501300695F15 /* IntroScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = IntroScene.m; path = Classes/IntroScene.m; sourceTree = "<group>"; };
+		E4E9146B198A2D2D00E9FC4A /* freeze-mode-Bobble-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "freeze-mode-Bobble-hd.png"; sourceTree = "<group>"; };
 		E4EFFB15198101C100127D95 /* pause-icon-active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause-icon-active.png"; sourceTree = "<group>"; };
 		E4EFFB16198101C100127D95 /* pause-icon-inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause-icon-inactive.png"; sourceTree = "<group>"; };
 		E4EFFB1919810B0B00127D95 /* play-icon-active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-icon-active.png"; sourceTree = "<group>"; };
@@ -764,7 +764,6 @@
 				E445DF2C19829276000E3596 /* 10-Pointer-Bobble-hd.png */,
 				E445DF2D19829276000E3596 /* bomb-Bobble-hd.png */,
 				E445DF2F19829276000E3596 /* faster-Bobble-hd.png */,
-				E445DF3019829276000E3596 /* freeze-mode-Bobble-hd.png */,
 				E445DF3119829276000E3596 /* grsser-werden-Bobble-hd.png */,
 				E445DF3219829276000E3596 /* hintergrund-elemente-hd.png */,
 				E445DF3319829276000E3596 /* hintergrund-mit-hd.png */,
@@ -788,6 +787,7 @@
 				E4FDA6B21986995C005035CA /* faenger-Bobble-80-Prozent-hd.png */,
 				E4FDA6B31986995C005035CA /* faenger-Bobble-90-Prozent-hd.png */,
 				E445DF2E19829276000E3596 /* faenger-Bobble-100-Prozent-hd.png */,
+				E4E9146B198A2D2D00E9FC4A /* freeze-mode-Bobble-hd.png */,
 				E474B872198936CB00B49AB4 /* xtra-newlife-hd.png */,
 			);
 			name = "Grafiken-HD";
@@ -1729,6 +1729,7 @@
 				E445DF5219829276000E3596 /* pause-icon-inactive-hd.png in Resources */,
 				E445DF5119829276000E3596 /* pause-icon-active-hd.png in Resources */,
 				E445DF4919829276000E3596 /* faster-Bobble-hd.png in Resources */,
+				E4E9146C198A2D2D00E9FC4A /* freeze-mode-Bobble-hd.png in Resources */,
 				E4D7BF20197D501200695F15 /* LICENSE_CCBReader.txt in Resources */,
 				E4D7BE90197D501200695F15 /* LICENSE_cocos2d.txt in Resources */,
 				E445DF5019829276000E3596 /* linie-oben-hd.png in Resources */,
@@ -1745,7 +1746,6 @@
 				E430BBF9197FF70A00D7076C /* 1-Pointer-Bobble.png in Resources */,
 				E4EFFB18198101C100127D95 /* pause-icon-inactive.png in Resources */,
 				E4D7BD58197D501000695F15 /* Icon-Spotlight-iOS7@2x.png in Resources */,
-				E445DF4A19829276000E3596 /* freeze-mode-Bobble-hd.png in Resources */,
 				E4EFFB251981436D00127D95 /* time-down-Bobble.png in Resources */,
 				E4FDA6B61986995C005035CA /* faenger-Bobble-70-Prozent-hd.png in Resources */,
 				E445DF5419829276000E3596 /* play-icon-inactive-hd.png in Resources */,

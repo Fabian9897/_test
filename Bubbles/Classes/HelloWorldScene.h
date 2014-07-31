@@ -12,8 +12,10 @@
 #import "cocos2d-ui.h"
 #import <QuartzCore/QuartzCore.h>
 #import <CoreMotion/CoreMotion.h>
+#import "CCActionTween.h"
 #include <math.h>
-
+ 
+ 
  
 // -----------------------------------------------------------------------
 

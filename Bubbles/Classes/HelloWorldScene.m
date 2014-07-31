@@ -115,6 +115,10 @@
     int windowHeight;
     int windowWidth;
     CCNode *groupBubbles;
+    
+    
+    
+  
 
 }
 
@@ -156,7 +160,8 @@
     [self addChild:background];
 
     CCSprite *linie = [CCSprite spriteWithImageNamed:@"linie-oben.png"];
-    linie.position = ccp(windowWidth, self.contentSize.height - 50 );
+    linie.positionType = CCPositionTypeNormalized;
+     linie.position = ccp(0.5, 0.9 );
     
     [self addChild:linie];
     
@@ -309,7 +314,7 @@
            anzahl = ( arc4random()%3 + 1);
     
    //NSLog(@"anzahl : %d", anzahl);
-        NSLog(@"anzahl der Bubbles %d", anzahlBubblesAufDemFeld);
+     //   NSLog(@"anzahl der Bubbles %d", anzahlBubblesAufDemFeld);
     
     
     //if (anzahlBubblesAufDemFeld + anzahl  < 6)
@@ -322,7 +327,7 @@
          
          artDerBubbles = arc4random()%150;
          
-         NSLog(@"  Arte der Bubble : %d", artDerBubbles);
+       //  NSLog(@"  Arte der Bubble : %d", artDerBubbles);
 
          // 1 Bubbles
 
@@ -365,6 +370,7 @@
          
      
     CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubbles_1.contentSize.width/2)];
+             actionMove.tag = 0;
          
          
        //  NSLog(@"anzahl auf dem feld1: %d", anzahlBubblesAufDemFeld );
@@ -415,7 +421,8 @@
              
              
              CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubbles_2.contentSize.width/2)];
-             
+             actionMove.tag = 1;
+
              
              //NSLog(@"anzahl auf dem feld1: %d", anzahlBubblesAufDemFeld );
              
@@ -463,7 +470,7 @@
              int maxDuration = 6.0;
              int rangeDuration = maxDuration - minDuration;
              int randomDuration = (arc4random() % rangeDuration) + minDuration + ( 1/sec);
-             NSLog(@"duration %d", randomDuration);
+           //  NSLog(@"duration %d", randomDuration);
              
              
              
@@ -474,7 +481,8 @@
              
              CCAction *actionRemove = [CCActionRemove action];
              CCActionCallFunc *callAfterMoving = [CCActionCallFunc actionWithTarget:self selector:@selector(callBack)];
-             
+             actionMove.tag = 2;
+
              
              
              
@@ -522,7 +530,8 @@
              
              CCAction *actionRemove = [CCActionRemove action];
              CCActionCallFunc *callAfterMoving = [CCActionCallFunc actionWithTarget:self selector:@selector(callBack)];
-             
+             actionMove.tag = 3;
+
              
              
              
@@ -565,7 +574,8 @@
              
              
              CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubbles_10.contentSize.width/2)];
-             
+             actionMove.tag = 4;
+
              
              //NSLog(@"anzahl auf dem feld1: %d", anzahlBubblesAufDemFeld );
              
@@ -623,7 +633,8 @@
              CCAction *actionRemove = [CCActionRemove action];
              CCActionCallFunc *callAfterMoving = [CCActionCallFunc actionWithTarget:self selector:@selector(callBack)];
              
-             
+             actionMove.tag = 5;
+
              
              
              [bubbles_timeDown runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove,callAfterMoving]]];
@@ -665,7 +676,8 @@
              
              CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubbles_timeUp.contentSize.width/2)];
              
-             
+             actionMove.tag = 6;
+
              //NSLog(@"anzahl auf dem feld1: %d", anzahlBubblesAufDemFeld );
              
              CCAction *actionRemove = [CCActionRemove action];
@@ -711,7 +723,8 @@
               int randomDuration = (arc4random() % rangeDuration) + minDuration + ( 1/sec);
               
               CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubbles_bomb.contentSize.width/2)];
-              
+              actionMove.tag = 7;
+
               
               //NSLog(@"anzahl auf dem feld1: %d", anzahlBubblesAufDemFeld );
               
@@ -757,7 +770,8 @@
               int randomDuration = (arc4random() % rangeDuration) + minDuration + ( 1/sec);
               
               CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubbles_shield.contentSize.width/2)];
-              
+              actionMove.tag = 8;
+
               
               //NSLog(@"anzahl auf dem feld1: %d", anzahlBubblesAufDemFeld );
               
@@ -803,7 +817,8 @@
               int randomDuration = (arc4random() % rangeDuration) + minDuration + ( 1/sec);
               
               CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubble_faster.contentSize.width/2)];
-              
+              actionMove.tag = 9;
+
               
               //NSLog(@"anzahl auf dem feld1: %d", anzahlBubblesAufDemFeld );
               
@@ -818,7 +833,7 @@
 
           }
          //Slower
-          else if ( artDerBubbles > 123 && artDerBubbles <= 130&& !slowerActive && !fasterActive&& highScore > 90)
+          else if ( artDerBubbles > 123 && artDerBubbles <= 130&& !slowerActive && !fasterActive && highScore > 120 )
           {
               
               Collsion = NO;
@@ -849,7 +864,8 @@
               int randomDuration = (arc4random() % rangeDuration) + minDuration + ( 1/sec);
               
               CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubbles_slower.contentSize.width/2)];
-              
+              actionMove.tag = 10;
+
               
               //NSLog(@"anzahl auf dem feld1: %d", anzahlBubblesAufDemFeld );
               
@@ -899,7 +915,8 @@
               
               CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(randomX, -bubble_live.contentSize.width/2)];
               
-              
+              actionMove.tag = 11;
+
               //NSLog(@"anzahl auf dem feld1: %d", anzahlBubblesAufDemFeld );
               
               CCAction *actionRemove = [CCActionRemove action];
@@ -968,40 +985,30 @@
 
 
 {
-  
+ 
     
     if (gameStatus == gameisOn) {
          [motionManager startAccelerometerUpdates];
-
-   // [player stopAllActions];
+        // [player stopAllActions];
     CMAccelerometerData *acceleration = motionManager.accelerometerData;
-   // playerRichtungX = acceleration.acceleration.x*7;
-        
-      double x = acceleration.acceleration.x;
-      //  double y =  [[CCDirector sharedDirector] totalFrames]  ;
-       // NSLog(@"Total frames 2.%f", y);
-        
-        
-        //for (  int i  = 0; i <= 10; i++) {
-            
-        //  y = i * 0.1 ;
-          //
-       //    playerRichtungX = pow(x, y);
+  
+playerRichtungX = acceleration.acceleration.x*7;
 
-       // }
-        int velocity;
-        for (double i = 0; i<= 10; i++) {
-            
-            velocity = pow(i, x);
-            
-            
-        }
-        playerRichtungX +=velocity;
         
- 
-    float     targetX   = player.position.x + playerRichtungX;
+       // int position = player.position.x;
+      //  int target = player.position.x + playerRichtungX;
+      //  id act1 = [CCActionTween actionWithDuration:2 key:@"move" from:position to:target];
+        
+        //[player runAction:act1];
+        
+       
+       // int neigung = acceleration.acceleration.x;
+        
+       
+    float     targetX   = player.position.x + playerRichtungX ;
     float    targetY   = player.position.y;
  
+        
     
     if (player.position.x + playerRichtungX < player.contentSize.width/2 ) {
         player.position = CGPointMake(player.contentSize.width/2, player.position.y);
@@ -1022,19 +1029,23 @@
     else
     {
         
-        player.position = CGPointMake(targetX, targetY);
+         
+         
+     player.position = CGPointMake(targetX, targetY);
         [scoreLabel setPosition:player.position];
         [shield setPosition:player.position];
 
 
         
-    }
+     }
     
     
     }
     
     
-}
+ 
+ }
+
 
 -(void) labelAfter
 {
@@ -1055,10 +1066,9 @@
 }
 -(void)playerBlink
 {
-    
-    [ player setTexture:[CCTexture textureWithFile: @"faenger-Bobble-50-Prozent.png"]];
+    gameStatus = gamePaused;
 
- 
+ [self particle];
     CCActionCallFunc *callBefore = [CCActionCallFunc actionWithTarget:self selector:@selector(labelRemoving)];
     CCActionCallFunc *callAfter = [CCActionCallFunc actionWithTarget:self selector:@selector(labelAfter)];
 
@@ -1080,12 +1090,25 @@
         
         shieldActive = NO;
     }
+    [ player setTexture:[CCTexture textureWithFile: @"faenger-Bobble-50-Prozent.png"]];
 
   
     scoreBubbles = 0;
+    gameStatus = gameisOn;
 
  }
- 
+ -(void)particle
+{
+    
+    CCParticleSystem* particles = [CCParticleGalaxy node];
+    [particles setDuration:10.0f];
+    [particles setLife:3.0f];
+    [particles setLifeVar:0.5f];
+    [particles setEmissionRate:10.0f];
+    [particles setPosition:player.position];
+       [self addChild:particles];
+    
+}
 // -----------------------------------------------------------------------
 
 #pragma mark Collision
@@ -1115,12 +1138,12 @@
      
      
      if (scoreBubbles + 1 > 100 && !liveActive) {
-         
+         gameStatus = gamePaused;
+
          
          highScoreEnd  = highScore;
          [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
          [[NSUserDefaults standardUserDefaults] synchronize];
-         gameStatus = gamePaused;
          // back to intro scene with transition
          
          
@@ -1193,13 +1216,13 @@
    
  
     if (scoreBubbles+2 > 100 && !liveActive) {
-        
+        gameStatus = gamePaused;
+
         highScoreEnd  = highScore;
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self takeScreenShot];
 
-        gameStatus = gamePaused;
         // back to intro scene with transition
         [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
                                    withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f  ]];    }
@@ -1259,13 +1282,14 @@
 
  
     if (scoreBubbles+7 > 100&& ! liveActive) {
+        gameStatus = gamePaused;
+
         highScoreEnd  = highScore;
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         [self takeScreenShot];
 
-        gameStatus = gamePaused;
         // back to intro scene with transition
         [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
                                    withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f  ]];
@@ -1330,13 +1354,13 @@
 
     
     if (scoreBubbles+5 > 100 && ! liveActive) {
-        
+        gameStatus = gamePaused;
+
         highScoreEnd  = highScore;
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self takeScreenShot];
 
-        gameStatus = gamePaused;
         // back to intro scene with transition
         [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
                                    withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f  ]];
@@ -1400,13 +1424,14 @@
     
    
      if (scoreBubbles+10 > 100 && !liveActive) {
+         gameStatus = gamePaused;
+
          [self takeScreenShot];
 
          highScoreEnd  = highScore;
          [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
          [[NSUserDefaults standardUserDefaults] synchronize];
         
-        gameStatus = gamePaused;
         // back to intro scene with transition
          [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
                                     withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f  ]];
@@ -1778,7 +1803,7 @@
         [self schedule:@selector(slowerTimer) interval:1 repeat:6 delay:0.01];
         
         
-        slowerActive = 6;
+        slowerTime = 4;
         slowerActive = YES;
         return YES;
     }
@@ -1818,10 +1843,15 @@
         xtraLive.positionType = CCPositionTypeNormalized;
         xtraLive.position  = ccp(0.5, 0.95);
         xtraLive.scale = 2;
+     
+        
+        
+       
         [self addChild:xtraLive];
         
         
-        
+        [bubbles_life_Node removeFromParent];
+
         
         
         
@@ -1829,7 +1859,8 @@
         return YES;
     }
     
-    
+    [bubbles_life_Node removeFromParent];
+
     
     return YES;
     
@@ -1840,46 +1871,48 @@
 {
    if (slowerActive) {
        
-      
+//
  
-      /* CCNode *myNode;
-       
-       
-         NSArray *childrenArray = [self children];
- 
-       for( myNode in childrenArray)
-        {
-            
+         CCNode *myNode;
         
-            myNode.paused= YES;
+         NSArray *childrenArray = [self children];
+        
+        for( myNode in childrenArray)
+        {
+        
+        
+   
+ 
+            myNode.paused = YES;
+        
             
         }
        
-
-    
-     //  groupBubbles.paused = YES;
+       
+       physicsWorld.gravity = ccp(0, 20);
+                slowerTime--;
+        
        
 
-        */
-       physicsWorld.gravity = ccp(0, 10);
-         slowerTime--;
-        
-        
 
         if (slowerTime== 0) {
             
-            physicsWorld.gravity = ccp(0, 0);
+            
+            NSLog(@"Slower TIme ist um !!!");
             
             slowerActive = NO;
-    
-            /*  for( myNode in childrenArray)
+            physicsWorld.gravity = ccp(0, 0);
+
+            for( myNode in childrenArray)
             {
+                
+                
+                
                 
                 myNode.paused = NO;
                 
+                
             }
-           
-     */
    
            
         }
@@ -2060,7 +2093,7 @@
             
             
             
-            [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
+            [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
                                        withTransition:[CCTransition transitionCrossFadeWithDuration:1.0f ]];
             
         }
@@ -2097,7 +2130,7 @@
     [self schedule:@selector(addBubbles:) interval:1];
     [self schedule:@selector(ticker:) interval:1];
  
-        
+
  
 
  
