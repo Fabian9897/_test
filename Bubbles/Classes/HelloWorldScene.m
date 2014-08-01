@@ -23,9 +23,11 @@
 
 #pragma mark Implementation
 @implementation HelloWorldScene
+
 {
     
-    
+     OALSimpleAudio *audio;
+
     // SPRITES
     CCSprite *bubbles_1;
     CCSprite *bubbles_2;
@@ -293,6 +295,10 @@
     
     labelBlink = NO;
     // done
+    
+   audio = [OALSimpleAudio sharedInstance];
+  //
+    [audio preloadEffect:@"Blop-Mark_DiAngelo-79054334.mp3"];
     
            gameStatus = gameisOn;
 	return self;
@@ -1068,8 +1074,7 @@ playerRichtungX = acceleration.acceleration.x*7;
 {
     gameStatus = gamePaused;
 
- [self particle];
-    CCActionCallFunc *callBefore = [CCActionCallFunc actionWithTarget:self selector:@selector(labelRemoving)];
+     CCActionCallFunc *callBefore = [CCActionCallFunc actionWithTarget:self selector:@selector(labelRemoving)];
     CCActionCallFunc *callAfter = [CCActionCallFunc actionWithTarget:self selector:@selector(labelAfter)];
 
     
@@ -1097,17 +1102,17 @@ playerRichtungX = acceleration.acceleration.x*7;
     gameStatus = gameisOn;
 
  }
- -(void)particle
+
+-(void)bubblesSound
 {
     
-    CCParticleSystem* particles = [CCParticleGalaxy node];
-    [particles setDuration:10.0f];
-    [particles setLife:3.0f];
-    [particles setLifeVar:0.5f];
-    [particles setEmissionRate:10.0f];
-    [particles setPosition:player.position];
-       [self addChild:particles];
     
+    
+    
+ 
+     // Sound effect spielen
+    [audio playEffect:@"Blop-Mark_DiAngelo-79054334.mp3"];
+	
 }
 // -----------------------------------------------------------------------
 
@@ -1191,12 +1196,15 @@ playerRichtungX = acceleration.acceleration.x*7;
      //   NSLog(@"anzahl auf dem feld3: %d", anzahlBubblesAufDemFeld);
    // bubbles.position =ccp(bubbles.position.x+ bubbles.contentSize.width, bubbles.position.y);
     
+     
+     
+     [self bubblesSound];
        return YES;
     
     
 }
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubble2Collision:(CCNode *)bubbles_2Node   playerCollision:(CCNode *)player{
-    
+     [self bubblesSound];
     if (labelBlink) {
         
         [bubbles_2Node removeFromParent];
@@ -1263,7 +1271,7 @@ playerRichtungX = acceleration.acceleration.x*7;
     
 }
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubble7Collision:(CCNode *)bubbles_7Node   playerCollision:(CCNode *)player{
-    
+     [self bubblesSound];
     if (labelBlink) {
         
         [bubbles_7Node removeFromParent];
@@ -1331,7 +1339,7 @@ playerRichtungX = acceleration.acceleration.x*7;
 
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubble5Collision:(CCNode *)bubbles_5Node   playerCollision:(CCNode *)player{
-    
+     [self bubblesSound];
     if (labelBlink) {
         
         
@@ -1405,7 +1413,7 @@ playerRichtungX = acceleration.acceleration.x*7;
 
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubble10Collision:(CCNode *)bubbles_10Node   playerCollision:(CCNode *)player{
-    
+     [self bubblesSound];
     if (labelBlink) {
         
         [bubbles_10Node removeFromParent];
@@ -1474,7 +1482,7 @@ playerRichtungX = acceleration.acceleration.x*7;
 }
 #pragma mark Bubbles_Timer
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubbleTimeDownCollision:(CCNode *)bubbles_Time_Down_Node   playerCollision:(CCNode *)player{
-    
+     [self bubblesSound];
     if (labelBlink) {
         
         
@@ -1520,7 +1528,7 @@ playerRichtungX = acceleration.acceleration.x*7;
     
 }
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubbleTimeUpCollision:(CCNode *)bubbles_Time_Up_Node   playerCollision:(CCNode *)player{
-    
+     [self bubblesSound];
     if (labelBlink) {
         
         [bubbles_Time_Up_Node removeFromParent];
@@ -1552,7 +1560,7 @@ playerRichtungX = acceleration.acceleration.x*7;
 }
 #pragma mark Bubbles_Bomb
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubbleBombCollision:(CCNode *)bubbles_bomb_Node   playerCollision:(CCNode *)player{
-   
+    [self bubblesSound];
     if (labelBlink) {
         [bubbles_bomb_Node removeFromParent];
         
@@ -1610,7 +1618,7 @@ playerRichtungX = acceleration.acceleration.x*7;
 }
 #pragma mark Bubbles_Shield
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubbleShieldCollision:(CCNode *)bubbles_shield_Node   playerCollision:(CCNode *)player1{
-    
+     [self bubblesSound];
     if (labelBlink) {
         
         anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
@@ -1720,6 +1728,7 @@ playerRichtungX = acceleration.acceleration.x*7;
 }
 #pragma mark Bubbles_Faster
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubbleFasterCollision:(CCNode *)bubbles_faster_Node   playerCollision:(CCNode *)player{
+     [self bubblesSound];
      if (labelBlink || fasterActive) {
         [bubbles_faster_Node removeFromParent];
         
@@ -1771,6 +1780,7 @@ playerRichtungX = acceleration.acceleration.x*7;
 }
 #pragma mark Bubbles_Slower
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubbleSlowerCollision:(CCNode *)bubbles_slower_Node   playerCollision:(CCNode *)player{
+     [self bubblesSound];
     if (labelBlink || slowerActive) {
         [bubbles_slower_Node removeFromParent];
         
@@ -1824,6 +1834,7 @@ playerRichtungX = acceleration.acceleration.x*7;
 }
 #pragma mark Bubbles_xtraLife
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubbleLifeCollision:(CCNode *)bubbles_life_Node   playerCollision:(CCNode *)player{
+     [self bubblesSound];
     if (labelBlink || liveActive) {
         [bubbles_life_Node removeFromParent];
         

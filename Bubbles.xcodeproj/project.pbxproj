@@ -40,6 +40,7 @@
 		E445DF5A19829276000E3596 /* timeline-red-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E445DF4019829276000E3596 /* timeline-red-hd.png */; };
 		E445DF5B19829276000E3596 /* xtra-newlife-Bobble-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E445DF4119829276000E3596 /* xtra-newlife-Bobble-hd.png */; };
 		E445DF5D1982952A000E3596 /* timeline_white-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E445DF5C1982952A000E3596 /* timeline_white-hd.png */; };
+		E44A3F01198B790100136679 /* Blop-Mark_DiAngelo-79054334.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E44A3F00198B790100136679 /* Blop-Mark_DiAngelo-79054334.mp3 */; };
 		E474B873198936CB00B49AB4 /* xtra-newlife-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E474B872198936CB00B49AB4 /* xtra-newlife-hd.png */; };
 		E4D28D1A1982481800009D4A /* bomb-Bobble.png in Resources */ = {isa = PBXBuildFile; fileRef = E4D28D191982481800009D4A /* bomb-Bobble.png */; };
 		E4D28D1D198249F000009D4A /* shield-Bobble.png in Resources */ = {isa = PBXBuildFile; fileRef = E4D28D1B198249F000009D4A /* shield-Bobble.png */; };
@@ -304,6 +305,7 @@
 		E445DF4019829276000E3596 /* timeline-red-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timeline-red-hd.png"; sourceTree = "<group>"; };
 		E445DF4119829276000E3596 /* xtra-newlife-Bobble-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xtra-newlife-Bobble-hd.png"; sourceTree = "<group>"; };
 		E445DF5C1982952A000E3596 /* timeline_white-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timeline_white-hd.png"; sourceTree = "<group>"; };
+		E44A3F00198B790100136679 /* Blop-Mark_DiAngelo-79054334.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Blop-Mark_DiAngelo-79054334.mp3"; sourceTree = "<group>"; };
 		E474B872198936CB00B49AB4 /* xtra-newlife-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xtra-newlife-hd.png"; sourceTree = "<group>"; };
 		E4D28D191982481800009D4A /* bomb-Bobble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bomb-Bobble.png"; sourceTree = "<group>"; };
 		E4D28D1B198249F000009D4A /* shield-Bobble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shield-Bobble.png"; sourceTree = "<group>"; };
@@ -846,6 +848,7 @@
 		E4D7BD35197D501000695F15 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E44A3F00198B790100136679 /* Blop-Mark_DiAngelo-79054334.mp3 */,
 				E445DF2719829108000E3596 /* Grafiken-HD */,
 				E4EFFB1E1981110B00127D95 /* Grafiken */,
 				E4D7BD36197D501000695F15 /* Default.png */,
@@ -1717,6 +1720,7 @@
 				E4D28D1E198249F000009D4A /* shield.png in Resources */,
 				E4FDA6B81986995C005035CA /* faenger-Bobble-90-Prozent-hd.png in Resources */,
 				E4D7BD40197D501000695F15 /* Icon.png in Resources */,
+				E44A3F01198B790100136679 /* Blop-Mark_DiAngelo-79054334.mp3 in Resources */,
 				E430BBFA197FF70A00D7076C /* 2-Pointer-Bobble.png in Resources */,
 				E445DF5619829276000E3596 /* shield-hd.png in Resources */,
 				E4D7BD4E197D501000695F15 /* Icon-iPad-Spotlight-iOS7@2x.png in Resources */,
