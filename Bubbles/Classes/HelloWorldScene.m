@@ -1075,12 +1075,19 @@ playerRichtungX = acceleration.acceleration.x*7;
     [scoreLabel setString:[NSString stringWithFormat:@""]];
 
 }
+-(void)musicOff
+{
+    [audio stopAllEffects];
+    [audio playEffect:@"Blow Up Balloon-SoundBible.com-1407502310.mp3"];
+
+}
 -(void)playerBlink
 {
     gameStatus = gamePaused;
 
      CCActionCallFunc *callBefore = [CCActionCallFunc actionWithTarget:self selector:@selector(labelRemoving)];
     CCActionCallFunc *callAfter = [CCActionCallFunc actionWithTarget:self selector:@selector(labelAfter)];
+    CCActionCallFunc *musicOff = [CCActionCallFunc actionWithTarget:self selector:@selector(musicOff)];
 
     
      CCAction *scaledown = [CCActionScaleBy actionWithDuration:2 scale:0.1];
@@ -1089,9 +1096,8 @@ playerRichtungX = acceleration.acceleration.x*7;
     
    // CCAction *scaleNormal = [CCActionScaleBy actionWithDuration:2 scale:0.5];
     
-    [player runAction:[CCActionSequence actionWithArray:@[ callBefore,scaledown, scaleUp,   callAfter]]];
+    [player runAction:[CCActionSequence actionWithArray:@[ callBefore,scaledown, musicOff,scaleUp,   callAfter]]];
      [audio playEffect:@"Ready To Burst-SoundBible.com-1103504176.mp3"];
-    [audio playEffect:@"Blow Up Balloon-SoundBible.com-1407502310.mp3"];
 
     if (shieldActive) {
         
