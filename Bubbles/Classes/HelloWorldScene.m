@@ -300,6 +300,11 @@
   //
     [audio preloadEffect:@"Blop-Mark_DiAngelo-79054334.mp3"];
     
+    [audio preloadEffect:@"Blow Up Balloon-SoundBible.com-1407502310.mp3"];
+
+    [audio preloadEffect:@"Ready To Burst-SoundBible.com-1103504176.mp3"];
+
+    
            gameStatus = gameisOn;
 	return self;
 }
@@ -1085,6 +1090,8 @@ playerRichtungX = acceleration.acceleration.x*7;
    // CCAction *scaleNormal = [CCActionScaleBy actionWithDuration:2 scale:0.5];
     
     [player runAction:[CCActionSequence actionWithArray:@[ callBefore,scaledown, scaleUp,   callAfter]]];
+     [audio playEffect:@"Ready To Burst-SoundBible.com-1103504176.mp3"];
+    [audio playEffect:@"Blow Up Balloon-SoundBible.com-1407502310.mp3"];
 
     if (shieldActive) {
         
