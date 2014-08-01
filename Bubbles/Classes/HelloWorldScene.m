@@ -990,7 +990,7 @@
      }
     
     
-    NSLog(@" BUbble am BODEN !!!!!!!");
+   // NSLog(@" BUbble am BODEN !!!!!!!");
  
     
 }
