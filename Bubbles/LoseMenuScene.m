@@ -21,6 +21,8 @@
     
     UIImage *screenshot;
     NSString *theImagePath;
+    
+    UIView *backgroundView;
 }
 
 
@@ -40,14 +42,6 @@
     
     
   
-    CCSprite* background = [CCSprite spriteWithImageNamed:@"hintergrund-ohne.png"];
-    background.position = ccp(self.contentSize.width / 2, self.contentSize.height / 2);
-    
-    [background setScaleX: self.contentSize.width/background.contentSize.width];
-    [background setScaleY:self.contentSize.height/background.contentSize.height];
-    
-    [self addChild:background];
-
     
     // ENDSCORE lesen HighScore lesen
     endScore = [[[NSUserDefaults standardUserDefaults] objectForKey:@"HighScore"] intValue ];
@@ -55,6 +49,14 @@
     NSData* imageData = [[NSUserDefaults standardUserDefaults] objectForKey:@"Screenshot"];
   screenshot = [UIImage imageWithData:imageData];
     
+    CCSprite* background = [CCSprite spriteWithImageNamed:@"hintergrund-mit.png"];
+     background.position = ccp(self.contentSize.width / 2, self.contentSize.height / 2);
+    
+    [background setScaleX: self.contentSize.width/background.contentSize.width];
+    [background setScaleY:self.contentSize.height/background.contentSize.height];
+    
+   [self addChild:background];
+
     
      //UIImage *customImage = [UIImage imageWithContentsOfFile:theImagePath];
     
@@ -135,12 +137,34 @@
     [self addChild:shareButtnTwitter];
     
     
+/*
+    CGImage *blurImg = [UIImage imageWithCGImage :screenshot.CGImage ];
+    
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    CIFilter *clampFilter = [CIFilter filterWithName:@"CIAffineClamp"];
+    [clampFilter setValue:blurImg forKey:@"Screenshot"];
+    [clampFilter setValue:[NSValue valueWithBytes:&transform objCType:@encode(CGAffineTransform)] forKey:@"inputTransform"];
+    
+    CIFilter *gaussianBlurFilter = [CIFilter filterWithName: @"CIGaussianBlur"];
+    [gaussianBlurFilter setValue:clampFilter.outputImage forKey: @"inputImage"];
+    [gaussianBlurFilter setValue:[NSNumber numberWithFloat:5.0f] forKey:@"inputRadius"];
+    
+    CIContext *context = [CIContext contextWithOptions:nil];
+    CGImageRef cgImg = [context createCGImage:gaussianBlurFilter.outputImage fromRect:[blurImg extent]];
+    UIImage *outputImg = [UIImage imageWithCGImage:cgImg];
+    
+     UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(self.contentSize.width/2, self.contentSize.height/2,  self.contentSize.width, self.contentSize.height)];
+    imgView.image = outputImg;
+    
+    CCSprite *blur = [CCSprite spriteWithCGImage:screenshot.CGImage key:@"Screenshot"];
+    [self addChild:blur];
+ */
+    
     
     
  
-    
-    
-    return self;
+    // Create filter.
+       return self;
     
     
 }
@@ -268,9 +292,5 @@
      }
     
 }
-
-
-
-
 
 @end

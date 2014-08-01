@@ -324,7 +324,7 @@
 {
  
     
-    if (gameStatus == gameisOn) {
+   // if (gameStatus == gameisOn) {
         
            anzahl = ( arc4random()%3 + 1);
     
@@ -951,16 +951,16 @@
    //  anzahlBubblesAufDemFeld --;
         
          
-        
-        
-          }
-    
     if (anzahlBubblesAufDemFeld <= 2) {
         [self addBubbles:(CCTime)dt];
     }
     
-     
-        }
+    
+    
+          }
+    
+
+       // }
       
   //  }
  
@@ -1019,6 +1019,7 @@ playerRichtungX = acceleration.acceleration.x*7;
        
        // int neigung = acceleration.acceleration.x;
         
+         
        
     float     targetX   = player.position.x + playerRichtungX ;
     float    targetY   = player.position.y;
@@ -1075,9 +1076,9 @@ playerRichtungX = acceleration.acceleration.x*7;
  -(void)labelRemoving
 {
     
-    labelBlink = YES;
     
     [scoreLabel setString:[NSString stringWithFormat:@""]];
+    labelBlink = YES;
 
 }
 -(void)musicOff
