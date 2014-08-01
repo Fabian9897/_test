@@ -206,12 +206,12 @@
  
     
     // Create a back button
-    CCButton *backButton = [CCButton  buttonWithTitle:@"[ Menu ]" fontName:@"Helvetica-Neue-UltraLight" fontSize:18.0f];
+  /*  CCButton *backButton = [CCButton  buttonWithTitle:@"[ Menu ]" fontName:@"Helvetica-Neue-UltraLight" fontSize:18.0f];
     backButton.positionType = CCPositionTypeNormalized;
     backButton.position = ccp(0.5f, 0.95f); // Top Right of screen
     [backButton setTarget:self selector:@selector(onBackClicked:)];
     [self addChild:backButton];
-    
+   */
     
  
     
@@ -304,7 +304,11 @@
 
     [audio preloadEffect:@"Ready To Burst-SoundBible.com-1103504176.mp3"];
 
+    [audio preloadEffect:@"fail-trombone-02.mp3"];
     
+    [audio preloadEffect:@"ice-cracking-01.mp3"];
+
+
            gameStatus = gameisOn;
 	return self;
 }
@@ -1064,6 +1068,7 @@ playerRichtungX = acceleration.acceleration.x*7;
     
     labelBlink = NO;
     [scoreLabel setString:[NSString stringWithFormat:@"%d/100", scoreBubbles]];
+    gameStatus = gameisOn;
 
     
 }
@@ -1084,7 +1089,7 @@ playerRichtungX = acceleration.acceleration.x*7;
 -(void)playerBlink
 {
     gameStatus = gamePaused;
-
+    labelBlink = YES;
      CCActionCallFunc *callBefore = [CCActionCallFunc actionWithTarget:self selector:@selector(labelRemoving)];
     CCActionCallFunc *callAfter = [CCActionCallFunc actionWithTarget:self selector:@selector(labelAfter)];
     CCActionCallFunc *musicOff = [CCActionCallFunc actionWithTarget:self selector:@selector(musicOff)];
@@ -1112,9 +1117,11 @@ playerRichtungX = acceleration.acceleration.x*7;
 
   
     scoreBubbles = 0;
-    gameStatus = gameisOn;
 
  }
+
+
+#pragma mark Sounds
 
 -(void)bubblesSound
 {
@@ -1126,6 +1133,22 @@ playerRichtungX = acceleration.acceleration.x*7;
      // Sound effect spielen
     [audio playEffect:@"Blop-Mark_DiAngelo-79054334.mp3"];
 	
+}
+
+-(void)loseSound
+{
+    
+    
+    [audio playEffect: @"fail-trombone-02.mp3"];
+
+    
+    
+}
+-(void)freezeSound
+{
+    
+    [audio playEffect: @"ice-cracking-01.mp3"];
+
 }
 // -----------------------------------------------------------------------
 
@@ -1144,6 +1167,9 @@ playerRichtungX = acceleration.acceleration.x*7;
          
          
      }
+     
+     else if (!labelBlink  )
+     {
      Collsion = YES;
      
      [bubbles_1Node removeFromParent];
@@ -1163,7 +1189,7 @@ playerRichtungX = acceleration.acceleration.x*7;
          [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
          [[NSUserDefaults standardUserDefaults] synchronize];
          // back to intro scene with transition
-         
+         [self loseSound];
          
          [self takeScreenShot];
          [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
@@ -1200,12 +1226,11 @@ playerRichtungX = acceleration.acceleration.x*7;
      //}
      
      
-     if (!labelBlink) {
-    
+         
      [scoreLabel setString:[NSString stringWithFormat:@"%d/100", scoreBubbles]];
    
      [highScoreLabel setString:[NSString stringWithFormat:@"%d", highScore]];
-  }
+  
      //   NSLog(@"anzahl auf dem feld3: %d", anzahlBubblesAufDemFeld);
    // bubbles.position =ccp(bubbles.position.x+ bubbles.contentSize.width, bubbles.position.y);
     
@@ -1213,8 +1238,9 @@ playerRichtungX = acceleration.acceleration.x*7;
      
      [self bubblesSound];
        return YES;
-    
-    
+     }
+     return YES;
+
 }
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubble2Collision:(CCNode *)bubbles_2Node   playerCollision:(CCNode *)player{
      [self bubblesSound];
@@ -1227,6 +1253,8 @@ playerRichtungX = acceleration.acceleration.x*7;
         
         
     }
+    else if (!labelBlink  )
+    {
      Collsion = YES;
     
     
@@ -1243,6 +1271,7 @@ playerRichtungX = acceleration.acceleration.x*7;
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self takeScreenShot];
+        [self loseSound];
 
         // back to intro scene with transition
         [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
@@ -1271,17 +1300,16 @@ playerRichtungX = acceleration.acceleration.x*7;
     //for (float i; i>= 0.1; i--) {
     //    [ player setScale:i];
    // }
-         if (!labelBlink) {
+        
     [scoreLabel setString:[NSString stringWithFormat:@"%d/100", scoreBubbles]];
        
     [highScoreLabel setString:[NSString stringWithFormat:@"%d", highScore]];
-  }
+  
     //NSLog(@"anzahl auf dem feld3: %d", anzahlBubblesAufDemFeld);
     // bubbles.position =ccp(bubbles.position.x+ bubbles.contentSize.width, bubbles.position.y);
     
+     }
     return YES;
-    
-    
 }
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubble7Collision:(CCNode *)bubbles_7Node   playerCollision:(CCNode *)player{
      [self bubblesSound];
@@ -1293,6 +1321,9 @@ playerRichtungX = acceleration.acceleration.x*7;
         
         
     }
+    else if (!labelBlink )
+
+    {
     
      Collsion = YES;
     
@@ -1310,6 +1341,7 @@ playerRichtungX = acceleration.acceleration.x*7;
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         [self takeScreenShot];
+        [self loseSound];
 
         // back to intro scene with transition
         [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
@@ -1337,17 +1369,17 @@ playerRichtungX = acceleration.acceleration.x*7;
          [self playerOpacity];
     }
     
-         if (!labelBlink) {
+        
     [scoreLabel setString:[NSString stringWithFormat:@"%d/100", scoreBubbles]];
          
     [highScoreLabel setString:[NSString stringWithFormat:@"%d", highScore]];
-         }
+         
     // NSLog(@"anzahl auf dem feld3: %d", anzahlBubblesAufDemFeld);
     // bubbles.position =ccp(bubbles.position.x+ bubbles.contentSize.width, bubbles.position.y);
     
-    return YES;
-    
-    
+  
+    }
+      return YES;
 }
 
 
@@ -1364,6 +1396,9 @@ playerRichtungX = acceleration.acceleration.x*7;
         
         
     }
+    else if (!labelBlink )
+
+    {
      Collsion = YES;
     
     
@@ -1381,6 +1416,7 @@ playerRichtungX = acceleration.acceleration.x*7;
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self takeScreenShot];
+        [self loseSound];
 
         // back to intro scene with transition
         [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
@@ -1411,18 +1447,18 @@ playerRichtungX = acceleration.acceleration.x*7;
         
         
     }
-         if (!labelBlink) {
+       
     [scoreLabel setString:[NSString stringWithFormat:@"%d/100", scoreBubbles]];
          
     [highScoreLabel setString:[NSString stringWithFormat:@"%d", highScore]];
-         }
+        
     // NSLog(@"anzahl auf dem feld3: %d", anzahlBubblesAufDemFeld);
     // bubbles.position =ccp(bubbles.position.x+ bubbles.contentSize.width, bubbles.position.y);
     
-    return YES;
     
-    
-}
+    }return YES;
+}    
+
 
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubble10Collision:(CCNode *)bubbles_10Node   playerCollision:(CCNode *)player{
@@ -1436,7 +1472,8 @@ playerRichtungX = acceleration.acceleration.x*7;
         
         
     }
-    
+    else if (!labelBlink  )
+    {
      Collsion = YES;
     
     [bubbles_10Node removeFromParent];
@@ -1448,6 +1485,7 @@ playerRichtungX = acceleration.acceleration.x*7;
          gameStatus = gamePaused;
 
          [self takeScreenShot];
+         [self loseSound];
 
          highScoreEnd  = highScore;
          [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
@@ -1481,16 +1519,16 @@ playerRichtungX = acceleration.acceleration.x*7;
         
     }
     
-         if (!labelBlink) {
+       
     [scoreLabel setString:[NSString stringWithFormat:@"%d/100", scoreBubbles]];
        
     [highScoreLabel setString:[NSString stringWithFormat:@"%d", highScore]];
-  }
+  
    // NSLog(@"anzahl auf dem feld3: %d", anzahlBubblesAufDemFeld);
     // bubbles.position =ccp(bubbles.position.x+ bubbles.contentSize.width, bubbles.position.y);
     
-    return YES;
-    
+    }    return YES;
+
     
 }
 #pragma mark Bubbles_Timer
@@ -1506,13 +1544,15 @@ playerRichtungX = acceleration.acceleration.x*7;
         
         
     }
-    
+    else if (!labelBlink )
+    {
      Collsion = YES;
     
     [bubbles_Time_Down_Node removeFromParent];
         anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
     if (percentage +5 == 100 && !liveActive) {
-       
+        [self loseSound];
+
         [self takeScreenShot];
 
         [[CCDirector sharedDirector] replaceScene:[LoseMenuScene scene]
@@ -1536,9 +1576,9 @@ playerRichtungX = acceleration.acceleration.x*7;
     }
     [_progressNode setPercentage: percentage];
 
-        return YES;
     
-    
+    }        return YES;
+
 }
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubbleTimeUpCollision:(CCNode *)bubbles_Time_Up_Node   playerCollision:(CCNode *)player{
      [self bubblesSound];
@@ -1553,7 +1593,10 @@ playerRichtungX = acceleration.acceleration.x*7;
         
         
     }
-     Collsion = YES;
+    else if (!labelBlink )
+
+     {
+    Collsion = YES;
     
     
     [bubbles_Time_Up_Node removeFromParent];
@@ -1567,8 +1610,8 @@ playerRichtungX = acceleration.acceleration.x*7;
     }
         [_progressNode setPercentage: percentage];
 
-    return YES;
-    
+     }    return YES;
+
     
 }
 #pragma mark Bubbles_Bomb
@@ -1583,6 +1626,9 @@ playerRichtungX = acceleration.acceleration.x*7;
         
         
     }
+    else if (!labelBlink  )
+
+    {
      Collsion = YES;
     
     
@@ -1597,6 +1643,7 @@ playerRichtungX = acceleration.acceleration.x*7;
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self takeScreenShot];
+            [self loseSound];
 
     gameStatus = gamePaused;
     
@@ -1617,7 +1664,7 @@ playerRichtungX = acceleration.acceleration.x*7;
         
         shieldActive = NO;
     }
-    if (liveActive) {
+    else if (liveActive && !shieldActive) {
         
         liveActive = NO;
         [xtraLive removeFromParent];
@@ -1625,9 +1672,9 @@ playerRichtungX = acceleration.acceleration.x*7;
     }
     
     
-    return YES;
     
     
+    }    return YES;
 }
 #pragma mark Bubbles_Shield
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubbleShieldCollision:(CCNode *)bubbles_shield_Node   playerCollision:(CCNode *)player1{
@@ -1642,6 +1689,9 @@ playerRichtungX = acceleration.acceleration.x*7;
         
         
     }
+    else if (!labelBlink )
+
+    {
      Collsion = YES;
     
     anzahlBubblesAufDemFeld= anzahlBubblesAufDemFeld -1;
@@ -1709,11 +1759,11 @@ playerRichtungX = acceleration.acceleration.x*7;
          shieldTime = 11;
         
     }
-     return YES;
     
     
 
-    
+    }     return YES;
+
     
 }
 
@@ -1751,7 +1801,9 @@ playerRichtungX = acceleration.acceleration.x*7;
         
         
     }
-    
+     else if (!labelBlink  )
+
+    {
     if (!fasterActive && !slowerActive) {
   
     Collsion = YES;
@@ -1787,8 +1839,8 @@ playerRichtungX = acceleration.acceleration.x*7;
         return YES;
 
     }
-    return YES;
-    
+    }    return YES;
+
     
 }
 #pragma mark Bubbles_Slower
@@ -1803,6 +1855,9 @@ playerRichtungX = acceleration.acceleration.x*7;
         
         
     }
+    else if (!labelBlink  )
+
+    {
     
     if (!slowerActive && !fasterActive) {
         
@@ -1841,9 +1896,9 @@ playerRichtungX = acceleration.acceleration.x*7;
         
     }
     
-    return YES;
     
-    
+    }    return YES;
+
 }
 #pragma mark Bubbles_xtraLife
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bubbleLifeCollision:(CCNode *)bubbles_life_Node   playerCollision:(CCNode *)player{
@@ -1857,7 +1912,8 @@ playerRichtungX = acceleration.acceleration.x*7;
         
         
     }
-    
+    else if (!labelBlink  )
+    {
     if (!liveActive) {
         
  
@@ -1886,8 +1942,8 @@ playerRichtungX = acceleration.acceleration.x*7;
     [bubbles_life_Node removeFromParent];
 
     
-    return YES;
-    
+    }    return YES;
+
     
 }
 
@@ -1896,7 +1952,7 @@ playerRichtungX = acceleration.acceleration.x*7;
    if (slowerActive) {
        
 //
- 
+       [self freezeSound];
          CCNode *myNode;
         
          NSArray *childrenArray = [self children];
@@ -1932,7 +1988,8 @@ playerRichtungX = acceleration.acceleration.x*7;
                 
                 
                 
-                
+                [audio stopAllEffects];
+
                 myNode.paused = NO;
                 
                 
@@ -2108,6 +2165,8 @@ playerRichtungX = acceleration.acceleration.x*7;
         if (percentage == 100 && ! liveActive)
         {
             [self takeScreenShot];
+            [self loseSound];
+
             highScoreEnd  = highScore;
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScoreEnd] forKey:@"HighScore"];
             [[NSUserDefaults standardUserDefaults] synchronize];
@@ -2242,7 +2301,7 @@ playerRichtungX = acceleration.acceleration.x*7;
 #pragma mark - Button Callbacks
 // -----------------------------------------------------------------------
 
-- (void)onBackClicked:(id)sender
+/*- (void)onBackClicked:(id)sender
 
 
 {
@@ -2261,6 +2320,7 @@ playerRichtungX = acceleration.acceleration.x*7;
                                withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f  ]];
     gameStatus = gamePaused;
 }
+ */
 
 // -----------------------------------------------------------------------
 @end

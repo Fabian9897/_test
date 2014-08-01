@@ -243,6 +243,8 @@
 		E4D7BF99197D501300695F15 /* HelloWorldScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E4D7BF98197D501300695F15 /* HelloWorldScene.m */; };
 		E4D7BF9C197D501300695F15 /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E4D7BF9B197D501300695F15 /* IntroScene.m */; };
 		E4E9146C198A2D2D00E9FC4A /* freeze-mode-Bobble-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = E4E9146B198A2D2D00E9FC4A /* freeze-mode-Bobble-hd.png */; };
+		E4EFCBE2198B8F0D00AD0F9E /* fail-trombone-02.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E4EFCBE1198B8F0D00AD0F9E /* fail-trombone-02.mp3 */; };
+		E4EFCBE4198B948500AD0F9E /* ice-cracking-01.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E4EFCBE3198B948500AD0F9E /* ice-cracking-01.mp3 */; };
 		E4EFFB17198101C100127D95 /* pause-icon-active.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EFFB15198101C100127D95 /* pause-icon-active.png */; };
 		E4EFFB18198101C100127D95 /* pause-icon-inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EFFB16198101C100127D95 /* pause-icon-inactive.png */; };
 		E4EFFB1B19810B0B00127D95 /* play-icon-active.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EFFB1919810B0B00127D95 /* play-icon-active.png */; };
@@ -713,6 +715,8 @@
 		E4D7BF9A197D501300695F15 /* IntroScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IntroScene.h; path = Classes/IntroScene.h; sourceTree = "<group>"; };
 		E4D7BF9B197D501300695F15 /* IntroScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = IntroScene.m; path = Classes/IntroScene.m; sourceTree = "<group>"; };
 		E4E9146B198A2D2D00E9FC4A /* freeze-mode-Bobble-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "freeze-mode-Bobble-hd.png"; sourceTree = "<group>"; };
+		E4EFCBE1198B8F0D00AD0F9E /* fail-trombone-02.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "fail-trombone-02.mp3"; sourceTree = "<group>"; };
+		E4EFCBE3198B948500AD0F9E /* ice-cracking-01.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "ice-cracking-01.mp3"; sourceTree = "<group>"; };
 		E4EFFB15198101C100127D95 /* pause-icon-active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause-icon-active.png"; sourceTree = "<group>"; };
 		E4EFFB16198101C100127D95 /* pause-icon-inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause-icon-inactive.png"; sourceTree = "<group>"; };
 		E4EFFB1919810B0B00127D95 /* play-icon-active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-icon-active.png"; sourceTree = "<group>"; };
@@ -855,6 +859,8 @@
 				E44A3F00198B790100136679 /* Blop-Mark_DiAngelo-79054334.mp3 */,
 				E44A3F02198B81CD00136679 /* Blow Up Balloon-SoundBible.com-1407502310.mp3 */,
 				E44A3F04198B834C00136679 /* Ready To Burst-SoundBible.com-1103504176.mp3 */,
+				E4EFCBE1198B8F0D00AD0F9E /* fail-trombone-02.mp3 */,
+				E4EFCBE3198B948500AD0F9E /* ice-cracking-01.mp3 */,
 				E445DF2719829108000E3596 /* Grafiken-HD */,
 				E4EFFB1E1981110B00127D95 /* Grafiken */,
 				E4D7BD36197D501000695F15 /* Default.png */,
@@ -1703,6 +1709,7 @@
 				E4D7BD39197D501000695F15 /* Default@2x.png in Resources */,
 				E4D7BD4C197D501000695F15 /* Icon-120.png in Resources */,
 				E445DF5319829276000E3596 /* play-icon-active-hd.png in Resources */,
+				E4EFCBE2198B8F0D00AD0F9E /* fail-trombone-02.mp3 in Resources */,
 				E445DF4D19829276000E3596 /* hintergrund-mit-hd.png in Resources */,
 				E4FDA6B41986995C005035CA /* faenger-Bobble-50-Prozent-hd.png in Resources */,
 				E430BC01197FF8D700D7076C /* hintergrund-mit.png in Resources */,
@@ -1734,6 +1741,7 @@
 				E4D28D1D198249F000009D4A /* shield-Bobble.png in Resources */,
 				E4D7BD52197D501000695F15 /* Icon-Small.png in Resources */,
 				E4D7BD50197D501000695F15 /* Icon-Small-50.png in Resources */,
+				E4EFCBE4198B948500AD0F9E /* ice-cracking-01.mp3 in Resources */,
 				E4D7BF8E197D501300695F15 /* LICENSE_Chipmunk.txt in Resources */,
 				E4D7BD44197D501000695F15 /* Icon-72.png in Resources */,
 				E445DF5219829276000E3596 /* pause-icon-inactive-hd.png in Resources */,
