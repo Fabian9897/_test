@@ -1,34 +1,18 @@
 //
-//  IntroScene.m
+//  ContinueScene.m
 //  Bubbles
 //
-//  Created by Praktikant on 21.07.14.
-//  Copyright Praktikant 2014. All rights reserved.
+//  Created by Fabian Töpfer on 08.08.14.
+//  Copyright (c) 2014 Praktikant. All rights reserved.
 //
-// -----------------------------------------------------------------------
 
-// Import the interfaces
-#import "IntroScene.h"
-#import "HelloWorldScene.h"
+#import "ContinueScene.h"
 
-// -----------------------------------------------------------------------
-#pragma mark - IntroScene
-// -----------------------------------------------------------------------
-
-@implementation IntroScene
-  
-
-// -----------------------------------------------------------------------
-#pragma mark - Create & Destroy
-// -----------------------------------------------------------------------
-
-+ (IntroScene *)scene
+@implementation ContinueScene
++ (ContinueScene *)scene2
 {
 	return [[self alloc] init];
 }
-
-// -----------------------------------------------------------------------
-
 - (id)init
 {
     // Apple recommend assigning self with supers return value
@@ -53,23 +37,26 @@
     [self addChild:logo];
     
     
-    // Helloworld scene button
-    CCSprite *ball = [CCSprite spriteWithImageNamed:@"faenger-Bobble-100-Prozent-hd.png"];
-    ball.positionType = CCPositionTypeNormalized;
-    ball.position = ccp(0.5f, 0.15f);
-    ball.scale = 1.5;
-    [self addChild:ball];
+ 
     
-    CCButton *helloWorldButton = [CCButton buttonWithTitle:@"Start" fontName:@"Helvetica" fontSize:35.0f];
+    CCButton *helloWorldButton = [CCButton buttonWithTitle:@"Continue" fontName:@"Helvetica" fontSize:35.0f];
     helloWorldButton.positionType = CCPositionTypeNormalized;
-    helloWorldButton.position = ccp(0.5f, 0.15f);
+    helloWorldButton.position = ccp(0.5f, 0.25f);
     [helloWorldButton setTarget:self selector:@selector(onSpinningClicked:)];
     helloWorldButton.color = [CCColor colorWithRed:0.0 green:0.0 blue:0.0];
     
     [self addChild:helloWorldButton];
-
     
-   
+    CCButton *startNewButton = [CCButton buttonWithTitle:@"Start" fontName:@"Helvetica" fontSize:35.0f];
+    startNewButton.positionType = CCPositionTypeNormalized;
+    startNewButton.position = ccp(0.5f, 0.1f);
+    [startNewButton setTarget:self selector:@selector(onstartClicked:)];
+    
+    startNewButton.color = [CCColor colorWithRed:0.0 green:0.0 blue:0.0];
+    
+    [self addChild:startNewButton];
+    
+    
     // done
 	return self;
 }
@@ -77,13 +64,19 @@
 // -----------------------------------------------------------------------
 #pragma mark - Button Callbacks
 // -----------------------------------------------------------------------
-
+-(void)onstartClicked:(id)sender
+{
+    [[CCDirector sharedDirector] replaceScene:[HelloWorldScene scene] ];
+    
+    
+}
 - (void)onSpinningClicked:(id)sender
 {
     // start spinning scene with transition
-    [[CCDirector sharedDirector] replaceScene:[HelloWorldScene scene]
-                               withTransition:[CCTransition transitionCrossFadeWithDuration:1.0f ]];
+    
+    [[CCDirector sharedDirector] popScene];
+    
+    
 }
 
-// -----------------------------------------------------------------------
 @end

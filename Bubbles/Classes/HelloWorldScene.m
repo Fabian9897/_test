@@ -10,6 +10,7 @@
 #import "HelloWorldScene.h"
 #import "IntroScene.h"
 #import "LoseMenuScene.h"
+#import "ContinueScene.h"
 
 // -----------------------------------------------------------------------
 #pragma mark - HelloWorldScene
@@ -2324,4 +2325,6 @@ playerRichtungX = acceleration.acceleration.x*7;
  */
 
 // -----------------------------------------------------------------------
+
+
 @end

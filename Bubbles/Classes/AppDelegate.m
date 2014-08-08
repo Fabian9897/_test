@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "IntroScene.h"
 #import "HelloWorldScene.h"
+#import "ContinueScene.h"
 
 @implementation AppDelegate
 
@@ -51,5 +52,16 @@
 	// This method should return the very first scene to be run when your app starts.
 	return [IntroScene scene];
 }
-
+- (void)applicationWillResignActive:(UIApplication *)application
+{
+    
+    
+    
+    [[CCDirector sharedDirector] pushScene:[ContinueScene scene2]];
+    
+    //   [[CCDirector sharedDirector] replaceScene:[ContinueScene scene2]
+    //              withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f  ]];
+    
+    
+}
 @end
